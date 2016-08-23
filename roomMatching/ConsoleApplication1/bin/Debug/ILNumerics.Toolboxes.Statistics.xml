@@ -1,0 +1,2858 @@
+﻿<doc>
+  <assembly>
+    <name>ILNumerics.Toolboxes.Statistics</name>
+  </assembly>
+  <members>
+    <member name="M:ILNumerics.Toolboxes.StatisticsInternal.hist(ILNumerics.ILInArray{System.Double},System.Int32,System.Double,System.Double)">
+      <summary>
+            Calculates the histogram of the given samples.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="x">Given data.</param>
+      <param name="bins">Number of the bins [by default 0 - ceiled square root of the samples], specify otherwise.</param>
+      <param name="rangeStart">Start of the range [by default double.NegativeInfinity - minimum value of the samples], specify otherwise.</param>
+      <param name="rangeEnd">End of the range [by default double.PositiveInfinity - maximum value of the samples], specify otherwise.</param>
+      <returns>Returns with the observation counts for each bins.</returns>
+      <remarks>
+        <list type="bullet">
+          <item>If 'x' is empty, an empty array will be returned.</item>
+          <item>If 'x' is null, an ILArgumentException will be thrown.</item>
+          <item>The number of the bins will be the square root of the samples by default.</item>
+          <item>The start of the range is the minimum value of the elements by default.</item>
+          <item>The end of the range is the maximum value of the elements by default.</item>
+          <item>If the 'rangeEnd' ≥ 'rangeStart' an ILArgumentException will be thrown.</item>
+          <item>On the limits of the edges, the counting will increment to the left side bin.</item>
+          <item>On the leftmost bin's edge, the counting will increment to the right side bin (first bin).</item>
+          <item>On the rightmost bin's edge, the counting will increment to the left side bin (last bin).</item>
+          <item>Outside of the limits, the occurance will not be counted.</item>
+        </list>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.StatisticsInternal.histc(ILNumerics.ILInArray{System.Double},System.Int32,System.Double,System.Double)">
+      <summary>
+            Calculates the cumulated histogram of the given samples.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="x">Given data.</param>
+      <param name="bins">Number of the bins [by default 0 - ceiled square root of the samples], specify otherwise.</param>
+      <param name="rangeStart">Start of the range [by default double.NegativeInfinity - minimum value of the samples], specify otherwise.</param>
+      <param name="rangeEnd">End of the range [by default double.PositiveInfinity - maximum value of the samples], specify otherwise.</param>
+      <returns>Returns with the cumulated sum of the histogram.</returns>
+      <remarks>
+        <list type="bullet">
+          <item>If 'x' is empty, an empty array will be returned.</item>
+          <item>If 'x' is null, an ILArgumentException will be thrown.</item>
+          <item>The number of the bins will be the square root of the samples by default.</item>
+          <item>The start of the range is the minimum value of the elements by default.</item>
+          <item>The end of the range is the maximum value of the elements by default.</item>
+          <item>If the 'rangeEnd' ≥ 'rangeStart' an ILArgumentException will be thrown.</item>
+          <item>On the limits of the edges, the counting will increment to the left side bin.</item>
+          <item>On the leftmost bin's edge, the counting will increment to the right side bin (first bin).</item>
+          <item>On the rightmost bin's edge, the counting will increment to the left side bin (last bin).</item>
+          <item>Outside of the limits, the occurance will not be counted.</item>
+        </list>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.StatisticsInternal.histn(ILNumerics.ILInArray{System.Double},System.Int32,System.Double,System.Double)">
+      <summary>
+            Calculates the normalized (with the number of the samples) histogram of the given samples.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="x">Given data.</param>
+      <param name="bins">Number of the bins [by default 0 - ceiled square root of the samples], specify otherwise.</param>
+      <param name="rangeStart">Start of the range [by default double.NegativeInfinity - minimum value of the samples], specify otherwise.</param>
+      <param name="rangeEnd">End of the range [by default double.PositiveInfinity - maximum value of the samples], specify otherwise.</param>
+      <returns>Returns with the observation counts for each bins normalized with the number of elements, yielding the probability for each bin.</returns>
+      <remarks>
+        <list type="bullet">
+          <item>If 'x' is empty, an empty array will be returned.</item>
+          <item>If 'x' is null, an ILArgumentException will be thrown.</item>
+          <item>The number of the bins will be the square root of the samples by default.</item>
+          <item>The start of the range is the minimum value of the elements by default.</item>
+          <item>The end of the range is the maximum value of the elements by default.</item>
+          <item>If the 'rangeEnd' ≥ 'rangeStart' an ILArgumentException will be thrown.</item>
+          <item>On the limits of the edges, the counting will increment to the left side bin.</item>
+          <item>On the leftmost bin's edge, the counting will increment to the right side bin (first bin).</item>
+          <item>On the rightmost bin's edge, the counting will increment to the left side bin (last bin).</item>
+          <item>Outside of the limits, the occurance will not be counted.</item>
+        </list>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.StatisticsInternal.histnc(ILNumerics.ILInArray{System.Double},System.Int32,System.Double,System.Double)">
+      <summary>
+            Calculates the normalized (with the number of the samples) cumulated histogram of the given samples.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="x">Given data.</param>
+      <param name="bins">Number of the bins [by default 0 - ceiled square root of the samples], specify otherwise.</param>
+      <param name="rangeStart">Start of the range [by default double.NegativeInfinity - minimum value of the samples], specify otherwise.</param>
+      <param name="rangeEnd">End of the range [by default double.PositiveInfinity - maximum value of the samples], specify otherwise.</param>
+      <returns>Returns with the cumulated sum of the normalized histogram.</returns>
+      <remarks>
+        <list type="bullet">
+          <item>If 'x' is empty, an empty array will be returned.</item>
+          <item>If 'x' is null, an ILArgumentException will be thrown.</item>
+          <item>The number of the bins will be the square root of the samples by default.</item>
+          <item>The start of the range is the minimum value of the elements by default.</item>
+          <item>The end of the range is the maximum value of the elements by default.</item>
+          <item>If the 'rangeEnd' ≥ 'rangeStart' an ILArgumentException will be thrown.</item>
+          <item>On the limits of the edges, the counting will increment to the left side bin.</item>
+          <item>On the leftmost bin's edge, the counting will increment to the right side bin (first bin).</item>
+          <item>On the rightmost bin's edge, the counting will increment to the left side bin (last bin).</item>
+          <item>Outside of the limits, the occurance will not be counted.</item>
+        </list>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.StatisticsInternal.cov(ILNumerics.ILInArray{System.Double},System.Boolean)">
+      <summary>
+            Covariance matrix of A.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Input vector or data matrix, samples in columns, variables in rows.</param>
+      <param name="unbiased">[Optional] If true, calculate the best unbiased variance estimate if the observations are from a normal distribution. This normalized by n-1 if n&gt;1 (n = number of samples). If n == 1 normalization is always 1. If false always normalize by n.</param>
+      <returns>Variance of vector A/Covariance matrix of A.</returns>
+      <remarks>
+        <para>If A is a vector <c>cov(A)</c> returns the variance of A.</para>
+        <para>If A is a m x n matrix, where each of the n columns is an m-dimensional observation, <c>cov(A)</c> is the n x n covariance matrix.</para>
+        <para>The mean is removed from each column before calculating the result.</para>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.StatisticsInternal.cov(ILNumerics.ILInArray{System.Single},System.Boolean)">
+      <summary>
+            Covariance matrix of A.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Input vector or data matrix, samples in columns, variables in rows.</param>
+      <param name="unbiased">[Optional] If true, calculate the best unbiased variance estimate if the observations are from a normal distribution. This normalized by n-1 if n&gt;1 (n = number of samples). If n == 1 normalization is always 1. If false always normalize by n.</param>
+      <returns>Variance of vector A/Covariance matrix of A.</returns>
+      <remarks>
+        <para>If A is a vector <c>cov(A)</c> returns the variance of A.</para>
+        <para>If A is a m x n matrix, where each of the n columns is an m-dimensional observation, <c>cov(A)</c> is the n x n covariance matrix.</para>
+        <para>The mean is removed from each column before calculating the result.</para>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.StatisticsInternal.median(ILNumerics.ILInArray{System.Double},System.Int32)">
+      <summary>
+            Calculates median along the specified dimension.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Input Array.</param>
+      <returns>
+        <para>Array having the specified dimension reduced to the length 1 with the median of 
+            all elements along that dimension.</para>
+        <param name="dim">[Optional] Index of dimension to operate along. If omitted operates along the first non singleton dimension (i.e. != 1).</param>
+        <para>The result will have the same number of dimensions as A, but the specified dimension will have the 
+            size 1.</para>
+        <para>If the specified dimension of A is empty, the median along that dimension will be NaN and that dimension will be 1.</para>
+      </returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.StatisticsInternal.median(ILNumerics.ILInArray{System.Int64},System.Int32)">
+      <summary>
+            Calculates median along the specified dimension.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Input Array.</param>
+      <returns>
+        <para>Array having the specified dimension reduced to the length 1 with the median of 
+            all elements along that dimension.</para>
+        <param name="dim">[Optional] Index of dimension to operate along. If omitted operates along the first non singleton dimension (i.e. != 1).</param>
+        <para>The result will have the same number of dimensions as A, but the specified dimension will have the 
+            size 1.</para>
+        <para>If the specified dimension of A is empty, the median along that dimension will be NaN and that dimension will be 1.</para>
+      </returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.StatisticsInternal.median(ILNumerics.ILInArray{System.Int32},System.Int32)">
+      <summary>
+            Calculates median along the specified dimension.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Input Array.</param>
+      <returns>
+        <para>Array having the specified dimension reduced to the length 1 with the median of 
+            all elements along that dimension.</para>
+        <param name="dim">[Optional] Index of dimension to operate along. If omitted operates along the first non singleton dimension (i.e. != 1).</param>
+        <para>The result will have the same number of dimensions as A, but the specified dimension will have the 
+            size 1.</para>
+        <para>If the specified dimension of A is empty, the median along that dimension will be NaN and that dimension will be 1.</para>
+      </returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.StatisticsInternal.median(ILNumerics.ILInArray{System.Byte},System.Int32)">
+      <summary>
+            Calculates median along the specified dimension.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Input Array.</param>
+      <returns>
+        <para>Array having the specified dimension reduced to the length 1 with the median of 
+            all elements along that dimension.</para>
+        <param name="dim">[Optional] Index of dimension to operate along. If omitted operates along the first non singleton dimension (i.e. != 1).</param>
+        <para>The result will have the same number of dimensions as A, but the specified dimension will have the 
+            size 1.</para>
+        <para>If the specified dimension of A is empty, the median along that dimension will be NaN and that dimension will be 1.</para>
+      </returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.StatisticsInternal.median(ILNumerics.ILInArray{ILNumerics.fcomplex},System.Int32)">
+      <summary>
+            Calculates median along the specified dimension.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Input Array.</param>
+      <returns>
+        <para>Array having the specified dimension reduced to the length 1 with the median of 
+            all elements along that dimension.</para>
+        <param name="dim">[Optional] Index of dimension to operate along. If omitted operates along the first non singleton dimension (i.e. != 1).</param>
+        <para>The result will have the same number of dimensions as A, but the specified dimension will have the 
+            size 1.</para>
+        <para>If the specified dimension of A is empty, the median along that dimension will be NaN and that dimension will be 1.</para>
+      </returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.StatisticsInternal.median(ILNumerics.ILInArray{System.Single},System.Int32)">
+      <summary>
+            Calculates median along the specified dimension.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Input Array.</param>
+      <returns>
+        <para>Array having the specified dimension reduced to the length 1 with the median of 
+            all elements along that dimension.</para>
+        <param name="dim">[Optional] Index of dimension to operate along. If omitted operates along the first non singleton dimension (i.e. != 1).</param>
+        <para>The result will have the same number of dimensions as A, but the specified dimension will have the 
+            size 1.</para>
+        <para>If the specified dimension of A is empty, the median along that dimension will be NaN and that dimension will be 1.</para>
+      </returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.StatisticsInternal.median(ILNumerics.ILInArray{ILNumerics.complex},System.Int32)">
+      <summary>
+            Calculates median along the specified dimension.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Input Array.</param>
+      <returns>
+        <para>Array having the specified dimension reduced to the length 1 with the median of 
+            all elements along that dimension.</para>
+        <param name="dim">[Optional] Index of dimension to operate along. If omitted operates along the first non singleton dimension (i.e. != 1).</param>
+        <para>The result will have the same number of dimensions as A, but the specified dimension will have the 
+            size 1.</para>
+        <para>If the specified dimension of A is empty, the median along that dimension will be NaN and that dimension will be 1.</para>
+      </returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.StatisticsInternal.mvnpdf(ILNumerics.ILInArray{System.Double},ILNumerics.ILInArray{System.Double},ILNumerics.ILInArray{System.Double})">
+      <summary>
+            Probability density function for a multivariate normal random distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Matrix of points in columns, where the probability density function is to be evaluated.</param>
+      <param name="mu">[Optional] Centers, size d x 1, if 'null': zeros are attempted, default: null.</param>
+      <param name="sigma">Covariance matrix, must be positive definite, size d x d or vector of lenght d.</param>
+      <returns>Random numbers as taken from the multivariate random probability distribution given by mu and sigma.</returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.StatisticsInternal.mvnpdf(ILNumerics.ILInArray{System.Single},ILNumerics.ILInArray{System.Single},ILNumerics.ILInArray{System.Single})">
+      <summary>
+            Probability density function for a multivariate normal random distribution
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Matrix of points in columns, where the probability density function is to be evaluated</param>
+      <param name="mu">[Optional] Centers, size d x 1, if 'null': zeros are attempted, default: null</param>
+      <param name="sigma">Covariance matrix, must be positive definite, size d x d or vector of lenght d</param>
+      <returns>Random numbers as taken from the multivariate random probability distribution given by mu and sigma</returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.StatisticsInternal.mvnrnd(System.Int32)">
+      <summary>
+            Chooses samples from a multivariate random distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <returns>n random numbers as taken from the multivariate random probability distribution with zero mean and unity covariance.</returns>
+      <remarks>
+        <para>This is an alias for <see cref="M:ILNumerics.ILMath.randn(params int[])" />. If n was not specified, a single random number is generated.</para>
+        <para>The samples are returned as row vector of size 1 x n.</para>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.StatisticsInternal.mvnrnd">
+      <summary>
+            Chooses one sample from a multivariate random distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <returns>Single random number, taken from the multivariate random probability distribution with zero mean and unity covariance</returns>
+      <remarks>
+        <para>This is an alias for <see cref="M:ILNumerics.ILMath.randn(params int[])" />. A single (scalar) random number is generated.</para>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.StatisticsInternal.mvnrnd(ILNumerics.ILInArray{System.Double},ILNumerics.ILInArray{System.Double},System.Int32,System.Boolean)">
+      <summary>
+            Chooses samples from a multivariate random distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="inMu">[optional] centers, size d x n; if d x 1 is given, optional parameter <paramref name="n" /> is used to replicate mu accordingly, if null, the values will be genereated with a center of zero.</param>
+      <param name="inSigma">[optional] covariance matrix, must be positive definite, size d x d or vector of lenght d, if null (not set), unitiy matrix is expected.</param>
+      <param name="n">[optional] number of samples to generate, per default (-1) the number of columns of <paramref name="inMu" /> defines that number.</param>
+      <param name="sigmaIsSquaredCov">[optional] if false: safe the effort of finding the square root of <paramref name="inSigma" /> parameter; default: true.</param>
+      <returns>random numbers as taken from the multivariate random probability distribution given by mu and sigma.</returns>
+      <remarks>
+        <para>In order to safe the step of finding the root of sigma, the following options exist: 
+            <list type="bullet"><item>Provide only the diagonal of a (virtual) diagonal matrix to <paramref name="inSigma" />.</item><item>Compute the root manually, give it to sigma and set <paramref name="sigmaIsSquaredCov" /> to false.</item></list></para>
+        <para>In case <paramref name="sigmaIsSquaredCov" /> set to 'false' and <paramref name="inSigma" /> is given, 
+            the root is computed via Cholesky factorization. The result of the last root finding process is cached and reused for 
+            subsequent requests with the same set of <paramref name="n" /> and <paramref name="inSigma" /> parameters.</para>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.StatisticsInternal.mvnrnd(ILNumerics.ILInArray{System.Single},ILNumerics.ILInArray{System.Single},System.Int32,System.Boolean)">
+      <summary>
+            Chooses samples from a multivariate random distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="inMu">[optional] centers, size d x n; if d x 1 is given, optional parameter <paramref name="n" /> is used to replicate mu accordingly, if null, the values will be genereated with a center of zero.</param>
+      <param name="inSigma">[optional] covariance matrix, must be positive definite, size d x d or vector of lenght d, if null (not set), unitiy matrix is expected.</param>
+      <param name="n">[optional] number of samples to generate, per default (-1) the number of columns of <paramref name="inMu" /> defines that number.</param>
+      <param name="sigmaIsSquaredCov">[optional] if false: safe the effort of finding the square root of <paramref name="inSigma" /> parameter; default: true.</param>
+      <returns>random numbers as taken from the multivariate random probability distribution given by mu and sigma.</returns>
+      <remarks>
+        <para>In order to safe the step of finding the root of sigma, the following options exist: 
+            <list type="bullet"><item>Provide only the diagonal of a (virtual) diagonal matrix to <paramref name="inSigma" />.</item><item>Compute the root manually, give it to sigma and set <paramref name="sigmaIsSquaredCov" /> to false.</item></list></para>
+        <para>In case <paramref name="sigmaIsSquaredCov" /> set to 'false' and <paramref name="inSigma" /> is given, 
+            the root is computed via Cholesky factorization. The result of the last root finding process is cached and reused for 
+            subsequent requests with the same set of <paramref name="n" /> and <paramref name="inSigma" /> parameters.</para>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.StatisticsInternal.nanmean(ILNumerics.ILInArray{System.Double},System.Int32)">
+      <summary>
+            Mean of array along specified dimension ignoring NaN values.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Input array.</param>
+      <param name="dim">[Optional] Index of the dimension to work along. If omitted operates along the first non singleton dimension (i.e. != 1).</param>
+      <returns>Mean of non-NaN elements along specified dimension.</returns>
+      <remarks>
+        <para>The return array has the same shape as A, but the selected dimension is reduced 
+            to length 1. If A is scalar, an scalar array will be returned. On empty input, the output will be empty.
+            </para>
+        <para>If A contains an all NaN vector along the specified dimension the resulting value will by NaN
+            (as the nansum of these elements is 0 divided by 0 elements).</para>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.StatisticsInternal.nanmean(ILNumerics.ILInArray{ILNumerics.fcomplex},System.Int32)">
+      <summary>
+            Mean of array along specified dimension ignoring NaN values.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Input array.</param>
+      <param name="dim">[Optional] Index of the dimension to work along. If omitted operates along the first non singleton dimension (i.e. != 1).</param>
+      <returns>Mean of non-NaN elements along specified dimension.</returns>
+      <remarks>
+        <para>The return array has the same shape as A, but the selected dimension is reduced 
+            to length 1. If A is scalar, an scalar array will be returned. On empty input, the output will be empty.
+            </para>
+        <para>If A contains an all NaN vector along the specified dimension the resulting value will by NaN
+            (as the nansum of these elements is 0 divided by 0 elements).</para>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.StatisticsInternal.nanmean(ILNumerics.ILInArray{System.Single},System.Int32)">
+      <summary>
+            Mean of array along specified dimension ignoring NaN values.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Input array.</param>
+      <param name="dim">[Optional] Index of the dimension to work along. If omitted operates along the first non singleton dimension (i.e. != 1).</param>
+      <returns>Mean of non-NaN elements along specified dimension.</returns>
+      <remarks>
+        <para>The return array has the same shape as A, but the selected dimension is reduced 
+            to length 1. If A is scalar, an scalar array will be returned. On empty input, the output will be empty.
+            </para>
+        <para>If A contains an all NaN vector along the specified dimension the resulting value will by NaN
+            (as the nansum of these elements is 0 divided by 0 elements).</para>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.StatisticsInternal.nanmean(ILNumerics.ILInArray{ILNumerics.complex},System.Int32)">
+      <summary>
+            Mean of array along specified dimension ignoring NaN values.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Input array.</param>
+      <param name="dim">[Optional] Index of the dimension to work along. If omitted operates along the first non singleton dimension (i.e. != 1).</param>
+      <returns>Mean of non-NaN elements along specified dimension.</returns>
+      <remarks>
+        <para>The return array has the same shape as A, but the selected dimension is reduced 
+            to length 1. If A is scalar, an scalar array will be returned. On empty input, the output will be empty.
+            </para>
+        <para>If A contains an all NaN vector along the specified dimension the resulting value will by NaN
+            (as the nansum of these elements is 0 divided by 0 elements).</para>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.StatisticsInternal.nansum(ILNumerics.ILInArray{System.Double},System.Int32)">
+      <summary>
+            Sums the elements along first non singleton dimension ignoring NaN values.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Input array.</param>
+      <param name="dim">[Optional] Index of the dimension to operate along. If omitted operates along the first non singleton dimension (i.e. != 1).</param>
+      <returns>Sum of elements along specified of first non singleton dimension, ignoring nan values.</returns>
+      <remarks>
+        <para>The array returned will have the same size as <paramref name="A" />, with the specified or first non singleton dimension 
+            reduced to the length 1. It will contain the sum of all elements along that dimension after removing NaN values respectively. </para>
+        <para>If A contains an all NaN vector along <paramref name="dim" /> , 
+            the resulting sum will be 0 - not NaN! This corresponds to the sum of an empty vector.</para>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.StatisticsInternal.nansum_internal(ILNumerics.ILInArray{System.Double},System.Int32,System.Boolean)">
+      <summary>
+            Depending on settings, calculate nansum or nanmean
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.StatisticsInternal.nansum(ILNumerics.ILInArray{ILNumerics.fcomplex},System.Int32)">
+      <summary>
+            Sums the elements along first non singleton dimension ignoring NaN values.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Input array.</param>
+      <param name="dim">[Optional] Index of the dimension to operate along. If omitted operates along the first non singleton dimension (i.e. != 1).</param>
+      <returns>Sum of elements along specified of first non singleton dimension, ignoring nan values.</returns>
+      <remarks>
+        <para>The array returned will have the same size as <paramref name="A" />, with the specified or first non singleton dimension 
+            reduced to the length 1. It will contain the sum of all elements along that dimension after removing NaN values respectively. </para>
+        <para>If A contains an all NaN vector along <paramref name="dim" /> , 
+            the resulting sum will be 0 - not NaN! This corresponds to the sum of an empty vector.</para>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.StatisticsInternal.nansum_internal(ILNumerics.ILInArray{ILNumerics.fcomplex},System.Int32,System.Boolean)">
+      <summary>
+            Depending on settings, calculate nansum or nanmean
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.StatisticsInternal.nansum(ILNumerics.ILInArray{System.Single},System.Int32)">
+      <summary>
+            Sums the elements along first non singleton dimension ignoring NaN values.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Input array.</param>
+      <param name="dim">[Optional] Index of the dimension to operate along. If omitted operates along the first non singleton dimension (i.e. != 1).</param>
+      <returns>Sum of elements along specified of first non singleton dimension, ignoring nan values.</returns>
+      <remarks>
+        <para>The array returned will have the same size as <paramref name="A" />, with the specified or first non singleton dimension 
+            reduced to the length 1. It will contain the sum of all elements along that dimension after removing NaN values respectively. </para>
+        <para>If A contains an all NaN vector along <paramref name="dim" /> , 
+            the resulting sum will be 0 - not NaN! This corresponds to the sum of an empty vector.</para>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.StatisticsInternal.nansum_internal(ILNumerics.ILInArray{System.Single},System.Int32,System.Boolean)">
+      <summary>
+            Depending on settings, calculate nansum or nanmean
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.StatisticsInternal.nansum(ILNumerics.ILInArray{ILNumerics.complex},System.Int32)">
+      <summary>
+            Sums the elements along first non singleton dimension ignoring NaN values.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Input array.</param>
+      <param name="dim">[Optional] Index of the dimension to operate along. If omitted operates along the first non singleton dimension (i.e. != 1).</param>
+      <returns>Sum of elements along specified of first non singleton dimension, ignoring nan values.</returns>
+      <remarks>
+        <para>The array returned will have the same size as <paramref name="A" />, with the specified or first non singleton dimension 
+            reduced to the length 1. It will contain the sum of all elements along that dimension after removing NaN values respectively. </para>
+        <para>If A contains an all NaN vector along <paramref name="dim" /> , 
+            the resulting sum will be 0 - not NaN! This corresponds to the sum of an empty vector.</para>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.StatisticsInternal.nansum_internal(ILNumerics.ILInArray{ILNumerics.complex},System.Int32,System.Boolean)">
+      <summary>
+            Depending on settings, calculate nansum or nanmean
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.StatisticsInternal.randperm(ILNumerics.ILBaseArray)">
+      <summary>
+            Creates a random permutation of integers.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="length">Number of unique integers to be created.</param>
+      <returns>Integer vector of length 'length'.</returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.StatisticsInternal.select(ILNumerics.ILInArray{System.Double},System.Int32,System.Int32)">
+      <summary>
+            Selects the k-th smallest element from an array along a specific dimension.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Input array.</param>
+      <param name="k">The element to find. If k is smaller 1 or larger than the number of elements in list, the smallest/largest value will be returned.</param>
+      <param name="dim">[Optional] Dimension to operate along. If omitted operates along the first non singleton dimension (i.e. != 1).</param>
+      <returns>
+        <para>Array having the specified dimension reduced to the length 1 with the value of the k-the smallest element along that dimension.</para>
+        <para>Exception: If the selected dimension is of size 0 it will remain 0 (an empty set).</para>
+      </returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.StatisticsInternal.select(ILNumerics.ILInArray{System.Int64},System.Int32,System.Int32)">
+      <summary>
+            Selects the k-th smallest element from an array along a specific dimension.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Input array.</param>
+      <param name="k">The element to find. If k is smaller 1 or larger than the number of elements in list, the smallest/largest value will be returned.</param>
+      <param name="dim">[Optional] Dimension to operate along. If omitted operates along the first non singleton dimension (i.e. != 1).</param>
+      <returns>
+        <para>Array having the specified dimension reduced to the length 1 with the value of the k-the smallest element along that dimension.</para>
+        <para>Exception: If the selected dimension is of size 0 it will remain 0 (an empty set).</para>
+      </returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.StatisticsInternal.select(ILNumerics.ILInArray{System.Int32},System.Int32,System.Int32)">
+      <summary>
+            Selects the k-th smallest element from an array along a specific dimension.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Input array.</param>
+      <param name="k">The element to find. If k is smaller 1 or larger than the number of elements in list, the smallest/largest value will be returned.</param>
+      <param name="dim">[Optional] Dimension to operate along. If omitted operates along the first non singleton dimension (i.e. != 1).</param>
+      <returns>
+        <para>Array having the specified dimension reduced to the length 1 with the value of the k-the smallest element along that dimension.</para>
+        <para>Exception: If the selected dimension is of size 0 it will remain 0 (an empty set).</para>
+      </returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.StatisticsInternal.select(ILNumerics.ILInArray{System.Byte},System.Int32,System.Int32)">
+      <summary>
+            Selects the k-th smallest element from an array along a specific dimension.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Input array.</param>
+      <param name="k">The element to find. If k is smaller 1 or larger than the number of elements in list, the smallest/largest value will be returned.</param>
+      <param name="dim">[Optional] Dimension to operate along. If omitted operates along the first non singleton dimension (i.e. != 1).</param>
+      <returns>
+        <para>Array having the specified dimension reduced to the length 1 with the value of the k-the smallest element along that dimension.</para>
+        <para>Exception: If the selected dimension is of size 0 it will remain 0 (an empty set).</para>
+      </returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.StatisticsInternal.select(ILNumerics.ILInArray{ILNumerics.fcomplex},System.Int32,System.Int32)">
+      <summary>
+            Selects the k-th smallest element from an array along a specific dimension.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Input array.</param>
+      <param name="k">The element to find. If k is smaller 1 or larger than the number of elements in list, the smallest/largest value will be returned.</param>
+      <param name="dim">[Optional] Dimension to operate along. If omitted operates along the first non singleton dimension (i.e. != 1).</param>
+      <returns>
+        <para>Array having the specified dimension reduced to the length 1 with the value of the k-the smallest element along that dimension.</para>
+        <para>Exception: If the selected dimension is of size 0 it will remain 0 (an empty set).</para>
+      </returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.StatisticsInternal.select(ILNumerics.ILInArray{System.Single},System.Int32,System.Int32)">
+      <summary>
+            Selects the k-th smallest element from an array along a specific dimension.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Input array.</param>
+      <param name="k">The element to find. If k is smaller 1 or larger than the number of elements in list, the smallest/largest value will be returned.</param>
+      <param name="dim">[Optional] Dimension to operate along. If omitted operates along the first non singleton dimension (i.e. != 1).</param>
+      <returns>
+        <para>Array having the specified dimension reduced to the length 1 with the value of the k-the smallest element along that dimension.</para>
+        <para>Exception: If the selected dimension is of size 0 it will remain 0 (an empty set).</para>
+      </returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.StatisticsInternal.select(ILNumerics.ILInArray{ILNumerics.complex},System.Int32,System.Int32)">
+      <summary>
+            Selects the k-th smallest element from an array along a specific dimension.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Input array.</param>
+      <param name="k">The element to find. If k is smaller 1 or larger than the number of elements in list, the smallest/largest value will be returned.</param>
+      <param name="dim">[Optional] Dimension to operate along. If omitted operates along the first non singleton dimension (i.e. != 1).</param>
+      <returns>
+        <para>Array having the specified dimension reduced to the length 1 with the value of the k-the smallest element along that dimension.</para>
+        <para>Exception: If the selected dimension is of size 0 it will remain 0 (an empty set).</para>
+      </returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.StatisticsInternal.quickselect_worker(System.Double[],System.Int32,System.Int32,System.Int32,System.Int32@)">
+      <summary>
+            Quick select algorithm: Find the k-th smallest element in list.
+            Will change the list parameter!
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>Elements in the array list will be reordered. Make sure to pass a copy if you intend to use that data later</para>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+      <param name="list">The list to search in</param>
+      <param name="left">The first index in the list to start the search</param>
+      <param name="right">The last index in the list to end the search</param>
+      <param name="k">The k-th smallest element to find in list[left:right]. If k is smaller than 1 or larger than the number of elements the smallest/largest value will be returned.</param>
+      <param name="position">Returns the index in list where the smallest element was found</param>
+      <returns>The k-th smallest element</returns>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.StatisticsInternal.quickselect_worker(System.Int64[],System.Int32,System.Int32,System.Int32,System.Int32@)">
+      <summary>
+            Quick select algorithm: Find the k-th smallest element in list.
+            Will change the list parameter!
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>Elements in the array list will be reordered. Make sure to pass a copy if you intend to use that data later</para>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+      <param name="list">The list to search in</param>
+      <param name="left">The first index in the list to start the search</param>
+      <param name="right">The last index in the list to end the search</param>
+      <param name="k">The k-th smallest element to find in list[left:right]. If k is smaller than 1 or larger than the number of elements the smallest/largest value will be returned.</param>
+      <param name="position">Returns the index in list where the smallest element was found</param>
+      <returns>The k-th smallest element</returns>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.StatisticsInternal.quickselect_worker(System.Int32[],System.Int32,System.Int32,System.Int32,System.Int32@)">
+      <summary>
+            Quick select algorithm: Find the k-th smallest element in list.
+            Will change the list parameter!
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>Elements in the array list will be reordered. Make sure to pass a copy if you intend to use that data later</para>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+      <param name="list">The list to search in</param>
+      <param name="left">The first index in the list to start the search</param>
+      <param name="right">The last index in the list to end the search</param>
+      <param name="k">The k-th smallest element to find in list[left:right]. If k is smaller than 1 or larger than the number of elements the smallest/largest value will be returned.</param>
+      <param name="position">Returns the index in list where the smallest element was found</param>
+      <returns>The k-th smallest element</returns>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.StatisticsInternal.quickselect_worker(System.Byte[],System.Int32,System.Int32,System.Int32,System.Int32@)">
+      <summary>
+            Quick select algorithm: Find the k-th smallest element in list.
+            Will change the list parameter!
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>Elements in the array list will be reordered. Make sure to pass a copy if you intend to use that data later</para>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+      <param name="list">The list to search in</param>
+      <param name="left">The first index in the list to start the search</param>
+      <param name="right">The last index in the list to end the search</param>
+      <param name="k">The k-th smallest element to find in list[left:right]. If k is smaller than 1 or larger than the number of elements the smallest/largest value will be returned.</param>
+      <param name="position">Returns the index in list where the smallest element was found</param>
+      <returns>The k-th smallest element</returns>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.StatisticsInternal.quickselect_worker(ILNumerics.fcomplex[],System.Int32,System.Int32,System.Int32,System.Int32@)">
+      <summary>
+            Quick select algorithm: Find the k-th smallest element in list.
+            Will change the list parameter!
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>Elements in the array list will be reordered. Make sure to pass a copy if you intend to use that data later</para>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+      <param name="list">The list to search in</param>
+      <param name="left">The first index in the list to start the search</param>
+      <param name="right">The last index in the list to end the search</param>
+      <param name="k">The k-th smallest element to find in list[left:right]. If k is smaller than 1 or larger than the number of elements the smallest/largest value will be returned.</param>
+      <param name="position">Returns the index in list where the smallest element was found</param>
+      <returns>The k-th smallest element</returns>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.StatisticsInternal.quickselect_worker(System.Single[],System.Int32,System.Int32,System.Int32,System.Int32@)">
+      <summary>
+            Quick select algorithm: Find the k-th smallest element in list.
+            Will change the list parameter!
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>Elements in the array list will be reordered. Make sure to pass a copy if you intend to use that data later</para>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+      <param name="list">The list to search in</param>
+      <param name="left">The first index in the list to start the search</param>
+      <param name="right">The last index in the list to end the search</param>
+      <param name="k">The k-th smallest element to find in list[left:right]. If k is smaller than 1 or larger than the number of elements the smallest/largest value will be returned.</param>
+      <param name="position">Returns the index in list where the smallest element was found</param>
+      <returns>The k-th smallest element</returns>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.StatisticsInternal.quickselect_worker(ILNumerics.complex[],System.Int32,System.Int32,System.Int32,System.Int32@)">
+      <summary>
+            Quick select algorithm: Find the k-th smallest element in list.
+            Will change the list parameter!
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>Elements in the array list will be reordered. Make sure to pass a copy if you intend to use that data later</para>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+      <param name="list">The list to search in</param>
+      <param name="left">The first index in the list to start the search</param>
+      <param name="right">The last index in the list to end the search</param>
+      <param name="k">The k-th smallest element to find in list[left:right]. If k is smaller than 1 or larger than the number of elements the smallest/largest value will be returned.</param>
+      <param name="position">Returns the index in list where the smallest element was found</param>
+      <returns>The k-th smallest element</returns>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.StatisticsInternal.std(ILNumerics.ILInArray{System.Double},ILNumerics.ILInArray{System.Double},System.Boolean,System.Int32)">
+      <summary>
+            Calculates the standard deviation for values in A.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Input array.</param>
+      <param name="Weights">Vector of scaling factors, same length as working dimension of A, default: no scaling.</param>
+      <param name="biased">[Optional] true: apply biased normalization to result, default: false (non-biased).</param>
+      <param name="dim">[Optional] Dimension index of A to operate along, default: first non singleton dimension.</param>
+      <returns>Variances</returns>
+      <remarks>
+        <para>On scalar A a scalar 0 of the same shape as A is returned.</para>
+        <para>On empty A an empty array is returned, having the dimension to operate along reduced to length 1.</para>
+        <para>The parameters <paramref name="Weights" />, <paramref name="biased" /> and <paramref name="dim" /> are optional. 
+            Ommiting either one will choose its respective default value.</para>
+        <para>The standard deviation is computed by the formula 
+            <c>std = sqrt(var(A,...))</c>. For further details on given parameters, see 
+            <see cref="M:ILNumerics.ILMath.var(ILNumerics.ILInArray{T},ILNumerics.ILInArray{T},bool,false);" />.</para>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.StatisticsInternal.std(ILNumerics.ILInArray{System.Single},ILNumerics.ILInArray{System.Single},System.Boolean,System.Int32)">
+      <summary>
+            Calculates the standard deviation for values in A.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Input array.</param>
+      <param name="Weights">Vector of scaling factors, same length as working dimension of A, default: no scaling.</param>
+      <param name="biased">[Optional] true: apply biased normalization to result, default: false (non-biased).</param>
+      <param name="dim">[Optional] Dimension index of A to operate along, default: first non singleton dimension.</param>
+      <returns>Variances</returns>
+      <remarks>
+        <para>On scalar A a scalar 0 of the same shape as A is returned.</para>
+        <para>On empty A an empty array is returned, having the dimension to operate along reduced to length 1.</para>
+        <para>The parameters <paramref name="Weights" />, <paramref name="biased" /> and <paramref name="dim" /> are optional. 
+            Ommiting either one will choose its respective default value.</para>
+        <para>The standard deviation is computed by the formula 
+            <c>std = sqrt(var(A,...))</c>. For further details on given parameters, see 
+            <see cref="M:ILNumerics.ILMath.var(ILNumerics.ILInArray{T},ILNumerics.ILInArray{T},bool,false);" />.</para>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.StatisticsInternal.var(ILNumerics.ILInArray{System.Double},ILNumerics.ILInArray{System.Double},System.Boolean,System.Int32)">
+      <summary>
+            Calculates the variance along dimension of A.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Input array A.</param>
+      <param name="Weights">[Optional] Vector of scaling factors, same length as working dimension of A, default: no scaling.</param>
+      <param name="biased">[Optional] true: apply biased normalization to result, default: false (non-biased).</param>
+      <param name="dim">[Optional] Index of the dimension to operate along. If omitted operates along the first non singleton dimension (i.e. != 1).</param>
+      <returns>Variances</returns>
+      <remarks>
+        <para>On scalar A a scalar 0 of the same shape as A is returned.</para>
+        <para>On empty A an empty array is returned, having the dimension to operate along reduced to length 1.</para>
+        <para>The parameters <paramref name="Weights" />, <paramref name="biased" /> and <paramref name="dim" /> are optional. 
+            Ommiting either one will choose its respective default value.</para>
+        <para> The result for <paramref name="biased" /> = true is computed by the following formula: 
+            <code>r = (A - mean(A)); 
+            var = sum(r * r) / A.D[dim];</code>
+            If <paramref name="biased" /> is false (default) the normalization is done with the length of the working dimension of A as follows: 
+            <code>r = (A - mean(A)); 
+            var = sum(r * r) / (A.D[dim] - 1); </code>
+            If <paramref name="Weights" /> is given, the parameter <paramref name="biased" /> is ignored.</para>
+        <para>If <paramref name="Weights" /> is given, the normalization is applied to r as follows: 
+            <code>w = w / sum(w); 
+            r = A - sum(w * A);
+            var = sum(w * (r * r)); 
+            </code></para>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.StatisticsInternal.var(ILNumerics.ILInArray{System.Single},ILNumerics.ILInArray{System.Single},System.Boolean,System.Int32)">
+      <summary>
+            Calculates the variance along dimension of A.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Input array A.</param>
+      <param name="Weights">[Optional] Vector of scaling factors, same length as working dimension of A, default: no scaling.</param>
+      <param name="biased">[Optional] true: apply biased normalization to result, default: false (non-biased).</param>
+      <param name="dim">[Optional] Index of the dimension to operate along. If omitted operates along the first non singleton dimension (i.e. != 1).</param>
+      <returns>Variances</returns>
+      <remarks>
+        <para>On scalar A a scalar 0 of the same shape as A is returned.</para>
+        <para>On empty A an empty array is returned, having the dimension to operate along reduced to length 1.</para>
+        <para>The parameters <paramref name="Weights" />, <paramref name="biased" /> and <paramref name="dim" /> are optional. 
+            Ommiting either one will choose its respective default value.</para>
+        <para> The result for <paramref name="biased" /> = true is computed by the following formula: 
+            <code>r = (A - mean(A)); 
+            var = sum(r * r) / A.D[dim];</code>
+            If <paramref name="biased" /> is false (default) the normalization is done with the length of the working dimension of A as follows: 
+            <code>r = (A - mean(A)); 
+            var = sum(r * r) / (A.D[dim] - 1); </code>
+            If <paramref name="Weights" /> is given, the parameter <paramref name="biased" /> is ignored.</para>
+        <para>If <paramref name="Weights" /> is given, the normalization is applied to r as follows: 
+            <code>w = w / sum(w); 
+            r = A - sum(w * A);
+            var = sum(w * (r * r)); 
+            </code></para>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="T:ILNumerics_Licensing.ILLicHelper_a0d5915b76894f31be5de77f460373e3_">
+      <summary>
+            This type supports ILNumerics infrastructure. Do not edit the code!
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>This type is automatically generated by ILNumerics Ultimate VS. If you encounter problems compiling this file, make sure to reference ILNumerics.Core in your project!<para>[ILNumerics Statistics Toolbox]</para></remarks>
+    </member>
+    <member name="T:ILNumerics.Toolboxes.Distributions.ChiDistribution">
+      <summary>
+            Continuous Univariate Chi distribution.
+            This distribution is a continuous probability distribution. The distribution usually arises when a k-dimensional vector's orthogonal
+            components are independent and each follow a standard normal distribution. The length of the vector will
+            then have a chi distribution.
+            <a href="http://en.wikipedia.org/wiki/Chi_distribution">Wikipedia - Chi distribution</a>.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.ChiDistribution.#cctor">
+      <summary>
+            License validation for Distributions in the Statistics Toolbox.
+            </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.ChiDistribution.#ctor(System.Double)">
+      <summary>
+            Initializes a new instance of the <see cref="T:ILNumerics.Toolboxes.Distributions.ChiDistribution" /> class.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="freedom">The degrees of freedom (k) of the distribution. Range: k &gt; 0.</param>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.ChiDistribution.SetParameters(System.Double)">
+      <summary>
+            Sets the parameters of the distribution after checking their validity.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="freedom">The degrees of freedom (k) of the distribution. Range: k &gt; 0.</param>
+      <exception cref="T:System.ArgumentException">When the parameters are out of range.</exception>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.ChiDistribution.ToString">
+      <summary>
+            A string representation of the distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <returns>a string representation of the distribution.</returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.ChiDistribution.Density(ILNumerics.ILInArray{System.Double})">
+      <summary>
+            Computes the probability density of the distribution (PDF) at x, i.e. ∂P(X ≤ x)/∂x.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="x">The location at which to compute the density.</param>
+      <returns>the density at <paramref name="x" />.</returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.ChiDistribution.DensityLog(ILNumerics.ILInArray{System.Double})">
+      <summary>
+            Computes the log probability density of the distribution (lnPDF) at x, i.e. ln(∂P(X ≤ x)/∂x).
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="x">The location at which to compute the log density.</param>
+      <returns>the log density at <paramref name="x" />.</returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.ChiDistribution.CumulativeDistribution(ILNumerics.ILInArray{System.Double})">
+      <summary>
+            Computes the cumulative distribution (CDF) of the distribution at x, i.e. P(X ≤ x).
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="x">The location at which to compute the cumulative distribution function.</param>
+      <returns>the cumulative distribution at location <paramref name="x" />.</returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.ChiDistribution.Samples(ILNumerics.ILSize,System.Int32)">
+      <summary>
+            Generates a sequence of samples from the Chi distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <returns>a sequence of samples from the distribution.</returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.ChiDistribution.PDF(ILNumerics.ILInArray{System.Double})">
+      <summary>
+            Computes the probability density of the distribution (PDF) at x, i.e. ∂P(X ≤ x)/∂x.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="x">The location at which to compute the density.</param>
+      <returns>the density at <paramref name="x" />.</returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.ChiDistribution.PDFLog(ILNumerics.ILInArray{System.Double})">
+      <summary>
+            Computes the log probability density of the distribution (lnPDF) at x, i.e. ln(∂P(X ≤ x)/∂x).
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="x">The location at which to compute the density.</param>
+      <returns>the log density at <paramref name="x" />.</returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.ChiDistribution.CDF(ILNumerics.ILInArray{System.Double})">
+      <summary>
+            Computes the cumulative distribution (CDF) of the distribution at x, i.e. P(X ≤ x).
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="x">The location at which to compute the cumulative distribution function.</param>
+      <returns>the cumulative distribution at location <paramref name="x" />.</returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.ChiDistribution.Samples(ILNumerics.ILSize)">
+      <summary>
+            Generates a sequence of samples from the distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="size">The size of the samples to generate.</param>
+      <returns>a sequence of samples from the distribution.</returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.ChiDistribution.DegreesOfFreedom">
+      <summary>
+            Gets or sets the degrees of freedom (k) of the Chi distribution. Range: k &gt; 0.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.ChiDistribution.Mean">
+      <summary>
+            Gets the mean of the distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.ChiDistribution.Variance">
+      <summary>
+            Gets the variance of the distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.ChiDistribution.StdDev">
+      <summary>
+            Gets the standard deviation of the distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.ChiDistribution.Entropy">
+      <summary>
+            Gets the entropy of the distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.ChiDistribution.Skewness">
+      <summary>
+            Gets the skewness of the distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.ChiDistribution.Mode">
+      <summary>
+            Gets the mode of the distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.ChiDistribution.Median">
+      <summary>
+            Gets the median of the distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.ChiDistribution.Minimum">
+      <summary>
+            Gets the minimum of the distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.ChiDistribution.Maximum">
+      <summary>
+            Gets the maximum of the distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="T:ILNumerics.Toolboxes.Distributions.ChiSquareDistribution">
+      <summary>
+            Continuous Univariate Chi-Squared distribution.
+            This distribution is a sum of the squares of k independent standard normal random variables.
+            <a href="http://en.wikipedia.org/wiki/Chi-square_distribution">Wikipedia - ChiSquare distribution</a>.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.ChiSquareDistribution.#cctor">
+      <summary>
+            License validation for Distributions in the Statistics Toolbox.
+            </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.ChiSquareDistribution.#ctor(System.Double)">
+      <summary>
+            Initializes a new instance of the <see cref="T:ILNumerics.Toolboxes.Distributions.ChiSquareDistribution" /> class.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="freedom">The degrees of freedom (k) of the distribution. Range: k &gt; 0.</param>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.ChiSquareDistribution.SetParameters(System.Double)">
+      <summary>
+            Sets the parameters of the distribution after checking their validity.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="freedom">The degrees of freedom (k) of the distribution. Range: k &gt; 0.</param>
+      <exception cref="T:System.ArgumentException">When the parameters are out of range.</exception>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.ChiSquareDistribution.ToString">
+      <summary>
+            A string representation of the distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <returns>a string representation of the distribution.</returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.ChiSquareDistribution.Density(ILNumerics.ILInArray{System.Double})">
+      <summary>
+            Computes the probability density of the distribution (PDF) at x, i.e. ∂P(X ≤ x)/∂x.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="x">The location at which to compute the density.</param>
+      <returns>the density at <paramref name="x" />.</returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.ChiSquareDistribution.DensityLog(ILNumerics.ILInArray{System.Double})">
+      <summary>
+            Computes the log probability density of the distribution (lnPDF) at x, i.e. ln(∂P(X ≤ x)/∂x).
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="x">The location at which to compute the log density.</param>
+      <returns>the log density at <paramref name="x" />.</returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.ChiSquareDistribution.CumulativeDistribution(ILNumerics.ILInArray{System.Double})">
+      <summary>
+            Computes the cumulative distribution (CDF) of the distribution at x, i.e. P(X ≤ x).
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="x">Vector of locations at which to compute the cumulative distribution function.</param>
+      <returns>the cumulative distribution at location <paramref name="x" />.</returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.ChiSquareDistribution.Samples(ILNumerics.ILSize,System.Double)">
+      <summary>
+            Generates a sequence of samples from the <c>ChiSquare</c> distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <returns>a sequence of samples from the distribution.</returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.ChiSquareDistribution.PDF(ILNumerics.ILInArray{System.Double})">
+      <summary>
+            Computes the probability density of the distribution (PDF) at x, i.e. ∂P(X ≤ x)/∂x.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="x">The location at which to compute the density.</param>
+      <returns>the density at <paramref name="x" />.</returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.ChiSquareDistribution.PDFLog(ILNumerics.ILInArray{System.Double})">
+      <summary>
+            Computes the log probability density of the distribution (lnPDF) at x, i.e. ln(∂P(X ≤ x)/∂x).
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="x">The location at which to compute the density.</param>
+      <returns>the log density at <paramref name="x" />.</returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.ChiSquareDistribution.CDF(ILNumerics.ILInArray{System.Double})">
+      <summary>
+            Computes the cumulative distribution (CDF) of the distribution at x, i.e. P(X ≤ x).
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="x">The location at which to compute the cumulative distribution function.</param>
+      <returns>the cumulative distribution at location <paramref name="x" />.</returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.ChiSquareDistribution.DegreesOfFreedom">
+      <summary>
+            Gets or sets the degrees of freedom (k) of the Chi distribution. Range: k &gt; 0.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.ChiSquareDistribution.Mean">
+      <summary>
+            Gets the mean of the distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.ChiSquareDistribution.Variance">
+      <summary>
+            Gets the variance of the distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.ChiSquareDistribution.StdDev">
+      <summary>
+            Gets the standard deviation of the distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.ChiSquareDistribution.Entropy">
+      <summary>
+            Gets the entropy of the distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.ChiSquareDistribution.Skewness">
+      <summary>
+            Gets the skewness of the distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.ChiSquareDistribution.Mode">
+      <summary>
+            Gets the mode of the distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.ChiSquareDistribution.Median">
+      <summary>
+            Gets the median of the distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.ChiSquareDistribution.Minimum">
+      <summary>
+            Gets the minimum of the distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.ChiSquareDistribution.Maximum">
+      <summary>
+            Gets the maximum of the distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="T:ILNumerics.Toolboxes.Distributions.HypergeometricDistribution">
+      <summary>
+            Discrete Univariate Hypergeometric distribution.
+            This distribution is a discrete probability distribution that describes the number of successes in a sequence
+            of n draws from a finite population without replacement, just as the binomial distribution
+            describes the number of successes for draws with replacement
+            <a href="http://en.wikipedia.org/wiki/Hypergeometric_distribution">Wikipedia - Hypergeometric distribution</a>.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.HypergeometricDistribution.#cctor">
+      <summary>
+            License validation for Distributions in the Statistics Toolbox.
+            </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.HypergeometricDistribution.#ctor(System.Int32,System.Int32,System.Int32)">
+      <summary>
+            Initializes a new instance of the Hypergeometric class.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="population">The size of the population (N).</param>
+      <param name="success">The number successes within the population (K, M).</param>
+      <param name="draws">The number of draws without replacement (n).</param>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.HypergeometricDistribution.SetParameters(System.Int32,System.Int32,System.Int32)">
+      <summary>
+            Sets the parameters of the distribution after checking their validity.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="population">The size of the population (N).</param>
+      <param name="success">The number successes within the population (K, M).</param>
+      <param name="draws">The number of draws without replacement (n).</param>
+      <exception cref="T:System.ArgumentOutOfRangeException">When the parameters are out of range.</exception>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.HypergeometricDistribution.ToString">
+      <summary>
+            Returns a <see cref="T:System.String" /> that represents this instance.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <returns>
+            A <see cref="T:System.String" /> that represents this instance.
+            </returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.HypergeometricDistribution.Density(ILNumerics.ILInArray{System.Int32})">
+      <summary>
+            Computes the probability mass (PMF) at k, i.e. P(X = k).
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="k">The location in the domain where we want to evaluate the probability mass function.</param>
+      <returns>the probability mass at location <paramref name="k" />.</returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.HypergeometricDistribution.DensiityLog(ILNumerics.ILInArray{System.Int32})">
+      <summary>
+            Computes the log probability mass at k, i.e. ln(P(X = k)).
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="k">The location in the domain where we want to evaluate the log probability mass function.</param>
+      <returns>the log probability mass at location <paramref name="k" />.</returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.HypergeometricDistribution.CumulativeDistribution(ILNumerics.ILInArray{System.Double})">
+      <summary>
+            Computes the cumulative distribution (CDF) of the distribution at x, i.e. P(X ≤ x).
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="x">The location at which to compute the cumulative distribution function.</param>
+      <returns>the cumulative distribution at location <paramref name="x" />.</returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.HypergeometricDistribution.Samples(ILNumerics.ILSize)">
+      <summary>
+            Generates a sample from the Hypergeometric distribution without doing parameter checking.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="size">The size of the samples to generate.</param>
+      <returns>a random number from the Hypergeometric distribution.</returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.HypergeometricDistribution.Population">
+      <summary>
+            Gets or sets the size of the population (N).
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.HypergeometricDistribution.Draws">
+      <summary>
+            Gets or sets the number of draws without replacement (n).
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.HypergeometricDistribution.Success">
+      <summary>
+            Gets or sets the number successes within the population (K, M).
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.HypergeometricDistribution.Mean">
+      <summary>
+            Gets the mean of the distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.HypergeometricDistribution.Variance">
+      <summary>
+            Gets the variance of the distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.HypergeometricDistribution.StdDev">
+      <summary>
+            Gets the standard deviation of the distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.HypergeometricDistribution.Entropy">
+      <summary>
+            Gets the entropy of the distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.HypergeometricDistribution.Mode">
+      <summary>
+            Gets the mode of the distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.HypergeometricDistribution.Median">
+      <summary>
+            Gets the median of the distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.HypergeometricDistribution.Minimum">
+      <summary>
+            Gets the minimum of the distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.HypergeometricDistribution.Maximum">
+      <summary>
+            Gets the maximum of the distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="T:ILNumerics.Toolboxes.Distributions.LogNormalDistribution">
+      <summary>
+            Continuous Univariate Log-Normal distribution.
+            For details about this distribution, see
+            <a href="http://en.wikipedia.org/wiki/Log-normal_distribution">Wikipedia - Log-Normal distribution</a>.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.LogNormalDistribution.#cctor">
+      <summary>
+            License validation for Distributions in the Statistics Toolbox.
+            </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.LogNormalDistribution.#ctor(System.Double,System.Double)">
+      <summary>
+            Initializes a new instance of the <see cref="T:ILNumerics.Toolboxes.Distributions.LogNormalDistribution" /> class.
+            The distribution will be initialized with the default <seealso cref="T:System.Random" />
+            random number generator.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="mu">The log-scale (μ) of the logarithm of the distribution.</param>
+      <param name="sigma">The shape (σ) of the logarithm of the distribution. Range: σ ≥ 0.</param>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.LogNormalDistribution.SetParameters(System.Double,System.Double)">
+      <summary>
+            Sets the parameters of the distribution after checking their validity.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="mu">The log-scale (μ) of the distribution.</param>
+      <param name="sigma">The shape (σ) of the distribution. Range: σ ≥ 0.</param>
+      <exception cref="T:System.ArgumentOutOfRangeException">When the parameters are out of range.</exception>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.LogNormalDistribution.Density(System.Double)">
+      <summary>
+            Computes the probability density of the distribution (PDF) at x
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="x">The location at which to compute the density.</param>
+      <returns>the density at <paramref name="x" />.</returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.LogNormalDistribution.DensityLn(System.Double)">
+      <summary>
+            Computes the log probability density of the distribution (lnPDF) at x, i.e. ln(∂P(X ≤ x)/∂x).
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="x">The location at which to compute the log density.</param>
+      <returns>the log density at <paramref name="x" />.</returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.LogNormalDistribution.Samples(ILNumerics.ILSize)">
+      <summary>
+            Generates a sample from the log-normal distribution using the <i>Box-Muller</i> algorithm.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <returns>a sample from the distribution.</returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.LogNormalDistribution.CumulativeDistributionF(System.Double)">
+      <summary>
+            Computes the cumulative distribution (CDF) of the distribution at x, i.e. p(X ≤ x)
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="x">The location at which to compute the cumulative distribution function</param>
+      <returns>the cumulative distribution at location <paramref name="x" /></returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.LogNormalDistribution.InverseCumulativeDistributionF(System.Double)">
+      <summary>
+            Computes the inverse of the cumulative distribution function (InvCDF) for the distribution
+            at the given probability. This is also known as the quantile or percent point function.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="x">The location at which to compute the inverse cumulative density.</param>
+      <returns>the inverse cumulative density at <paramref name="x" />.</returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.LogNormalDistribution.ToString">
+      <summary>
+            A string representation of the distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <returns>a string representation of the distribution.</returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.LogNormalDistribution.Mu">
+      <summary>
+            Gets or sets the log-scale (μ) (mean of the logarithm) of the distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.LogNormalDistribution.Sigma">
+      <summary>
+            Gets or sets the shape (σ) (standard deviation of the logarithm) of the distribution. Range: σ ≥ 0.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.LogNormalDistribution.Mean">
+      <summary>
+            Gets the mu of the log-normal distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.LogNormalDistribution.Variance">
+      <summary>
+            Gets the variance of the log-normal distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.LogNormalDistribution.StdDev">
+      <summary>
+            Gets the standard deviation of the log-normal distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.LogNormalDistribution.Entropy">
+      <summary>
+            Gets the entropy of the log-normal distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.LogNormalDistribution.Skewness">
+      <summary>
+            Gets the skewness of the log-normal distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.LogNormalDistribution.Mode">
+      <summary>
+            Gets the mode of the log-normal distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.LogNormalDistribution.Median">
+      <summary>
+            Gets the median of the log-normal distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.LogNormalDistribution.Minimum">
+      <summary>
+            Gets the minimum of the log-normal distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.LogNormalDistribution.Maximum">
+      <summary>
+            Gets the maximum of the log-normal distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="T:ILNumerics.Toolboxes.Distributions.NormalDistribution">
+      <summary>
+            Normal distribution.
+            For details about this distribution, see
+            <a href="http://en.wikipedia.org/wiki/Normal_distribution">Wikipedia - Normal distribution</a>.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.NormalDistribution.#cctor">
+      <summary>
+            License validation for Distributions in the Statistics Toolbox.
+            </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="F:ILNumerics.Toolboxes.Distributions.NormalDistribution.m_mu">
+      <summary>
+            Initializes a new instance of the Normal class. This is a normal distribution with mean 0.0
+            and standard deviation 1.0. The distribution will
+            be initialized with the default <seealso cref="T:System.Random" /> random number generator.
+            </summary>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.NormalDistribution.#ctor(System.Double,System.Double)">
+      <summary>
+            Initializes a new instance of the Normal class with a particular mean and standard deviation. The distribution will
+            be initialized with the default <seealso cref="T:System.Random" /> random number generator.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="mean">The mean of the normal distribution.</param>
+      <param name="stddev">The standard deviation of the normal distribution. Range: σ ≥ 0.</param>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.NormalDistribution.SetParameters(System.Double,System.Double)">
+      <summary>
+            Sets the parameters of the distribution after checking their validity.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="mean">The mean (μ) of the normal distribution.</param>
+      <param name="stddev">The standard deviation (σ) of the normal distribution. Range: σ ≥ 0.</param>
+      <exception cref="T:System.ArgumentOutOfRangeException">When the parameters are out of range.</exception>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.NormalDistribution.WithMeanStdDev(System.Double,System.Double)">
+      <summary>
+            Constructs a normal distribution from a mean and standard deviation.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="mean">The mean (μ) of the normal distribution.</param>
+      <param name="stddev">The standard deviation (σ) of the normal distribution. Range: σ ≥ 0.</param>
+      <returns>a normal distribution.</returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.NormalDistribution.WithMeanVariance(System.Double,System.Double)">
+      <summary>
+            Constructs a normal distribution from a mean and variance.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="mean">The mean (μ) of the normal distribution.</param>
+      <param name="var">The variance (σ^2) of the normal distribution.</param>
+      <returns>A normal distribution.</returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.NormalDistribution.WithMeanPrecision(System.Double,System.Double)">
+      <summary>
+            Constructs a normal distribution from a mean and precision.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="mean">The mean (μ) of the normal distribution.</param>
+      <param name="precision">The precision of the normal distribution.</param>
+      <returns>A normal distribution.</returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.NormalDistribution.Estimate(ILNumerics.ILInArray{System.Double})">
+      <summary>
+            Estimates the normal distribution parameters from sample data with maximum-likelihood.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="samples">The samples to estimate the distribution parameters from</param>
+      <returns>A normal distribution.</returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.NormalDistribution.ToString">
+      <summary>
+            A string representation of the distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <returns>a string representation of the distribution.</returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.NormalDistribution.Density(ILNumerics.ILInArray{System.Double})">
+      <summary>
+            Computes the probability density of the distribution (PDF) at x, i.e. ∂P(X ≤ x)/∂x.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="x">The location at which to compute the density.</param>
+      <returns>the density at <paramref name="x" />.</returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.NormalDistribution.Samples(ILNumerics.ILSize,System.Double,System.Double)">
+      <summary>
+            Computes a set of samples with normal distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="size">Size of the sample set.</param>
+      <param name="mean">Mean of the normal distribution.</param>
+      <param name="stddev">Standard deviation of the distribution.</param>
+      <returns>Samples with the specified size.</returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.NormalDistribution.CumulativeDistribution(ILNumerics.ILInArray{System.Double})">
+      <summary>
+            Computes the cumulative distribution (CDF) of the distribution at x, i.e. P(X ≤ x).
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="x">The location at which to compute the cumulative distribution function.</param>
+      <returns>the cumulative distribution at location <paramref name="x" />.</returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.NormalDistribution.PDF(ILNumerics.ILInArray{System.Double})">
+      <summary>
+            Computes the probability density of the distribution (PDF) at x, i.e. ∂P(X ≤ x)/∂x.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="x">The location at which to compute the density.</param>
+      <returns>the density at <paramref name="x" />.</returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.NormalDistribution.PDFLog(ILNumerics.ILInArray{System.Double})">
+      <summary>
+            Computes the log probability density of the distribution (lnPDF) at x, i.e. ln(∂P(X ≤ x)/∂x).
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="x">The location at which to compute the density.</param>
+      <returns>the log density at <paramref name="x" />.</returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.NormalDistribution.Mean">
+      <summary>
+            Gets or sets the mean (μ) of the normal distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.NormalDistribution.StdDev">
+      <summary>
+            Gets or sets the standard deviation (σ) of the normal distribution. Range: σ ≥ 0.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.NormalDistribution.Variance">
+      <summary>
+            Gets or sets the variance of the normal distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.NormalDistribution.Precision">
+      <summary>
+            Gets or sets the precision of the normal distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.NormalDistribution.Minimum">
+      <summary>
+            Gets the minimum of the normal distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.NormalDistribution.Maximum">
+      <summary>
+            Gets the maximum of the normal distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="T:ILNumerics.Toolboxes.Distributions.StudentDistribution">
+      <summary>
+            Continuous Univariate Student's T-distribution.
+            Implements the univariate Student t-distribution. For details about this
+            distribution, see
+            <a href="http://en.wikipedia.org/wiki/Student%27s_t-distribution">
+            Wikipedia - Student's t-distribution</a>.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.StudentDistribution.#cctor">
+      <summary>
+            License validation for Distributions in the Statistics Toolbox.
+            </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.StudentDistribution.#ctor(System.Double,System.Double,System.Double)">
+      <summary>
+            Initializes a new instance of the StudentT class with a particular location, scale and degrees of
+            freedom. The distribution will
+            be initialized with the default <seealso cref="T:System.Random" /> random number generator.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="location">The location (μ) of the distribution.</param>
+      <param name="scale">The scale (σ) of the distribution. Range: σ &gt; 0.</param>
+      <param name="freedom">The degrees of freedom (ν) for the distribution. Range: ν &gt; 0.</param>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.StudentDistribution.SetParameters(System.Double,System.Double,System.Double)">
+      <summary>
+            Sets the parameters of the distribution after checking their validity.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="location">The location (μ) of the distribution.</param>
+      <param name="scale">The scale (σ) of the distribution. Range: σ &gt; 0.</param>
+      <param name="freedom">The degrees of freedom (ν) for the distribution. Range: ν &gt; 0.</param>
+      <exception cref="T:System.ArgumentOutOfRangeException">When the parameters are out of range.</exception>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.StudentDistribution.ToString">
+      <summary>
+            A string representation of the distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <returns>a string representation of the distribution.</returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.StudentDistribution.Density(ILNumerics.ILInArray{System.Double})">
+      <summary>
+            Computes the probability density of the distribution (PDF) at x, i.e. ∂P(X ≤ x)/∂x.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="x">The location at which to compute the density.</param>
+      <returns>the density at <paramref name="x" />.</returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Distributions.StudentDistribution.DensityLog(ILNumerics.ILInArray{System.Double})">
+      <summary>
+            Computes the log probability density of the distribution (lnPDF) at x, i.e. ln(∂P(X ≤ x)/∂x).
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="x">The location at which to compute the density.</param>
+      <returns>the log density at <paramref name="x" />.</returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.StudentDistribution.Location">
+      <summary>
+            Gets or sets the location (μ) of the Student t-distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.StudentDistribution.Scale">
+      <summary>
+            Gets or sets the scale (σ) of the Student t-distribution. Range: σ &gt; 0.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.StudentDistribution.DegreesOfFreedom">
+      <summary>
+            Gets or sets the degrees of freedom (ν) of the Student t-distribution. Range: ν &gt; 0.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.StudentDistribution.Mean">
+      <summary>
+            Gets the mean of the Student t-distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.StudentDistribution.Variance">
+      <summary>
+            Gets the variance of the Student t-distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.StudentDistribution.StdDev">
+      <summary>
+            Gets the standard deviation of the Student t-distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.StudentDistribution.Entropy">
+      <summary>
+            Gets the entropy of the Student t-distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.StudentDistribution.Skewness">
+      <summary>
+            Gets the skewness of the Student t-distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.StudentDistribution.Mode">
+      <summary>
+            Gets the mode of the Student t-distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.StudentDistribution.Median">
+      <summary>
+            Gets the median of the Student t-distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.StudentDistribution.Minimum">
+      <summary>
+            Gets the minimum of the Student t-distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="P:ILNumerics.Toolboxes.Distributions.StudentDistribution.Maximum">
+      <summary>
+            Gets the maximum of the Student t-distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="T:ILNumerics.Toolboxes.Statistics">
+      <summary>
+            Statistics contains several common functions for statistical operators.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Statistics.cov(ILNumerics.ILInArray{System.Double},System.Boolean)">
+      <summary>
+            Covariance matrix of A.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Input vector or data matrix, samples in columns, variables in rows.</param>
+      <param name="unbiased">[Optional] If true, calculate the best unbiased variance estimate if the observations are from a normal distribution. This normalized by n-1 if n&gt;1 (n = number of samples). If n == 1 normalization is always 1. If false always normalize by n.</param>
+      <returns>Variance of vector A/Covariance matrix of A.</returns>
+      <remarks>
+        <para>If A is a vector <c>cov(A)</c> returns the variance of A.</para>
+        <para>If A is a m x n matrix, where each of the n columns is an m-dimensional observation, <c>cov(A)</c> is the n x n covariance matrix.</para>
+        <para>The mean is removed from each column before calculating the result.</para>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Statistics.cov(ILNumerics.ILInArray{System.Single},System.Boolean)">
+      <summary>
+            Covariance matrix of A.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Input vector or data matrix, samples in columns, variables in rows.</param>
+      <param name="unbiased">[Optional] If true, calculate the best unbiased variance estimate if the observations are from a normal distribution. This normalized by n-1 if n&gt;1 (n = number of samples). If n == 1 normalization is always 1. If false always normalize by n.</param>
+      <returns>Variance of vector A/Covariance matrix of A.</returns>
+      <remarks>
+        <para>If A is a vector <c>cov(A)</c> returns the variance of A.</para>
+        <para>If A is a m x n matrix, where each of the n columns is an m-dimensional observation, <c>cov(A)</c> is the n x n covariance matrix.</para>
+        <para>The mean is removed from each column before calculating the result.</para>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Statistics.median(ILNumerics.ILInArray{System.Double},System.Int32)">
+      <summary>
+            Calculates median along the specified dimension.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Input Array.</param>
+      <returns>
+        <para>Array having the specified dimension reduced to the length 1 with the median of 
+            all elements along that dimension.</para>
+        <param name="dim">[Optional] Index of dimension to operate along. If omitted operates along the first non singleton dimension (i.e. != 1).</param>
+        <para>The result will have the same number of dimensions as A, but the specified dimension will have the 
+            size 1.</para>
+        <para>If the specified dimension of A is empty, the median along that dimension will be NaN and that dimension will be 1.</para>
+      </returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Statistics.median(ILNumerics.ILInArray{System.Int64},System.Int32)">
+      <summary>
+            Calculates median along the specified dimension.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Input Array.</param>
+      <returns>
+        <para>Array having the specified dimension reduced to the length 1 with the median of 
+            all elements along that dimension.</para>
+        <param name="dim">[Optional] Index of dimension to operate along. If omitted operates along the first non singleton dimension (i.e. != 1).</param>
+        <para>The result will have the same number of dimensions as A, but the specified dimension will have the 
+            size 1.</para>
+        <para>If the specified dimension of A is empty, the median along that dimension will be NaN and that dimension will be 1.</para>
+      </returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Statistics.median(ILNumerics.ILInArray{System.Int32},System.Int32)">
+      <summary>
+            Calculates median along the specified dimension.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Input Array.</param>
+      <returns>
+        <para>Array having the specified dimension reduced to the length 1 with the median of 
+            all elements along that dimension.</para>
+        <param name="dim">[Optional] Index of dimension to operate along. If omitted operates along the first non singleton dimension (i.e. != 1).</param>
+        <para>The result will have the same number of dimensions as A, but the specified dimension will have the 
+            size 1.</para>
+        <para>If the specified dimension of A is empty, the median along that dimension will be NaN and that dimension will be 1.</para>
+      </returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Statistics.median(ILNumerics.ILInArray{System.Byte},System.Int32)">
+      <summary>
+            Calculates median along the specified dimension.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Input Array.</param>
+      <returns>
+        <para>Array having the specified dimension reduced to the length 1 with the median of 
+            all elements along that dimension.</para>
+        <param name="dim">[Optional] Index of dimension to operate along. If omitted operates along the first non singleton dimension (i.e. != 1).</param>
+        <para>The result will have the same number of dimensions as A, but the specified dimension will have the 
+            size 1.</para>
+        <para>If the specified dimension of A is empty, the median along that dimension will be NaN and that dimension will be 1.</para>
+      </returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Statistics.median(ILNumerics.ILInArray{ILNumerics.fcomplex},System.Int32)">
+      <summary>
+            Calculates median along the specified dimension.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Input Array.</param>
+      <returns>
+        <para>Array having the specified dimension reduced to the length 1 with the median of 
+            all elements along that dimension.</para>
+        <param name="dim">[Optional] Index of dimension to operate along. If omitted operates along the first non singleton dimension (i.e. != 1).</param>
+        <para>The result will have the same number of dimensions as A, but the specified dimension will have the 
+            size 1.</para>
+        <para>If the specified dimension of A is empty, the median along that dimension will be NaN and that dimension will be 1.</para>
+      </returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Statistics.median(ILNumerics.ILInArray{System.Single},System.Int32)">
+      <summary>
+            Calculates median along the specified dimension.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Input Array.</param>
+      <returns>
+        <para>Array having the specified dimension reduced to the length 1 with the median of 
+            all elements along that dimension.</para>
+        <param name="dim">[Optional] Index of dimension to operate along. If omitted operates along the first non singleton dimension (i.e. != 1).</param>
+        <para>The result will have the same number of dimensions as A, but the specified dimension will have the 
+            size 1.</para>
+        <para>If the specified dimension of A is empty, the median along that dimension will be NaN and that dimension will be 1.</para>
+      </returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Statistics.median(ILNumerics.ILInArray{ILNumerics.complex},System.Int32)">
+      <summary>
+            Calculates median along the specified dimension.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Input Array.</param>
+      <returns>
+        <para>Array having the specified dimension reduced to the length 1 with the median of 
+            all elements along that dimension.</para>
+        <param name="dim">[Optional] Index of dimension to operate along. If omitted operates along the first non singleton dimension (i.e. != 1).</param>
+        <para>The result will have the same number of dimensions as A, but the specified dimension will have the 
+            size 1.</para>
+        <para>If the specified dimension of A is empty, the median along that dimension will be NaN and that dimension will be 1.</para>
+      </returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Statistics.mvnpdf(ILNumerics.ILInArray{System.Double},ILNumerics.ILInArray{System.Double},ILNumerics.ILInArray{System.Double})">
+      <summary>
+            Probability density function for a multivariate normal random distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Matrix of points in columns, where the probability density function is to be evaluated.</param>
+      <param name="mu">[Optional] Centers, size d x 1, if 'null': zeros are attempted, default: null.</param>
+      <param name="sigma">Covariance matrix, must be positive definite, size d x d or vector of lenght d.</param>
+      <returns>Random numbers as taken from the multivariate random probability distribution given by mu and sigma.</returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Statistics.mvnpdf(ILNumerics.ILInArray{System.Single},ILNumerics.ILInArray{System.Single},ILNumerics.ILInArray{System.Single})">
+      <summary>
+            Probability density function for a multivariate normal random distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Matrix of points in columns, where the probability density function is to be evaluated.</param>
+      <param name="mu">[Optional] Centers, size d x 1, if 'null': zeros are attempted, default: null.</param>
+      <param name="sigma">Covariance matrix, must be positive definite, size d x d or vector of lenght d.</param>
+      <returns>Random numbers as taken from the multivariate random probability distribution given by mu and sigma.</returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Statistics.mvnrnd(System.Int32)">
+      <summary>
+            Choose samples from a multivariate random distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <returns>n random numbers as taken from the multivariate random probability distribution with zero mean and unity covariance.</returns>
+      <remarks>
+        <para>This is an alias for <see cref="M:ILNumerics.ILMath.randn(params int[])" />. If n was not specified, a single random number is generated.</para>
+        <para>The samples are returned as row vector of size 1 x n.</para>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Statistics.mvnrnd">
+      <summary>
+            Choose one sample from a multivariate random distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <returns>Single random number, taken from the multivariate random probability distribution with zero mean and unity covariance</returns>
+      <remarks>
+        <para>This is an alias for <see cref="M:ILNumerics.ILMath.randn(params int[])" />. A single (scalar) random number is generated.</para>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Statistics.mvnrnd(ILNumerics.ILInArray{System.Double},ILNumerics.ILInArray{System.Double},System.Int32,System.Boolean)">
+      <summary>
+            Chooses samples from a multivariate random distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="inMu">[optional] centers, size d x n; if d x 1 is given, optional parameter <paramref name="n" /> is used to replicate mu accordingly, if null, the values will be genereated with a center of zero.</param>
+      <param name="inSigma">[optional] covariance matrix, must be positive definite, size d x d or vector of lenght d, if null (not set), unitiy matrix is expected.</param>
+      <param name="n">[optional] number of samples to generate, per default (-1) the number of columns of <paramref name="inMu" /> defines that number.</param>
+      <param name="sigmaIsSquaredCov">[optional] if false: safe the effort of finding the square root of <paramref name="inSigma" /> parameter; default: true.</param>
+      <returns>random numbers as taken from the multivariate random probability distribution given by mu and sigma.</returns>
+      <remarks>
+        <para>In order to safe the step of finding the root of sigma, the following options exist: 
+            <list type="bullet"><item>Provide only the diagonal of a (virtual) diagonal matrix to <paramref name="inSigma" />.</item><item>Compute the root manually, give it to sigma and set <paramref name="sigmaIsSquaredCov" /> to false.</item></list></para>
+        <para>In case <paramref name="sigmaIsSquaredCov" /> set to 'false' and <paramref name="inSigma" /> is given, 
+            the root is computed via Cholesky factorization. The result of the last root finding process is cached and reused for 
+            subsequent requests with the same set of <paramref name="n" /> and <paramref name="inSigma" /> parameters.</para>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Statistics.mvnrnd(ILNumerics.ILInArray{System.Single},ILNumerics.ILInArray{System.Single},System.Int32,System.Boolean)">
+      <summary>
+            Chooses samples from a multivariate random distribution.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="inMu">[optional] centers, size d x n; if d x 1 is given, optional parameter <paramref name="n" /> is used to replicate mu accordingly, if null, the values will be genereated with a center of zero.</param>
+      <param name="inSigma">[optional] covariance matrix, must be positive definite, size d x d or vector of lenght d, if null (not set), unitiy matrix is expected.</param>
+      <param name="n">[optional] number of samples to generate, per default (-1) the number of columns of <paramref name="inMu" /> defines that number.</param>
+      <param name="sigmaIsSquaredCov">[optional] if false: safe the effort of finding the square root of <paramref name="inSigma" /> parameter; default: true.</param>
+      <returns>random numbers as taken from the multivariate random probability distribution given by mu and sigma.</returns>
+      <remarks>
+        <para>In order to safe the step of finding the root of sigma, the following options exist: 
+            <list type="bullet"><item>Provide only the diagonal of a (virtual) diagonal matrix to <paramref name="inSigma" />.</item><item>Compute the root manually, give it to sigma and set <paramref name="sigmaIsSquaredCov" /> to false.</item></list></para>
+        <para>In case <paramref name="sigmaIsSquaredCov" /> set to 'false' and <paramref name="inSigma" /> is given, 
+            the root is computed via Cholesky factorization. The result of the last root finding process is cached and reused for 
+            subsequent requests with the same set of <paramref name="n" /> and <paramref name="inSigma" /> parameters.</para>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Statistics.nanmean(ILNumerics.ILInArray{System.Double},System.Int32)">
+      <summary>
+            Mean of array along specified dimension ignoring NaN values.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Input array.</param>
+      <param name="dim">[Optional] Index of the dimension to work along. If omitted operates along the first non singleton dimension (i.e. != 1).</param>
+      <returns>Mean of non-NaN elements along specified dimension.</returns>
+      <remarks>
+        <para>The return array has the same shape as A, but the selected dimension is reduced 
+            to length 1. If A is scalar, an scalar array will be returned. On empty input, the output will be empty.
+            </para>
+        <para>If A contains an all NaN vector along the specified dimension the resulting value will by NaN
+            (as the nansum of these elements is 0 divided by 0 elements).</para>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Statistics.nanmean(ILNumerics.ILInArray{ILNumerics.fcomplex},System.Int32)">
+      <summary>
+            Mean of array along specified dimension ignoring NaN values.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Input array.</param>
+      <param name="dim">[Optional] Index of the dimension to work along. If omitted operates along the first non singleton dimension (i.e. != 1).</param>
+      <returns>Mean of non-NaN elements along specified dimension.</returns>
+      <remarks>
+        <para>The return array has the same shape as A, but the selected dimension is reduced 
+            to length 1. If A is scalar, an scalar array will be returned. On empty input, the output will be empty.
+            </para>
+        <para>If A contains an all NaN vector along the specified dimension the resulting value will by NaN
+            (as the nansum of these elements is 0 divided by 0 elements).</para>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Statistics.nanmean(ILNumerics.ILInArray{System.Single},System.Int32)">
+      <summary>
+            Mean of array along specified dimension ignoring NaN values.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Input array.</param>
+      <param name="dim">[Optional] Index of the dimension to work along. If omitted operates along the first non singleton dimension (i.e. != 1).</param>
+      <returns>Mean of non-NaN elements along specified dimension.</returns>
+      <remarks>
+        <para>The return array has the same shape as A, but the selected dimension is reduced 
+            to length 1. If A is scalar, an scalar array will be returned. On empty input, the output will be empty.
+            </para>
+        <para>If A contains an all NaN vector along the specified dimension the resulting value will by NaN
+            (as the nansum of these elements is 0 divided by 0 elements).</para>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Statistics.nanmean(ILNumerics.ILInArray{ILNumerics.complex},System.Int32)">
+      <summary>
+            Mean of array along specified dimension ignoring NaN values.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Input array.</param>
+      <param name="dim">[Optional] Index of the dimension to work along. If omitted operates along the first non singleton dimension (i.e. != 1).</param>
+      <returns>Mean of non-NaN elements along specified dimension.</returns>
+      <remarks>
+        <para>The return array has the same shape as A, but the selected dimension is reduced 
+            to length 1. If A is scalar, an scalar array will be returned. On empty input, the output will be empty.
+            </para>
+        <para>If A contains an all NaN vector along the specified dimension the resulting value will by NaN
+            (as the nansum of these elements is 0 divided by 0 elements).</para>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Statistics.nansum(ILNumerics.ILInArray{System.Double},System.Int32)">
+      <summary>
+            Sums the elements along first non singleton dimension ignoring NaN values.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Input array.</param>
+      <param name="dim">[Optional] Index of the dimension to operate along. If omitted operates along the first non singleton dimension (i.e. != 1).</param>
+      <returns>Sum of elements along specified of first non singleton dimension, ignoring nan values.</returns>
+      <remarks>
+        <para>The array returned will have the same size as <paramref name="A" />, with the specified or first non singleton dimension 
+            reduced to the length 1. It will contain the sum of all elements along that dimension after removing NaN values respectively. </para>
+        <para>If A contains an all NaN vector along <paramref name="dim" /> , 
+            the resulting sum will be 0 - not NaN! This corresponds to the sum of an empty vector.</para>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Statistics.nansum(ILNumerics.ILInArray{ILNumerics.fcomplex},System.Int32)">
+      <summary>
+            Sums the elements along first non singleton dimension ignoring NaN values.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Input array.</param>
+      <param name="dim">[Optional] Index of the dimension to operate along. If omitted operates along the first non singleton dimension (i.e. != 1).</param>
+      <returns>Sum of elements along specified of first non singleton dimension, ignoring nan values.</returns>
+      <remarks>
+        <para>The array returned will have the same size as <paramref name="A" />, with the specified or first non singleton dimension 
+            reduced to the length 1. It will contain the sum of all elements along that dimension after removing NaN values respectively. </para>
+        <para>If A contains an all NaN vector along <paramref name="dim" /> , 
+            the resulting sum will be 0 - not NaN! This corresponds to the sum of an empty vector.</para>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Statistics.nansum(ILNumerics.ILInArray{System.Single},System.Int32)">
+      <summary>
+            Sums the elements along first non singleton dimension ignoring NaN values.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Input array.</param>
+      <param name="dim">[Optional] Index of the dimension to operate along. If omitted operates along the first non singleton dimension (i.e. != 1).</param>
+      <returns>Sum of elements along specified of first non singleton dimension, ignoring nan values.</returns>
+      <remarks>
+        <para>The array returned will have the same size as <paramref name="A" />, with the specified or first non singleton dimension 
+            reduced to the length 1. It will contain the sum of all elements along that dimension after removing NaN values respectively. </para>
+        <para>If A contains an all NaN vector along <paramref name="dim" /> , 
+            the resulting sum will be 0 - not NaN! This corresponds to the sum of an empty vector.</para>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Statistics.nansum(ILNumerics.ILInArray{ILNumerics.complex},System.Int32)">
+      <summary>
+            Sums the elements along first non singleton dimension ignoring NaN values.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Input array.</param>
+      <param name="dim">[Optional] Index of the dimension to operate along. If omitted operates along the first non singleton dimension (i.e. != 1).</param>
+      <returns>Sum of elements along specified of first non singleton dimension, ignoring nan values.</returns>
+      <remarks>
+        <para>The array returned will have the same size as <paramref name="A" />, with the specified or first non singleton dimension 
+            reduced to the length 1. It will contain the sum of all elements along that dimension after removing NaN values respectively. </para>
+        <para>If A contains an all NaN vector along <paramref name="dim" /> , 
+            the resulting sum will be 0 - not NaN! This corresponds to the sum of an empty vector.</para>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Statistics.randperm(ILNumerics.ILBaseArray)">
+      <summary>
+            Creates a random permutation of integers.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="length">Number of unique integers to be created.</param>
+      <returns>Integer vector of length 'length'.</returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Statistics.select(ILNumerics.ILInArray{System.Double},System.Int32,System.Int32)">
+      <summary>
+            Selects the k-th smallest element from an array along a specific dimension.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Input array.</param>
+      <param name="k">The element to find. If k is smaller 1 or larger than the number of elements in list, the smallest/largest value will be returned.</param>
+      <param name="dim">[Optional] Dimension to operate along. If omitted operates along the first non singleton dimension (i.e. != 1).</param>
+      <returns>
+        <para>Array having the specified dimension reduced to the length 1 with the value of the k-the smallest element along that dimension.</para>
+        <para>Exception: If the selected dimension is of size 0 it will remain 0 (an empty set).</para>
+      </returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Statistics.select(ILNumerics.ILInArray{System.Int64},System.Int32,System.Int32)">
+      <summary>
+            Selects the k-th smallest element from an array along a specific dimension.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Input array.</param>
+      <param name="k">The element to find. If k is smaller 1 or larger than the number of elements in list, the smallest/largest value will be returned.</param>
+      <param name="dim">[Optional] Dimension to operate along. If omitted operates along the first non singleton dimension (i.e. != 1).</param>
+      <returns>
+        <para>Array having the specified dimension reduced to the length 1 with the value of the k-the smallest element along that dimension.</para>
+        <para>Exception: If the selected dimension is of size 0 it will remain 0 (an empty set).</para>
+      </returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Statistics.select(ILNumerics.ILInArray{System.Int32},System.Int32,System.Int32)">
+      <summary>
+            Selects the k-th smallest element from an array along a specific dimension.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Input array.</param>
+      <param name="k">The element to find. If k is smaller 1 or larger than the number of elements in list, the smallest/largest value will be returned.</param>
+      <param name="dim">[Optional] Dimension to operate along. If omitted operates along the first non singleton dimension (i.e. != 1).</param>
+      <returns>
+        <para>Array having the specified dimension reduced to the length 1 with the value of the k-the smallest element along that dimension.</para>
+        <para>Exception: If the selected dimension is of size 0 it will remain 0 (an empty set).</para>
+      </returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Statistics.select(ILNumerics.ILInArray{System.Byte},System.Int32,System.Int32)">
+      <summary>
+            Selects the k-th smallest element from an array along a specific dimension.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Input array.</param>
+      <param name="k">The element to find. If k is smaller 1 or larger than the number of elements in list, the smallest/largest value will be returned.</param>
+      <param name="dim">[Optional] Dimension to operate along. If omitted operates along the first non singleton dimension (i.e. != 1).</param>
+      <returns>
+        <para>Array having the specified dimension reduced to the length 1 with the value of the k-the smallest element along that dimension.</para>
+        <para>Exception: If the selected dimension is of size 0 it will remain 0 (an empty set).</para>
+      </returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Statistics.select(ILNumerics.ILInArray{ILNumerics.fcomplex},System.Int32,System.Int32)">
+      <summary>
+            Selects the k-th smallest element from an array along a specific dimension.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Input array.</param>
+      <param name="k">The element to find. If k is smaller 1 or larger than the number of elements in list, the smallest/largest value will be returned.</param>
+      <param name="dim">[Optional] Dimension to operate along. If omitted operates along the first non singleton dimension (i.e. != 1).</param>
+      <returns>
+        <para>Array having the specified dimension reduced to the length 1 with the value of the k-the smallest element along that dimension.</para>
+        <para>Exception: If the selected dimension is of size 0 it will remain 0 (an empty set).</para>
+      </returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Statistics.select(ILNumerics.ILInArray{System.Single},System.Int32,System.Int32)">
+      <summary>
+            Selects the k-th smallest element from an array along a specific dimension.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Input array.</param>
+      <param name="k">The element to find. If k is smaller 1 or larger than the number of elements in list, the smallest/largest value will be returned.</param>
+      <param name="dim">[Optional] Dimension to operate along. If omitted operates along the first non singleton dimension (i.e. != 1).</param>
+      <returns>
+        <para>Array having the specified dimension reduced to the length 1 with the value of the k-the smallest element along that dimension.</para>
+        <para>Exception: If the selected dimension is of size 0 it will remain 0 (an empty set).</para>
+      </returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Statistics.select(ILNumerics.ILInArray{ILNumerics.complex},System.Int32,System.Int32)">
+      <summary>
+            Selects the k-th smallest element from an array along a specific dimension.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Input array.</param>
+      <param name="k">The element to find. If k is smaller 1 or larger than the number of elements in list, the smallest/largest value will be returned.</param>
+      <param name="dim">[Optional] Dimension to operate along. If omitted operates along the first non singleton dimension (i.e. != 1).</param>
+      <returns>
+        <para>Array having the specified dimension reduced to the length 1 with the value of the k-the smallest element along that dimension.</para>
+        <para>Exception: If the selected dimension is of size 0 it will remain 0 (an empty set).</para>
+      </returns>
+      <remarks>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Statistics.std(ILNumerics.ILInArray{System.Double},ILNumerics.ILInArray{System.Double},System.Boolean,System.Int32)">
+      <summary>
+            Calculates the standard deviation for values in A.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Input array.</param>
+      <param name="Weights">Vector of scaling factors, same length as working dimension of A, default: no scaling.</param>
+      <param name="biased">[Optional] true: apply biased normalization to result, default: false (non-biased).</param>
+      <param name="dim">[Optional] Dimension index of A to operate along, default: first non singleton dimension.</param>
+      <returns>Variances.</returns>
+      <remarks>
+        <para>On scalar A a scalar 0 of the same shape as A is returned.</para>
+        <para>On empty A an empty array is returned, having the dimension to operate along reduced to length 1.</para>
+        <para>The parameters <paramref name="Weights" />, <paramref name="biased" /> and <paramref name="dim" /> are optional. 
+            Ommiting either one will choose its respective default value.</para>
+        <para>The standard deviation is computed by the formula 
+            <c>std = sqrt(var(A,...))</c>. For further details on given parameters, see 
+            <see cref="M:ILNumerics.Toolboxes.Statistics.var(ILNumerics.ILInArray{T},ILNumerics.ILInArray{T},bool,false);" />.</para>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Statistics.std(ILNumerics.ILInArray{System.Single},ILNumerics.ILInArray{System.Single},System.Boolean,System.Int32)">
+      <summary>
+            Calculates the standard deviation for values in A.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Input array.</param>
+      <param name="Weights">Vector of scaling factors, same length as working dimension of A, default: no scaling.</param>
+      <param name="biased">[Optional] true: apply biased normalization to result, default: false (non-biased).</param>
+      <param name="dim">[Optional] Dimension index of A to operate along, default: first non singleton dimension.</param>
+      <returns>Variances.</returns>
+      <remarks>
+        <para>On scalar A a scalar 0 of the same shape as A is returned.</para>
+        <para>On empty A an empty array is returned, having the dimension to operate along reduced to length 1.</para>
+        <para>The parameters <paramref name="Weights" />, <paramref name="biased" /> and <paramref name="dim" /> are optional. 
+            Ommiting either one will choose its respective default value.</para>
+        <para>The standard deviation is computed by the formula 
+            <c>std = sqrt(var(A,...))</c>. For further details on given parameters, see 
+            <see cref="M:ILNumerics.Toolboxes.Statistics.var(ILNumerics.ILInArray{T},ILNumerics.ILInArray{T},bool,false);" />.</para>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Statistics.var(ILNumerics.ILInArray{System.Double},ILNumerics.ILInArray{System.Double},System.Boolean,System.Int32)">
+      <summary>
+            Calculates the variance along dimension of A.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Input array A.</param>
+      <param name="Weights">[Optional] Vector of scaling factors, same length as working dimension of A, default: no scaling.</param>
+      <param name="biased">[Optional] true: apply biased normalization to result, default: false (non-biased).</param>
+      <param name="dim">[Optional] Index of the dimension to operate along. If omitted operates along the first non singleton dimension (i.e. != 1).</param>
+      <returns>Variances</returns>
+      <remarks>
+        <para>On scalar A a scalar 0 of the same shape as A is returned.</para>
+        <para>On empty A an empty array is returned, having the dimension to operate along reduced to length 1.</para>
+        <para>The parameters <paramref name="Weights" />, <paramref name="biased" /> and <paramref name="dim" /> are optional. 
+            Ommiting either one will choose its respective default value.</para>
+        <para> The result for <paramref name="biased" /> = true is computed by the following formula: 
+            <code>r = (A - mean(A)); 
+            var = sum(r * r) / A.D[dim];</code>
+            If <paramref name="biased" /> is false (default) the normalization is done with the length of the working dimension of A as follows: 
+            <code>r = (A - mean(A)); 
+            var = sum(r * r) / (A.D[dim] - 1); </code>
+            If <paramref name="Weights" /> is given, the parameter <paramref name="biased" /> is ignored.</para>
+        <para>If <paramref name="Weights" /> is given, the normalization is applied to r as follows: 
+            <code>w = w / sum(w); 
+            r = A - sum(w * A);
+            var = sum(w * (r * r)); 
+            </code></para>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Statistics.var(ILNumerics.ILInArray{System.Single},ILNumerics.ILInArray{System.Single},System.Boolean,System.Int32)">
+      <summary>
+            Calculates the variance along dimension of A.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="A">Input array A.</param>
+      <param name="Weights">[Optional] Vector of scaling factors, same length as working dimension of A, default: no scaling.</param>
+      <param name="biased">[Optional] true: apply biased normalization to result, default: false (non-biased).</param>
+      <param name="dim">[Optional] Index of the dimension to operate along. If omitted operates along the first non singleton dimension (i.e. != 1).</param>
+      <returns>Variances</returns>
+      <remarks>
+        <para>On scalar A a scalar 0 of the same shape as A is returned.</para>
+        <para>On empty A an empty array is returned, having the dimension to operate along reduced to length 1.</para>
+        <para>The parameters <paramref name="Weights" />, <paramref name="biased" /> and <paramref name="dim" /> are optional. 
+            Ommiting either one will choose its respective default value.</para>
+        <para> The result for <paramref name="biased" /> = true is computed by the following formula: 
+            <code>r = (A - mean(A)); 
+            var = sum(r * r) / A.D[dim];</code>
+            If <paramref name="biased" /> is false (default) the normalization is done with the length of the working dimension of A as follows: 
+            <code>r = (A - mean(A)); 
+            var = sum(r * r) / (A.D[dim] - 1); </code>
+            If <paramref name="Weights" /> is given, the parameter <paramref name="biased" /> is ignored.</para>
+        <para>If <paramref name="Weights" /> is given, the normalization is applied to r as follows: 
+            <code>w = w / sum(w); 
+            r = A - sum(w * A);
+            var = sum(w * (r * r)); 
+            </code></para>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Statistics.hist(ILNumerics.ILInArray{System.Double},System.Int32,System.Double,System.Double)">
+      <summary>
+            Calculates the histogram of the given samples.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="x">Given data.</param>
+      <param name="bins">Number of the bins [by default 0 - ceiled square root of the samples], specify otherwise.</param>
+      <param name="rangeStart">Start of the range [by default double.NegativeInfinity - minimum value of the samples], specify otherwise.</param>
+      <param name="rangeEnd">End of the range [by default double.PositiveInfinity - maximum value of the samples], specify otherwise.</param>
+      <returns>Returns with the observation counts for each bins.</returns>
+      <remarks>
+        <list type="bullet">
+          <item>If 'x' is empty, an empty array will be returned.</item>
+          <item>If 'x' is null, an ILArgumentException will be thrown.</item>
+          <item>The number of the bins will be the square root of the samples by default.</item>
+          <item>The start of the range is the minimum value of the elements by default.</item>
+          <item>The end of the range is the maximum value of the elements by default.</item>
+          <item>If the 'rangeEnd' ≥ 'rangeStart' an ILArgumentException will be thrown.</item>
+          <item>On the limits of the edges, the counting will increment to the left side bin.</item>
+          <item>On the leftmost bin's edge, the counting will increment to the right side bin (first bin).</item>
+          <item>On the rightmost bin's edge, the counting will increment to the left side bin (last bin).</item>
+          <item>Outside of the limits, the occurance will not be counted.</item>
+          <item>All occurance of double.NaN will not be counted.</item>
+          <item>All occurance of double.PositiveInfinity will not be counted.</item>
+          <item>All occurance of double.NegativeInfinity will not be counted.</item>
+        </list>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Statistics.histc(ILNumerics.ILInArray{System.Double},System.Int32,System.Double,System.Double)">
+      <summary>
+            Calculates the cumulated histogram of the given samples.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="x">Given data.</param>
+      <param name="bins">Number of the bins [by default 0 - ceiled square root of the samples], specify otherwise.</param>
+      <param name="rangeStart">Start of the range [by default double.NegativeInfinity - minimum value of the samples], specify otherwise.</param>
+      <param name="rangeEnd">End of the range [by default double.PositiveInfinity - maximum value of the samples], specify otherwise.</param>
+      <returns>Returns with the cumulated sum of the histogram.</returns>
+      <remarks>
+        <list type="bullet">
+          <item>If 'x' is empty, an empty array will be returned.</item>
+          <item>If 'x' is null, an ILArgumentException will be thrown.</item>
+          <item>The number of the bins will be the square root of the samples by default.</item>
+          <item>The start of the range is the minimum value of the elements by default.</item>
+          <item>The end of the range is the maximum value of the elements by default.</item>
+          <item>If the 'rangeEnd' ≥ 'rangeStart' an ILArgumentException will be thrown.</item>
+          <item>On the limits of the edges, the counting will increment to the left side bin.</item>
+          <item>On the leftmost bin's edge, the counting will increment to the right side bin (first bin).</item>
+          <item>On the rightmost bin's edge, the counting will increment to the left side bin (last bin).</item>
+          <item>Outside of the limits, the occurance will not be counted.</item>
+          <item>All occurance of double.NaN will not be counted.</item>
+          <item>All occurance of double.PositiveInfinity will not be counted.</item>
+          <item>All occurance of double.NegativeInfinity will not be counted.</item>
+        </list>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Statistics.histn(ILNumerics.ILInArray{System.Double},System.Int32,System.Double,System.Double)">
+      <summary>
+            Calculates the normalized (with the number of the samples) histogram of the given samples.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="x">Given data.</param>
+      <param name="bins">Number of the bins [by default 0 - ceiled square root of the samples], specify otherwise.</param>
+      <param name="rangeStart">Start of the range [by default double.NegativeInfinity - minimum value of the samples], specify otherwise.</param>
+      <param name="rangeEnd">End of the range [by default double.PositiveInfinity - maximum value of the samples], specify otherwise.</param>
+      <returns>Returns with the observation counts for each bins normalized with the number of elements, yielding the probability for each bin.</returns>
+      <remarks>
+        <list type="bullet">
+          <item>If 'x' is empty, an empty array will be returned.</item>
+          <item>If 'x' is null, an ILArgumentException will be thrown.</item>
+          <item>The number of the bins will be the square root of the samples by default.</item>
+          <item>The start of the range is the minimum value of the elements by default.</item>
+          <item>The end of the range is the maximum value of the elements by default.</item>
+          <item>If the 'rangeEnd' ≥ 'rangeStart' an ILArgumentException will be thrown.</item>
+          <item>On the limits of the edges, the counting will increment to the left side bin.</item>
+          <item>On the leftmost bin's edge, the counting will increment to the right side bin (first bin).</item>
+          <item>On the rightmost bin's edge, the counting will increment to the left side bin (last bin).</item>
+          <item>Outside of the limits, the occurance will not be counted.</item>
+          <item>All occurance of double.NaN will not be counted.</item>
+          <item>All occurance of double.PositiveInfinity will not be counted.</item>
+          <item>All occurance of double.NegativeInfinity will not be counted.</item>
+        </list>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.Statistics.histnc(ILNumerics.ILInArray{System.Double},System.Int32,System.Double,System.Double)">
+      <summary>
+            Calculates the normalized (with the number of the samples) cumulated histogram of the given samples.
+            <para>[ILNumerics Statistics Toolbox]</para>
+      </summary>
+      <param name="x">Given data.</param>
+      <param name="bins">Number of the bins [by default 0 - ceiled square root of the samples], specify otherwise.</param>
+      <param name="rangeStart">Start of the range [by default double.NegativeInfinity - minimum value of the samples], specify otherwise.</param>
+      <param name="rangeEnd">End of the range [by default double.PositiveInfinity - maximum value of the samples], specify otherwise.</param>
+      <returns>Returns with the cumulated sum of the normalized histogram.</returns>
+      <remarks>
+        <list type="bullet">
+          <item>If 'x' is empty, an empty array will be returned.</item>
+          <item>If 'x' is null, an ILArgumentException will be thrown.</item>
+          <item>The number of the bins will be the square root of the samples by default.</item>
+          <item>The start of the range is the minimum value of the elements by default.</item>
+          <item>The end of the range is the maximum value of the elements by default.</item>
+          <item>If the 'rangeEnd' ≥ 'rangeStart' an ILArgumentException will be thrown.</item>
+          <item>On the limits of the edges, the counting will increment to the left side bin.</item>
+          <item>On the leftmost bin's edge, the counting will increment to the right side bin (first bin).</item>
+          <item>On the rightmost bin's edge, the counting will increment to the left side bin (last bin).</item>
+          <item>Outside of the limits, the occurance will not be counted.</item>
+          <item>All occurance of double.NaN will not be counted.</item>
+          <item>All occurance of double.PositiveInfinity will not be counted.</item>
+          <item>All occurance of double.NegativeInfinity will not be counted.</item>
+        </list>
+        <para>[ILNumerics Statistics Toolbox]</para>
+      </remarks>
+    </member>
+  </members>
+</doc>

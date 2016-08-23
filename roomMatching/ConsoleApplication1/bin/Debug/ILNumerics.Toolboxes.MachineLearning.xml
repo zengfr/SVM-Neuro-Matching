@@ -1,0 +1,525 @@
+﻿<doc>
+  <assembly>
+    <name>ILNumerics.Toolboxes.MachineLearning</name>
+  </assembly>
+  <members>
+    <member name="M:ILNumerics.Toolboxes.MachineLearningInternal.em(ILNumerics.ILInArray{System.Double},System.Int32,ILNumerics.ILOutArray{System.Double},ILNumerics.Toolboxes.EMInitializationMethod,ILNumerics.ILInArray{System.Double},System.Int32,System.Double)">
+      <summary>
+            Expectation maximization algorithm.
+            <para>[ILNumerics Machine Learning Toolbox]</para>
+      </summary>
+      <param name="Samples">Input data, data points in columns.</param>
+      <param name="k">Number of clusters.</param>
+      <param name="method">[Optional] Method used for initializing the cluster centers, default: kmeans_random.</param>
+      <param name="UserCenters">[Optional] For method 'user': initial cluster centers, size samples.D[0] x k, for other methods ignored.</param>
+      <param name="maxiterexit">[Optional] Break after that number of iterations, if no convergence was reached.</param>
+      <param name="Sigma">[Output] Covariance estimation for all clusters, size d x d x k, d = samples.D[0].</param>
+      <param name="centerconverg_exit">[Optional] Exit iteration if norm(L) falls below that value, default: 0.001.</param>
+      <returns>Estimated centers for all clusters, size samples.D[0] x k.</returns>
+      <remarks>
+        <para>The EM algorithm expects the data samples to be drawn from <paramref name="k" /> multivariate normal distributions. 
+            It estimates the parameters 'center' and 'sigma (covariance)' of every distribution. Therefore, the position and 'shape' 
+            of each distribution is calculated in such a way, that the likelyhood of generating the given sample points is maximized.</para>
+        <para>The parameter k must be determined by the user. This reflects the a priori knowledge of the number of distributions 
+            or clusters in the data.</para>
+        <para>The algorithm exits, if one of the exit criteria is reached: 
+            <list type="bullet"><item>norm(L) &lt; 'centerconverg_exit' - where L is the difference between 
+            the centers from the last step and the centers just computed in the current step</item><item>the number of iteration steps exceeds the limit of 'maxiterexit' iterations.</item></list></para>
+        <para>[ILNumerics Machine Learning Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.MachineLearningInternal.em(ILNumerics.ILInArray{System.Single},System.Int32,ILNumerics.ILOutArray{System.Single},ILNumerics.Toolboxes.EMInitializationMethod,ILNumerics.ILInArray{System.Single},System.Int32,System.Double)">
+      <summary>
+            Expectation maximization algorithm.
+            <para>[ILNumerics Machine Learning Toolbox]</para>
+      </summary>
+      <param name="Samples">Input data, data points in columns.</param>
+      <param name="k">Number of clusters.</param>
+      <param name="method">[Optional] Method used for initializing the cluster centers, default: kmeans_random.</param>
+      <param name="UserCenters">[Optional] For method 'user': initial cluster centers, size samples.D[0] x k, for other methods ignored.</param>
+      <param name="maxiterexit">[Optional] Break after that number of iterations, if no convergence was reached.</param>
+      <param name="Sigma">[Output] Covariance estimation for all clusters, size d x d x k, d = samples.D[0].</param>
+      <param name="centerconverg_exit">[Optional] Exit iteration if norm(L) falls below that value, default: 0.001.</param>
+      <returns>Estimated centers for all clusters, size samples.D[0] x k.</returns>
+      <remarks>
+        <para>The EM algorithm expects the data samples to be drawn from <paramref name="k" /> multivariate normal distributions. 
+            It estimates the parameters 'center' and 'sigma (covariance)' of every distribution. Therefore, the position and 'shape' 
+            of each distribution is calculated in such a way, that the likelyhood of generating the given sample points is maximized.</para>
+        <para>The parameter k must be determined by the user. This reflects the a priori knowledge of the number of distributions 
+            or clusters in the data.</para>
+        <para>The algorithm exits, if one of the exit criteria is reached: 
+            <list type="bullet"><item>norm(L) &lt; 'centerconverg_exit' - where L is the difference between 
+            the centers from the last step and the centers just computed in the current step</item><item>the number of iteration steps exceeds the limit of 'maxiterexit' iterations.</item></list></para>
+        <para>[ILNumerics Machine Learning Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.MachineLearningInternal.knn(ILNumerics.ILInArray{System.Double},ILNumerics.ILInArray{System.Double},System.Int32,ILNumerics.Toolboxes.DistanceMetrics,System.Double,System.Boolean)">
+      <summary>
+            Searches for k nearest neighbors for every sample in <paramref name="Samples" /> samples.
+            <para>[ILNumerics Machine Learning Toolbox]</para>
+      </summary>
+      <param name="Samples">Samples matrix, samples in columns, the number of rows (dimensionality) must match the number of rows in <paramref name="Neighbors" />.</param>
+      <param name="Neighbors">Matrix of training samples/ neighbors, this will be searched for matching points, rows: dimensionality, columns: number of points.</param>
+      <param name="k">[Optional] Number of neighbors to return, k must lay in range: 0 &lt;= k &lt; neighbors.D[1]; default: 1.</param>
+      <param name="metric">[Optional] Distance metric, one out of the <see cref="!:ILNumerics.Toolboxes.MachineLearning.DistanceMetrics" /> enumeration. Supported are: Euclidian_L2,Manhattan_L1, 
+            Minkowski, Cosine, Pearsons and Hamming distances; default: 'Euclidian_L2'.</param>
+      <param name="minkowski_parameter">[Optional] Exponent for minkowski distance; default: 2.</param>
+      <param name="unstable_error">[Optional] For cosine and pearson distances: if some samples lead to numerical instabilities, an exception is generated; default: true.</param>
+      <returns>Matrix of nearest neighbors, size: k x samples.D[1]; indices of points in <paramref name="Neighbors" /> matrix.</returns>
+      <remarks>
+        <para>[ILNumerics Machine Learning Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.MachineLearningInternal.testStable(ILNumerics.ILInArray{System.Double})">
+      <summary>
+            Test for numerical instability, expects positive data only!
+            <para>[ILNumerics Machine Learning Toolbox]</para>
+      </summary>
+      <param name="samples_normalized">Input data</param>
+      <returns>true: no instability detected, false, possible instablility</returns>
+      <remarks>
+        <para>[ILNumerics Machine Learning Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.MachineLearningInternal.knn(ILNumerics.ILInArray{System.Single},ILNumerics.ILInArray{System.Single},System.Int32,ILNumerics.Toolboxes.DistanceMetrics,System.Double,System.Boolean)">
+      <summary>
+            Searches for k nearest neighbors for every sample in <paramref name="Samples" /> samples.
+            <para>[ILNumerics Machine Learning Toolbox]</para>
+      </summary>
+      <param name="Samples">Samples matrix, samples in columns, the number of rows (dimensionality) must match the number of rows in <paramref name="Neighbors" />.</param>
+      <param name="Neighbors">Matrix of training samples/ neighbors, this will be searched for matching points, rows: dimensionality, columns: number of points.</param>
+      <param name="k">[Optional] Number of neighbors to return, k must lay in range: 0 &lt;= k &lt; neighbors.D[1]; default: 1.</param>
+      <param name="metric">[Optional] Distance metric, one out of the <see cref="!:ILNumerics.Toolboxes.MachineLearning.DistanceMetrics" /> enumeration. Supported are: Euclidian_L2,Manhattan_L1, 
+            Minkowski, Cosine, Pearsons and Hamming distances; default: 'Euclidian_L2'.</param>
+      <param name="minkowski_parameter">[Optional] Exponent for minkowski distance; default: 2.</param>
+      <param name="unstable_error">[Optional] For cosine and pearson distances: if some samples lead to numerical instabilities, an exception is generated; default: true.</param>
+      <returns>Matrix of nearest neighbors, size: k x samples.D[1]; indices of points in <paramref name="Neighbors" /> matrix.</returns>
+      <remarks>
+        <para>[ILNumerics Machine Learning Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.MachineLearningInternal.testStable(ILNumerics.ILInArray{System.Single})">
+      <summary>
+            Test for numerical instability, expects positive data only!
+            <para>[ILNumerics Machine Learning Toolbox]</para>
+      </summary>
+      <param name="samples_normalized">Input data</param>
+      <returns>true: no instability detected, false, possible instablility</returns>
+      <remarks>
+        <para>[ILNumerics Machine Learning Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.MachineLearningInternal.krr(ILNumerics.ILInArray{System.Double},ILNumerics.ILInArray{System.Double})">
+      <summary>
+            Calculates the kernel ridge regression (KRR) of X to Y.
+            <para>[ILNumerics Machine Learning Toolbox]</para>
+      </summary>
+      <param name="X">Input data X, observations in columns.</param>
+      <param name="Y">Input data Y (regression target).</param>
+      <returns>Kernel ridge regression model with linear kernel and no regularization.</returns>
+      <remarks>
+        <para>[ILNumerics Machine Learning Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.MachineLearningInternal.krr(ILNumerics.ILInArray{System.Double},ILNumerics.ILInArray{System.Double},ILNumerics.Toolboxes.KRRTypes,ILNumerics.ILInArray{System.Double},ILNumerics.ILInArray{System.Double})">
+      <summary>
+            Calculates the kernel ridge regression (KRR) of X to Y.
+            <para>[ILNumerics Machine Learning Toolbox]</para>
+      </summary>
+      <param name="X">Input data X, observations in columns.</param>
+      <param name="Y">Input data Y (regression target).</param>
+      <param name="kernel">Kernel type to use.</param>
+      <param name="Kernelparam">Kernel parameters, scalar constant, if invalid: defaults to 1.</param>
+      <param name="Regularization">Regularization constant (set to -1 to have no regularization).</param>
+      <returns>The kernel ridge regression model.</returns>
+      <remarks>
+        <para>[ILNumerics Machine Learning Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.MachineLearningInternal.pca(ILNumerics.ILInArray{System.Double},ILNumerics.ILOutArray{System.Double},ILNumerics.ILOutArray{System.Double},ILNumerics.ILOutArray{System.Double})">
+      <summary>
+            Principal Component Analysis (PCA).
+            <para>[ILNumerics Machine Learning Toolbox]</para>
+      </summary>
+      <param name="A">Data matrix, size (m,n); each of n observations is expected in a column of m variables.</param>
+      <param name="outWeights">[Output] Weights for scaling the components according to the original data.</param>
+      <param name="outCenter">[Output] Vector pointing to the center of the input data A.</param>
+      <param name="outScores">[Output] Scaling factors for the component to recreate original data.</param>
+      <returns>PCA components; weights, center and scores are returned at optional output parameters.</returns>
+      <remarks>Principal Component Analysis (PCA) is commonly used as method for dimension reduction. It computes 
+            a number of 'principal components' which span a space of orthogonal directions. The nice property is, these 
+            directions are choosen such, as to maximize the variance of original data, once they are projected onto them. 
+            We can simply pick only a subset of components, having associated a high variance and leave out other components, which do
+            not contribute much to the distribution of the original data. The resulting subspace is constructed of fewer
+            dimensions as the original space - with a smaller reconstrution error. Therefore, PCA is commonly used 
+            for visualizing higher dimensional data in only two or three dimensional plots. It helps analyzing datasets which 
+            otherwise could only be visualized by picking individual dimensions. By help of PCA, 'interesting' directions 
+            in the data are identified.
+            <para>Any output parameter are optional and may be ommited ore provided as null parameter: 
+            <list type="bullet"><item><b>components</b> (return value) prinicipal components. Matrix of size m x m, m components are provided in columns. The first 
+            component marks the direction in the data A, which corresponds to the largest variance (i.e. by projecting the data onto 
+            that direction, the largest variance would be created). Adjacent components are all orthogonal to each other. 
+            The components are ordered in columns of decreasing variance.</item><item><b>weights</b> vectors. While the components returned are normalized to length 1, the 'weights' vector 
+            contains the factors needed, to scale the components in order to reflect the real spacial distances in the 
+            original data.</item><item><b>center</b> of the original data. The vector points to the weight middle of A.</item><item><b>scores</b> is a matrix of size m by n. For each datapoint given in A, it contains factors for each component 
+            needed to reproduce the original data point in terms of the components.</item></list></para><para>[ILNumerics Machine Learning Toolbox]</para></remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.MachineLearningInternal.pca(ILNumerics.ILInArray{System.Single},ILNumerics.ILOutArray{System.Single},ILNumerics.ILOutArray{System.Single},ILNumerics.ILOutArray{System.Single})">
+      <summary>
+            Principal Component Analysis (PCA).
+            <para>[ILNumerics Machine Learning Toolbox]</para>
+      </summary>
+      <param name="A">Data matrix, size (m,n); each of n observations is expected in a column of m variables.</param>
+      <param name="outWeights">[Output] Weights for scaling the components according to the original data.</param>
+      <param name="outCenter">[Output] Vector pointing to the center of the input data A.</param>
+      <param name="outScores">[Output] Scaling factors for the component to recreate original data.</param>
+      <returns>PCA components; weights, center and scores are returned at optional output parameters.</returns>
+      <remarks>Principal Component Analysis (PCA) is commonly used as method for dimension reduction. It computes 
+            a number of 'principal components' which span a space of orthogonal directions. The nice property is, these 
+            directions are choosen such, as to maximize the variance of original data, once they are projected onto them. 
+            We can simply pick only a subset of components, having associated a high variance and leave out other components, which do
+            not contribute much to the distribution of the original data. The resulting subspace is constructed of fewer
+            dimensions as the original space - with a smaller reconstrution error. Therefore, PCA is commonly used 
+            for visualizing higher dimensional data in only two or three dimensional plots. It helps analyzing datasets which 
+            otherwise could only be visualized by picking individual dimensions. By help of PCA, 'interesting' directions 
+            in the data are identified.
+            <para>Any output parameter are optional and may be ommited ore provided as null parameter: 
+            <list type="bullet"><item><b>components</b> (return value) prinicipal components. Matrix of size m x m, m components ar provided in columns. The first 
+            component marks the direction in the data A, which corresponds to the largest variance (i.e. by projecting the data onto 
+            that direction, the largest variance would be created). Adjacent components are all orthogonal to each other. 
+            The components are ordered in columns of decreasing variance.</item><item><b>weights</b> vectors. While the components returned are normalized to length 1, the 'weights' vector 
+            contains the factors needed, to scale the components in order to reflect the real spacial distances in the 
+            original data.</item><item><b>center</b> of the original data. The vector points to the weight middle of A.</item><item><b>scores</b> is a matrix of size m by n. For each datapoint given in A, it contains factors for each component 
+            needed to reproduce the original data point in terms of the components.</item></list></para><para>[ILNumerics Machine Learning Toolbox]</para></remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.MachineLearningInternal.ridge_regression(ILNumerics.ILInArray{System.Double},ILNumerics.ILInArray{System.Double},ILNumerics.ILBaseArray,ILNumerics.ILBaseArray)">
+      <summary>
+            Ordinary least squares regression/ ridge regression.
+            <para>[ILNumerics Machine Learning Toolbox]</para>
+      </summary>
+      <param name="X">Data matrix, data points in columns.</param>
+      <param name="Y">Training targets (or 'labels') corresponding to <paramref name="X" />.</param>
+      <param name="Degree">Highest degree of polynomials for the design matrix.</param>
+      <param name="Regularization">Regularization constant (usually some "small" summand for stabilizing the matrix inversion).</param>
+      <returns>Train result used for applying the model to new data.</returns>
+      <remarks>
+        <para>[ILNumerics Machine Learning Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.MachineLearningInternal.kMeansClust(ILNumerics.ILInArray{System.Double},ILNumerics.ILBaseArray,System.Int32,System.Boolean,ILNumerics.ILOutArray{System.Double})">
+      <summary>
+            k-means clustering: finds clusters in data matrix X.
+            <para>[ILNumerics Machine Learning Toolbox]</para>
+      </summary>
+      <param name="X">Data matrix, data points are given as columns.</param>
+      <param name="k">Initial number of clusters.</param>
+      <param name="centerInitRandom">[Optional] false: pick the first k data points as initial centers, true: pick random datapoints (default).</param>
+      <param name="maxIterations">[Optional] Maximum number of iterations, the computation will exit after that many iterations, default: 10.000.</param>
+      <param name="outCenters">[Input/Output/Optional] If not null on entry, outCenters will contain the centers of the clusters found, default: null.</param>
+      <returns>Vector of length n with indices of the clusters which were assigned to each datapoint.</returns>
+      <remarks>
+        <para>If <paramref name="outCenters" /> is given not null on input, the algorithm returns the computed centers in that parameter. A 
+            matrix may be given on input, in order to give a hint of the initial center positions. This may help to find correct cluster centers - even if 
+            the initial hint is not exact. In order to do so, the matrix given must be of the correct size (X.D[0] by k) and <paramref name="centerInitRandom" />
+            must be set to <c>false</c>.</para>
+        <para>[ILNumerics Machine Learning Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.MachineLearningInternal.kMeansClust(ILNumerics.ILInArray{System.Single},ILNumerics.ILBaseArray,System.Int32,System.Boolean,ILNumerics.ILOutArray{System.Single})">
+      <summary>
+            k-means clustering: finds clusters in data matrix X.
+            <para>[ILNumerics Machine Learning Toolbox]</para>
+      </summary>
+      <param name="X">Data matrix, data points are given as columns.</param>
+      <param name="k">Initial number of clusters.</param>
+      <param name="centerInitRandom">[Optional] false: pick the first k data points as initial centers, true: pick random datapoints (default).</param>
+      <param name="maxIterations">[Optional] Maximum number of iterations, the computation will exit after that many iterations, default: 10.000.</param>
+      <param name="outCenters">[Input/Output/Optional] If not null on entry, outCenters will contain the centers of the clusters found, default: null.</param>
+      <returns>Vector of length n with indices of the clusters which were assigned to each datapoint.</returns>
+      <remarks>
+        <para>If <paramref name="outCenters" /> is given not null on input, the algorithm returns the computed centers in that parameter. A 
+            matrix may be given on input, in order to give a hint of the initial center positions. This may help to find correct cluster centers - even if 
+            the initial hint is not exact. In order to do so, the matrix given must be of the correct size (X.D[0] by k) and <paramref name="centerInitRandom" />
+            must be set to <c>false</c>.</para>
+        <para>[ILNumerics Machine Learning Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="T:ILNumerics.Toolboxes.MachineLearningInternal.ILKRRResult">
+      <summary>
+            Encapsulates the result of a kernel ridge regression and makes it applicable to new data.
+            <para>[ILNumerics Machine Learning Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Machine Learning Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="T:ILNumerics_Licensing.ILLicHelper_18b5ea78ab264f6e9f8c550f86695aa2_">
+      <summary>
+            This type supports ILNumerics infrastructure. Do not edit the code!
+            <para>[ILNumerics Machine Learning Toolbox]</para>
+      </summary>
+      <remarks>This type is automatically generated by ILNumerics Ultimate VS. If you encounter problems compiling this file, make sure to reference ILNumerics.Core in your project!<para>[ILNumerics Machine Learning Toolbox]</para></remarks>
+    </member>
+    <member name="T:ILNumerics.Toolboxes.MachineLearning">
+      <summary>
+            Machine Learning provides a range of algorithms from supervised to unsupervised learning with a convenient variable parameter list.
+            <para>[ILNumerics Machine Learning Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Machine Learning Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.MachineLearning.em(ILNumerics.ILInArray{System.Double},System.Int32,ILNumerics.ILOutArray{System.Double},ILNumerics.Toolboxes.EMInitializationMethod,ILNumerics.ILInArray{System.Double},System.Int32,System.Double)">
+      <summary>
+            Expectation maximization algorithm.
+            <para>[ILNumerics Machine Learning Toolbox]</para>
+      </summary>
+      <param name="Samples">Input data, data points in columns.</param>
+      <param name="k">Number of clusters.</param>
+      <param name="method">[Optional] Method used for initializing the cluster centers, default: kmeans_random.</param>
+      <param name="UserCenters">[Optional] For method 'user': initial cluster centers, size samples.D[0] x k, for other methods ignored.</param>
+      <param name="maxiterexit">[Optional] Break after that number of iterations, if no convergence was reached.</param>
+      <param name="Sigma">[Output] Covariance estimation for all clusters, size d x d x k, d = samples.D[0].</param>
+      <param name="centerconverg_exit">[Optional] Exit iteration if norm(L) falls below that value, default: 0.001.</param>
+      <returns>Estimated centers for all clusters, size samples.D[0] x k.</returns>
+      <remarks>
+        <para>The EM algorithm expects the data samples to be drawn from <paramref name="k" /> multivariate normal distributions. 
+            It estimates the parameters 'center' and 'sigma (covariance)' of every distribution. Therefore, the position and 'shape' 
+            of each distribution is calculated in such a way, that the likelyhood of generating the given sample points is maximized.</para>
+        <para>The parameter k must be determined by the user. This reflects the a priori knowledge of the number of distributions 
+            or clusters in the data.</para>
+        <para>The algorithm exits, if one of the exit criteria is reached: 
+            <list type="bullet"><item>norm(L) &lt; 'centerconverg_exit' - where L is the difference between 
+            the centers from the last step and the centers just computed in the current step</item><item>the number of iteration steps exceeds the limit of 'maxiterexit' iterations.</item></list></para>
+        <para>[ILNumerics Machine Learning Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.MachineLearning.em(ILNumerics.ILInArray{System.Single},System.Int32,ILNumerics.ILOutArray{System.Single},ILNumerics.Toolboxes.EMInitializationMethod,ILNumerics.ILInArray{System.Single},System.Int32,System.Double)">
+      <summary>
+            Expectation maximization algorithm.
+            <para>[ILNumerics Machine Learning Toolbox]</para>
+      </summary>
+      <param name="Samples">Input data, data points in columns.</param>
+      <param name="k">Number of clusters.</param>
+      <param name="method">[Optional] Method used for initializing the cluster centers, default: kmeans_random.</param>
+      <param name="UserCenters">[Optional] For method 'user': initial cluster centers, size samples.D[0] x k, for other methods ignored.</param>
+      <param name="maxiterexit">[Optional] Break after that number of iterations, if no convergence was reached.</param>
+      <param name="Sigma">[Output] Covariance estimation for all clusters, size d x d x k, d = samples.D[0].</param>
+      <param name="centerconverg_exit">[Optional] Exit iteration if norm(L) falls below that value, default: 0.001.</param>
+      <returns>Estimated centers for all clusters, size samples.D[0] x k.</returns>
+      <remarks>
+        <para>The EM algorithm expects the data samples to be drawn from <paramref name="k" /> multivariate normal distributions. 
+            It estimates the parameters 'center' and 'sigma (covariance)' of every distribution. Therefore, the position and 'shape' 
+            of each distribution is calculated in such a way, that the likelyhood of generating the given sample points is maximized.</para>
+        <para>The parameter k must be determined by the user. This reflects the a priori knowledge of the number of distributions 
+            or clusters in the data.</para>
+        <para>The algorithm exits, if one of the exit criteria is reached: 
+            <list type="bullet"><item>norm(L) &lt; 'centerconverg_exit' - where L is the difference between 
+            the centers from the last step and the centers just computed in the current step</item><item>the number of iteration steps exceeds the limit of 'maxiterexit' iterations.</item></list></para>
+        <para>This method is a part of </para>
+        <para>[ILNumerics Machine Learning Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.MachineLearning.knn(ILNumerics.ILInArray{System.Double},ILNumerics.ILInArray{System.Double},System.Int32,ILNumerics.Toolboxes.DistanceMetrics,System.Double,System.Boolean)">
+      <summary>
+            Searches for k nearest neighbors for every sample in <paramref name="Samples" /> samples.
+            <para>[ILNumerics Machine Learning Toolbox]</para>
+      </summary>
+      <param name="Samples">Samples matrix, samples in columns, the number of rows (dimensionality) must match the number of rows in <paramref name="Neighbors" />.</param>
+      <param name="Neighbors">Matrix of training samples/ neighbors, this will be searched for matching points, rows: dimensionality, columns: number of points.</param>
+      <param name="k">[Optional] Number of neighbors to return, k must lay in range: 0 &lt;= k &lt; neighbors.D[1]; default: 1.</param>
+      <param name="metric">[Optional] Distance metric, one out of the <see cref="!:ILNumerics.Toolboxes.MachineLearning.DistanceMetrics" /> enumeration. Supported are: Euclidian_L2,Manhattan_L1, 
+            Minkowski, Cosine, Pearsons and Hamming distances; default: 'Euclidian_L2'.</param>
+      <param name="minkowski_parameter">[Optional] Exponent for minkowski distance; default: 2.</param>
+      <param name="unstable_error">[Optional] For cosine and pearson distances: if some samples lead to numerical instabilities, an exception is generated; default: true.</param>
+      <returns>Matrix of nearest neighbors, size: k x samples.D[1]; indices of points in <paramref name="Neighbors" /> matrix.</returns>
+      <remarks>
+        <para>[ILNumerics Machine Learning Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.MachineLearning.knn(ILNumerics.ILInArray{System.Single},ILNumerics.ILInArray{System.Single},System.Int32,ILNumerics.Toolboxes.DistanceMetrics,System.Double,System.Boolean)">
+      <summary>
+            Searches for k nearest neighbors for every sample in <paramref name="Samples" /> samples.
+            <para>[ILNumerics Machine Learning Toolbox]</para>
+      </summary>
+      <param name="Samples">Samples matrix, samples in columns, the number of rows (dimensionality) must match the number of rows in <paramref name="Neighbors" />.</param>
+      <param name="Neighbors">Matrix of training samples/ neighbors, this will be searched for matching points, rows: dimensionality, columns: number of points.</param>
+      <param name="k">[Optional] Number of neighbors to return, k must lay in range: 0 &lt;= k &lt; neighbors.D[1]; default: 1.</param>
+      <param name="metric">[Optional] Distance metric, one out of the <see cref="!:ILNumerics.Toolboxes.MachineLearning.DistanceMetrics" /> enumeration. Supported are: Euclidian_L2,Manhattan_L1, 
+            Minkowski, Cosine, Pearsons and Hamming distances; default: 'Euclidian_L2'.</param>
+      <param name="minkowski_parameter">[Optional] Exponent for minkowski distance; default: 2.</param>
+      <param name="unstable_error">[Optional] For cosine and pearson distances: if some samples lead to numerical instabilities, an exception is generated; default: true.</param>
+      <returns>Matrix of nearest neighbors, size: k x samples.D[1]; indices of points in <paramref name="Neighbors" /> matrix.</returns>
+      <remarks>
+        <para>[ILNumerics Machine Learning Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.MachineLearning.krr(ILNumerics.ILInArray{System.Double},ILNumerics.ILInArray{System.Double})">
+      <summary>
+            Calculates the kernel ridge regression (KRR) of X to Y.
+            <para>[ILNumerics Machine Learning Toolbox]</para>
+      </summary>
+      <param name="X">Input data X, observations in columns.</param>
+      <param name="Y">Input data Y (regression target).</param>
+      <returns>Kernel ridge regression model with linear kernel and no regularization.</returns>
+      <remarks>
+        <para>[ILNumerics Machine Learning Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.MachineLearning.krr(ILNumerics.ILInArray{System.Double},ILNumerics.ILInArray{System.Double},ILNumerics.Toolboxes.KRRTypes,ILNumerics.ILInArray{System.Double},ILNumerics.ILInArray{System.Double})">
+      <summary>
+            Calculates the kernel ridge regression (KRR) of X to Y.
+            <para>[ILNumerics Machine Learning Toolbox]</para>
+      </summary>
+      <param name="X">Input data X, observations in columns.</param>
+      <param name="Y">Input data Y (regression target).</param>
+      <param name="kernel">Kernel type to use.</param>
+      <param name="Kernelparam">Kernel parameters, scalar constant, if invalid: defaults to 1.</param>
+      <param name="Regularization">Regularization constant (set to -1 to have no regularization).</param>
+      <returns>The kernel ridge regression model.</returns>
+      <remarks>
+        <para>[ILNumerics Machine Learning Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.MachineLearning.ridge_regression(ILNumerics.ILInArray{System.Double},ILNumerics.ILInArray{System.Double},ILNumerics.ILBaseArray,ILNumerics.ILBaseArray)">
+      <summary>
+            Ordinary least squares regression/ ridge regression.
+            <para>[ILNumerics Machine Learning Toolbox]</para>
+      </summary>
+      <param name="X">Data matrix, data points in columns.</param>
+      <param name="Y">Training targets (or 'labels') corresponding to <paramref name="X" />.</param>
+      <param name="Degree">Highest degree of polynomials for the design matrix.</param>
+      <param name="Regularization">Regularization constant (usually some "small" summand for stabilizing the matrix inversion).</param>
+      <returns>Train result used for applying the model to new data.</returns>
+      <remarks>
+        <para>[ILNumerics Machine Learning Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.MachineLearning.pca(ILNumerics.ILInArray{System.Double},ILNumerics.ILOutArray{System.Double},ILNumerics.ILOutArray{System.Double},ILNumerics.ILOutArray{System.Double})">
+      <summary>
+            Principal Component Analysis (PCA).
+            <para>[ILNumerics Machine Learning Toolbox]</para>
+      </summary>
+      <param name="A">Data matrix, size (m,n); each of n observations is expected in a column of m variables.</param>
+      <param name="outWeights">[Output] Weights for scaling the components according to the original data.</param>
+      <param name="outCenter">[Output] Vector pointing to the center of the input data A.</param>
+      <param name="outScores">[Output] Scaling factors for the component to recreate original data.</param>
+      <returns>PCA components; weights, center and scores are returned at optional output parameters.</returns>
+      <remarks>Principal Component Analysis (PCA) is commonly used as method for dimension reduction. It computes 
+            a number of 'principal components' which span a space of orthogonal directions. The nice property is, these 
+            directions are choosen such, as to maximize the variance of original data, once they are projected onto them. 
+            We can simply pick only a subset of components, having associated a high variance and leave out other components, which do
+            not contribute much to the distribution of the original data. The resulting subspace is constructed of fewer
+            dimensions as the original space - with a smaller reconstrution error. Therefore, PCA is commonly used 
+            for visualizing higher dimensional data in only two or three dimensional plots. It helps analyzing datasets which 
+            otherwise could only be visualized by picking individual dimensions. By help of PCA, 'interesting' directions 
+            in the data are identified.
+            <para>Any output parameter are optional and may be ommited ore provided as null parameter: 
+            <list type="bullet"><item><b>components</b> (return value) prinicipal components. Matrix of size m x m, m components are provided in columns. The first 
+            component marks the direction in the data A, which corresponds to the largest variance (i.e. by projecting the data onto 
+            that direction, the largest variance would be created). Adjacent components are all orthogonal to each other. 
+            The components are ordered in columns of decreasing variance.</item><item><b>weights</b> vectors. While the components returned are normalized to length 1, the 'weights' vector 
+            contains the factors needed, to scale the components in order to reflect the real spacial distances in the 
+            original data.</item><item><b>center</b> of the original data. The vector points to the weight middle of A.</item><item><b>scores</b> is a matrix of size m by n. For each datapoint given in A, it contains factors for each component 
+            needed to reproduce the original data point in terms of the components.</item></list></para><para>[ILNumerics Machine Learning Toolbox]</para></remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.MachineLearning.pca(ILNumerics.ILInArray{System.Single},ILNumerics.ILOutArray{System.Single},ILNumerics.ILOutArray{System.Single},ILNumerics.ILOutArray{System.Single})">
+      <summary>
+            Principal Component Analysis (PCA).
+            <para>[ILNumerics Machine Learning Toolbox]</para>
+      </summary>
+      <param name="A">Data matrix, size (m,n); each of n observations is expected in a column of m variables.</param>
+      <param name="outWeights">[Output] Weights for scaling the components according to the original data.</param>
+      <param name="outCenter">[Output] Vector pointing to the center of the input data A.</param>
+      <param name="outScores">[Output] Scaling factors for the component to recreate original data.</param>
+      <returns>PCA components; weights, center and scores are returned at optional output parameters.</returns>
+      <remarks>Principal Component Analysis (PCA) is commonly used as method for dimension reduction. It computes 
+            a number of 'principal components' which span a space of orthogonal directions. The nice property is, these 
+            directions are choosen such, as to maximize the variance of original data, once they are projected onto them. 
+            We can simply pick only a subset of components, having associated a high variance and leave out other components, which do
+            not contribute much to the distribution of the original data. The resulting subspace is constructed of fewer
+            dimensions as the original space - with a smaller reconstrution error. Therefore, PCA is commonly used 
+            for visualizing higher dimensional data in only two or three dimensional plots. It helps analyzing datasets which 
+            otherwise could only be visualized by picking individual dimensions. By help of PCA, 'interesting' directions 
+            in the data are identified.
+            <para>Any output parameter are optional and may be ommited ore provided as null parameter: 
+            <list type="bullet"><item><b>components</b> (return value) prinicipal components. Matrix of size m x m, m components ar provided in columns. The first 
+            component marks the direction in the data A, which corresponds to the largest variance (i.e. by projecting the data onto 
+            that direction, the largest variance would be created). Adjacent components are all orthogonal to each other. 
+            The components are ordered in columns of decreasing variance.</item><item><b>weights</b> vectors. While the components returned are normalized to length 1, the 'weights' vector 
+            contains the factors needed, to scale the components in order to reflect the real spacial distances in the 
+            original data.</item><item><b>center</b> of the original data. The vector points to the weight middle of A.</item><item><b>scores</b> is a matrix of size m by n. For each datapoint given in A, it contains factors for each component 
+            needed to reproduce the original data point in terms of the components.</item></list></para><para>[ILNumerics Machine Learning Toolbox]</para></remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.MachineLearning.kMeansClust(ILNumerics.ILInArray{System.Double},ILNumerics.ILBaseArray,System.Int32,System.Boolean,ILNumerics.ILOutArray{System.Double})">
+      <summary>
+            k-means clustering: finds clusters in data matrix X.
+            <para>[ILNumerics Machine Learning Toolbox]</para>
+      </summary>
+      <param name="X">Data matrix, data points are given as columns.</param>
+      <param name="k">Initial number of clusters.</param>
+      <param name="centerInitRandom">[Optional] false: pick the first k data points as initial centers, true: pick random datapoints (default).</param>
+      <param name="maxIterations">[Optional] Maximum number of iterations, the computation will exit after that many iterations, default: 10.000.</param>
+      <param name="outCenters">[Input/Output/Optional] If not null on entry, outCenters will contain the centers of the clusters found, default: null.</param>
+      <returns>Vector of length n with indices of the clusters which were assigned to each datapoint.</returns>
+      <remarks>
+        <para>If <paramref name="outCenters" /> is given not null on input, the algorithm returns the computed centers in that parameter. A 
+            matrix may be given on input, in order to give a hint of the initial center positions. This may help to find correct cluster centers - even if 
+            the initial hint is not exact. In order to do so, the matrix given must be of the correct size (X.D[0] by k) and <paramref name="centerInitRandom" />
+            must be set to <c>false</c>.</para>
+        <para>[ILNumerics Machine Learning Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.MachineLearning.kMeansClust(ILNumerics.ILInArray{System.Single},ILNumerics.ILBaseArray,System.Int32,System.Boolean,ILNumerics.ILOutArray{System.Single})">
+      <summary>
+            k-means clustering: finds clusters in data matrix X.
+            <para>[ILNumerics Machine Learning Toolbox]</para>
+      </summary>
+      <param name="X">Data matrix, data points are given as columns.</param>
+      <param name="k">Initial number of clusters.</param>
+      <param name="centerInitRandom">[Optional] false: pick the first k data points as initial centers, true: pick random datapoints (default).</param>
+      <param name="maxIterations">[Optional] Maximum number of iterations, the computation will exit after that many iterations, default: 10.000.</param>
+      <param name="outCenters">[Input/Output/Optional] If not null on entry, outCenters will contain the centers of the clusters found, default: null.</param>
+      <returns>Vector of length n with indices of the clusters which were assigned to each datapoint.</returns>
+      <remarks>
+        <para>If <paramref name="outCenters" /> is given not null on input, the algorithm returns the computed centers in that parameter. A 
+            matrix may be given on input, in order to give a hint of the initial center positions. This may help to find correct cluster centers - even if 
+            the initial hint is not exact. In order to do so, the matrix given must be of the correct size (X.D[0] by k) and <paramref name="centerInitRandom" />
+            must be set to <c>false</c>.</para>
+        <para>[ILNumerics Machine Learning Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="T:ILNumerics.Toolboxes.MachineLearning.ILRidgeRegressionResult`1">
+      <summary>
+            This class stores the result of a ridge regression
+            <para>[ILNumerics Machine Learning Toolbox]</para>
+      </summary>
+      <typeparam name="T">Element type (precision) for the result</typeparam>
+      <remarks>This class is returned from <see cref="M:ILNumerics.Toolboxes.MachineLearning.ridge_regression(ILNumerics.ILInArray{System.Double},ILNumerics.ILInArray{System.Double},ILNumerics.ILBaseArray,ILNumerics.ILBaseArray)" />
+            and all its overloads. The class stores all data needed to apply the regression result to new data points. Therefore a 
+            function <see cref="M:ILNumerics.Toolboxes.MachineLearning.ILRidgeRegressionResult`1.Apply(ILNumerics.ILInArray{`0},ILNumerics.ILBaseArray[])" /> is provided.
+            <para>The class implements the <c>IDisposable</c> interface and should be used inside a 'using' block or manually be disposed 
+            after use.</para><para>[ILNumerics Machine Learning Toolbox]</para></remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.MachineLearning.ILRidgeRegressionResult`1.Apply(ILNumerics.ILInArray{`0},ILNumerics.ILBaseArray[])">
+      <summary>
+            Apply the result on new datapoints
+            <para>[ILNumerics Machine Learning Toolbox]</para>
+      </summary>
+      <param name="X">New datapoints, same dimension as used for learning</param>
+      <returns></returns>
+      <remarks>
+        <para>[ILNumerics Machine Learning Toolbox]</para>
+      </remarks>
+    </member>
+    <member name="M:ILNumerics.Toolboxes.MachineLearning.ILRidgeRegressionResult`1.Dispose">
+      <summary>
+            Dispose off the result and free all storages used
+            <para>[ILNumerics Machine Learning Toolbox]</para>
+      </summary>
+      <remarks>
+        <para>[ILNumerics Machine Learning Toolbox]</para>
+      </remarks>
+    </member>
+  </members>
+</doc>

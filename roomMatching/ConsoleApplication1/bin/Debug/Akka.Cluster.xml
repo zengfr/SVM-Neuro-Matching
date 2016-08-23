@@ -1,0 +1,1126 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Akka.Cluster</name>
+    </assembly>
+    <members>
+        <member name="T:Akka.Cluster.AutoDown">
+            <summary>
+            INTERNAL API
+            
+            An unreachable member will be downed by this actor if it remains unreachable
+            for the specified duration and this actor is running on the leader node in the
+            cluster.
+            
+            The implementation is split into two classes AutoDown and AutoDownBase to be
+            able to unit test the logic without running cluster.
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Cluster">
+            <summary>
+            This module is responsible for cluster membership information. Changes to the cluster
+            information is retrieved through <see cref="T:Akka.Cluster.InternalClusterAction.Subscribe"/>. Commands to operate the cluster is
+            available through methods in this class, such as <see cref="M:Akka.Cluster.Cluster.Join(Akka.Actor.Address)"/>, <see cref="M:Akka.Cluster.Cluster.Down(Akka.Actor.Address)"/> and <see cref="M:Akka.Cluster.Cluster.Leave(Akka.Actor.Address)"/>.
+            
+            Each cluster <see cref="T:Akka.Cluster.Member"/> is identified by its <see cref="T:Akka.Actor.Address"/>, and
+            the cluster address of this actor system is [[#selfAddress]]. A member also has a status;
+            initially <see cref="F:Akka.Cluster.MemberStatus.Joining"/> followed by <see cref="F:Akka.Cluster.MemberStatus.Up"/>.
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Cluster.GetClusterCoreRef">
+            <summary>
+            Handles initialization logic for the <see cref="T:Akka.Cluster.Cluster"/>
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Cluster.Subscribe(Akka.Actor.IActorRef,System.Type[])">
+            <summary>
+            Subscribe to one or more cluster domain events.
+            </summary>
+            <param name="subscriber">The actor who'll receive the cluster domain events</param>
+            <param name="to"><see cref="T:Akka.Cluster.ClusterEvent.IClusterDomainEvent"/> subclasses</param>
+            <remarks>A snapshot of <see cref="T:Akka.Cluster.ClusterEvent.CurrentClusterState"/> will be sent to <paramref name="subscriber"/> as the first message</remarks>
+        </member>
+        <member name="M:Akka.Cluster.Cluster.Subscribe(Akka.Actor.IActorRef,Akka.Cluster.ClusterEvent.SubscriptionInitialStateMode,System.Type[])">
+            <summary>
+            Subscribe to one or more cluster domain events.
+            </summary>
+            <param name="subscriber">The actor who'll receive the cluster domain events</param>
+            <param name="initialStateMode">
+            If set to <see cref="F:Akka.Cluster.ClusterEvent.SubscriptionInitialStateMode.InitialStateAsEvents"/> the events corresponding to the current state
+            will be sent to <paramref name="subscriber"/> to mimic what it would have seen if it were listening to the events when they occurred in the past.
+            
+            If set to <see cref="F:Akka.Cluster.ClusterEvent.SubscriptionInitialStateMode.InitialStateAsSnapshot"/> 
+            a snapshot of <see cref="T:Akka.Cluster.ClusterEvent.CurrentClusterState"/> will be sent to <paramref name="subscriber"/> as the first message. </param>
+            <param name="to"><see cref="T:Akka.Cluster.ClusterEvent.IClusterDomainEvent"/> subclasses</param>
+        </member>
+        <member name="M:Akka.Cluster.Cluster.Unsubscribe(Akka.Actor.IActorRef)">
+            <summary>
+            Unsubscribe to all cluster domain events.
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Cluster.Unsubscribe(Akka.Actor.IActorRef,System.Type)">
+            <summary>
+            Unsubscribe to a specific type of cluster domain event
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Cluster.SendCurrentClusterState(Akka.Actor.IActorRef)">
+            <summary>
+            Send the current (full) state of the cluster to the specified receiver.
+            If you want this to happen periodically, you can use the <see cref="P:Akka.Cluster.Cluster.Scheduler"/> to schedule
+            a call to this method. You can also call <see cref="P:Akka.Cluster.Cluster.State"/> directly for this information.
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Cluster.Join(Akka.Actor.Address)">
+            <summary>
+            Try to join this cluster node specified by <paramref name="address"/>.
+            A <see cref="M:Akka.Cluster.Cluster.Join(Akka.Actor.Address)"/> command is sent to the node to join.
+            
+            An actor system can only join a cluster once. Additional attempts will be ignored.
+            When it has successfully joined it must be restarted to be able to join another
+            cluster or to join the same cluster again.
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Cluster.JoinSeedNodes(System.Collections.Generic.IEnumerable{Akka.Actor.Address})">
+            <summary>
+            Join the specified seed nodes without defining them in config.
+            Especially useful from tests when Addresses are unknown before startup time.
+            
+            An actor system can only join a cluster once. Additional attempts will be ignored.
+            When it has successfully joined it must be restarted to be able to join another
+            cluster or to join the same cluster again.
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Cluster.Leave(Akka.Actor.Address)">
+            <summary>
+            Send command to issue state transition to LEAVING for the node specified by <paramref name="address"/>.
+            The member will go through the status changes <see cref="F:Akka.Cluster.MemberStatus.Leaving"/> (not published to 
+            subscribers) followed by <see cref="F:Akka.Cluster.MemberStatus.Exiting"/> and finally <see cref="F:Akka.Cluster.MemberStatus.Removed"/>.
+            
+            Note that this command can be issued to any member in the cluster, not necessarily the
+            one that is leaving. The cluster extension, but not the actor system, of the leaving member will be shutdown after
+            the leader has changed status of the member to <see cref="F:Akka.Cluster.MemberStatus.Exiting"/>. Thereafter the member will be
+            removed from the cluster. Normally this is handled automatically, but in case of network failures during
+            this process it might still be necessary to set the node's status to <see cref="F:Akka.Cluster.MemberStatus.Down"/> in order
+            to complete the removal.
+            </summary>
+            <param name="address"></param>
+        </member>
+        <member name="M:Akka.Cluster.Cluster.Down(Akka.Actor.Address)">
+            <summary>
+            Send command to DOWN the node specified by <paramref name="address"/>.
+            
+            When a member is considered by the failure detector to be unreachable the leader is not
+            allowed to perform its duties, such as changing status of new joining members to <see cref="F:Akka.Cluster.MemberStatus.Up"/>.
+            The status of the unreachable member must be changed to <see cref="F:Akka.Cluster.MemberStatus.Down"/>, which can be done with
+            this method.
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Cluster.RegisterOnMemberUp(System.Action)">
+            <summary>
+            The supplied callback will be run once when the current cluster member is <see cref="F:Akka.Cluster.MemberStatus.Up"/>.
+            Typically used together with configuration option 'akka.cluster.min-nr-of-members' to defer some action,
+            such as starting actors, until the cluster has reached a certain size.
+            </summary>
+            <param name="callback">The callback that will be run whenever the current member achieves a status of <see cref="F:Akka.Cluster.MemberStatus.Up"/></param>
+        </member>
+        <member name="M:Akka.Cluster.Cluster.RegisterOnMemberRemoved(System.Action)">
+            <summary>
+            The supplied callback will be run once when the current cluster member is <see cref="F:Akka.Cluster.MemberStatus.Removed"/>.
+            
+            Typically used in combination with <see cref="M:Akka.Cluster.Cluster.Leave(Akka.Actor.Address)"/> and <see cref="M:Akka.Actor.ActorSystem.Terminate"/>.
+            </summary>
+            <param name="callback">The callback that will be run whenever the current member achieves a status of <see cref="F:Akka.Cluster.MemberStatus.Down"/></param>
+        </member>
+        <member name="M:Akka.Cluster.Cluster.RemotePathOf(Akka.Actor.IActorRef)">
+            <summary>
+            Generate the remote actor path by replacing the Address in the RootActor Path for the given
+            ActorRef with the cluster's `SelfAddress`, unless address' host is already defined
+            </summary>
+            <param name="actorRef"></param>
+        </member>
+        <member name="P:Akka.Cluster.Cluster.SelfAddress">
+            <summary>
+            The address of this cluster member.
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Cluster.SelfRoles">
+            <summary>
+            roles that this member has
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Cluster.State">
+            <summary>
+            Current snapshot state of the cluster.
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Cluster.IsTerminated">
+            <summary>
+            Returns true if this cluster instance has be shutdown.
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Cluster.Shutdown">
+            <summary>
+            INTERNAL API.
+            
+            Shuts down all connections to other members, the cluster daemon and the periodic gossip and cleanup tasks.
+            Should not called by the user. 
+            
+            The user can issue a <see cref="M:Akka.Cluster.Cluster.Leave(Akka.Actor.Address)"/> command which will tell the node
+            to go through graceful handoff process `LEAVE -> EXITING ->  REMOVED -> SHUTDOWN`.
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.ClusterActorRefProvider">
+            <summary>
+            INTERNAL API
+            
+            The `ClusterActorRefProvider` will load the <see cref="T:Akka.Cluster.Cluster"/>
+            extension, i.e. the cluster will automatically be started when
+            the `ClusterActorRefProvider` is used.
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.ClusterScope">
+            <summary>
+            This class represents a binding of an actor deployment to a cluster-aware system.
+            </summary>
+        </member>
+        <member name="F:Akka.Cluster.ClusterScope.Instance">
+            <summary>
+            The singleton instance of this scope.
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.ClusterScope.WithFallback(Akka.Actor.Scope)">
+             <summary>
+             Creates a new <see cref="T:Akka.Actor.Scope" /> from this scope using another <see cref="T:Akka.Actor.Scope" />
+             to backfill options that might be missing from this scope.
+            
+             <note>
+             This method ignores the given scope and returns the singleton instance of this scope.
+             </note>
+             </summary>
+             <param name="other">The <see cref="T:Akka.Actor.Scope" /> used for fallback configuration.</param>
+             <returns>The singleton instance of this scope</returns>
+        </member>
+        <member name="M:Akka.Cluster.ClusterScope.Copy">
+            <summary>
+            Creates a copy of the current instance.
+            
+            <note>
+            This method returns the singleton instance of this scope.
+            </note>
+            </summary>
+            <returns>The singleton instance of this scope</returns>
+        </member>
+        <member name="T:Akka.Cluster.ClusterDeployer">
+            <summary>
+            INTERNAL API
+            
+            Deployer of cluster-aware routers
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.IClusterMessage">
+            <summary>
+            Base interface for all cluster messages. All ClusterMessage's are serializable.
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.ClusterUserAction">
+            <summary>
+            Cluster commands sent by the USER via <see cref="T:Akka.Cluster.Cluster"/> extension.
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.ClusterUserAction.JoinTo">
+            <summary>
+            Command to initiate join another node (represented by `address`).
+            Join will be sent to the other node.
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.ClusterUserAction.Leave">
+            <summary>
+            Command to leave the cluster.
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.ClusterUserAction.Down">
+            <summary>
+            Command to mark node as temporary down.
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.InternalClusterAction">
+            <summary>
+            Command to join the cluster. Sent when a node wants to join another node (the receiver).
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.InternalClusterAction.Join.#ctor(Akka.Cluster.UniqueAddress,System.Collections.Immutable.ImmutableHashSet{System.String})">
+            <param name="node">the node that wants to join the cluster</param>
+            <param name="roles"></param>
+        </member>
+        <member name="T:Akka.Cluster.InternalClusterAction.Welcome">
+            <summary>
+            Reply to Join
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.InternalClusterAction.Welcome.#ctor(Akka.Cluster.UniqueAddress,Akka.Cluster.Gossip)">
+            <param name="from">the sender node in the cluster, i.e. the node that received the Join command</param>
+            <param name="gossip"></param>
+        </member>
+        <member name="T:Akka.Cluster.InternalClusterAction.JoinSeedNodes">
+            <summary>
+            Command to initiate the process to join the specified
+            seed nodes.
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.InternalClusterAction.JoinSeenNode">
+            <summary>
+            Start message of the process to join one of the seed nodes.
+            The node sends <see cref="T:Akka.Cluster.InternalClusterAction.InitJoin"/> to all seed nodes, which replies
+            with <see cref="T:Akka.Cluster.InternalClusterAction.InitJoinAck"/>. The first reply is used others are discarded.
+            The node sends <see cref="T:Akka.Cluster.InternalClusterAction.Join"/> command to the seed node that replied first.
+            If a node is uninitialized it will reply to `InitJoin` with
+            <see cref="T:Akka.Cluster.InternalClusterAction.InitJoinNack"/>.
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.InternalClusterAction.InitJoin">
+            <summary>
+            See JoinSeedNode
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.InternalClusterAction.InitJoinAck">
+            <summary>
+            See JoinSeeNode
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.InternalClusterAction.InitJoinNack">
+            <summary>
+            See JoinSeeNode
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.InternalClusterAction.ITick">
+            <summary>
+            Marker interface for periodic tick messages
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.InternalClusterAction.AddOnMemberUpListener">
+            <summary>
+            Command to <see cref="T:Akka.Cluster.ClusterDaemon"/> to create a
+            <see cref="T:Akka.Cluster.OnMemberStatusChangedListener"/>
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.InternalClusterAction.AddOnMemberRemovedListener">
+            <summary>
+            Command to the <see cref="T:Akka.Cluster.ClusterDaemon"/> to create a 
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.InternalClusterAction.SendCurrentClusterState.#ctor(Akka.Actor.IActorRef)">
+            <param name="receiver"><see cref="T:Akka.Cluster.ClusterEvent.CurrentClusterState"/> will be sent to the `receiver`</param>
+        </member>
+        <member name="T:Akka.Cluster.ClusterDaemon">
+            <summary>
+            Supervisor managing the different Cluster daemons.
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.ClusterCoreSupervisor">
+            <summary>
+            ClusterCoreDaemon and ClusterDomainEventPublisher can't be restarted because the state
+            would be obsolete. Shutdown the member if any those actors crashed.
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.ClusterCoreDaemon.Join(Akka.Actor.Address)">
+            <summary>
+            Try to join this cluster node with the node specified by `address`.
+            It's only allowed to join from an empty state, i.e. when not already a member.
+            A `Join(selfUniqueAddress)` command is sent to the node to join,
+            which will reply with a `Welcome` message.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">Join can only be done from an empty state</exception>
+        </member>
+        <member name="M:Akka.Cluster.ClusterCoreDaemon.Joining(Akka.Cluster.UniqueAddress,System.Collections.Immutable.ImmutableHashSet{System.String})">
+            <summary>
+            State transition to JOINING - new node joining.
+            Received `Join` message and replies with `Welcome` message, containing
+            current gossip state, including the new joining member.
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.ClusterCoreDaemon.Welcome(Akka.Actor.Address,Akka.Cluster.UniqueAddress,Akka.Cluster.Gossip)">
+            <summary>
+            Reply from Join request
+            </summary>
+            <exception cref="T:System.InvalidOperationException">Welcome can only be done from an empty state</exception>
+        </member>
+        <member name="M:Akka.Cluster.ClusterCoreDaemon.Leaving(Akka.Actor.Address)">
+            <summary>
+            State transition to LEAVING.
+            The node will eventually be removed by the leader, after hand-off in EXITING, and only after
+            removal a new node with same address can join the cluster through the normal joining procedure.
+            </summary>
+            <param name="address">The address.</param>
+        </member>
+        <member name="M:Akka.Cluster.ClusterCoreDaemon.Shutdown">
+            <summary>
+            This method is called when a member sees itself as Exiting or Down.
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.ClusterCoreDaemon.Downing(Akka.Actor.Address)">
+            <summary>
+            State transition to DOWN.
+            Its status is set to DOWN.The node is also removed from the `seen` table.
+            The node will eventually be removed by the leader, and only after removal a new node with same address can
+            join the cluster through the normal joining procedure.
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.ClusterCoreDaemon.ReceiveGossipType">
+            <summary>
+            The types of gossip actions that receive gossip has performed.
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.ClusterCoreDaemon.ReceiveGossip(Akka.Cluster.GossipEnvelope)">
+            <summary>
+            The types of gossip actions that receive gossip has performed.
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.ClusterCoreDaemon.SendGossip">
+            <summary>
+            Initiates a new round of gossip.
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.ClusterCoreDaemon.AdjustedGossipDifferentViewProbability">
+            <summary>
+            For large clusters we should avoid shooting down individual
+            nodes. Therefore the probability is reduced for large clusters
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.ClusterCoreDaemon.LeaderActions">
+            <summary>
+            Runs periodic leader actions, such as member status transitions, assigning partitions etc.
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.ClusterCoreDaemon.LeaderActionsOnConvergence">
+            <summary>
+             Leader actions are as follows:
+            1. Move JOINING     => UP                   -- When a node joins the cluster
+            2. Move LEAVING     => EXITING              -- When all partition handoff has completed
+            3. Non-exiting remain                       -- When all partition handoff has completed
+            4. Move unreachable EXITING => REMOVED      -- When all nodes have seen the EXITING node as unreachable (convergence) -
+                                                            remove the node from the node ring and seen table
+            5. Move unreachable DOWN/EXITING => REMOVED -- When all nodes have seen that the node is DOWN/EXITING (convergence) -
+                                                            remove the node from the node ring and seen table
+            7. Updating the vclock version for the changes
+            8. Updating the `seen` table
+            9. Update the state with the new gossip
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.ClusterCoreDaemon.ReapUnreachableMembers">
+            <summary>
+            Reaps the unreachable members according to the failure detector's verdict.
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.ClusterCoreDaemon.SendGossipTo(Akka.Actor.Address)">
+            <summary>
+            needed for tests
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.ClusterCoreDaemon.GossipTo(Akka.Cluster.UniqueAddress)">
+            <summary>
+            Gossips latest gossip to a node.
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.JoinSeedNodeProcess">
+            <summary>
+            INTERNAL API
+            
+            Sends <see cref="T:Akka.Cluster.InternalClusterAction.InitJoin"/> to all seed nodes (except itself) and expect
+            <see cref="T:Akka.Cluster.InternalClusterAction.InitJoinAck"/> reply back. The seed node that replied first
+            will be used and joined to. <see cref="T:Akka.Cluster.InternalClusterAction.InitJoinAck"/> replies received after
+            the first one are ignored.
+            
+            Retries if no <see cref="T:Akka.Cluster.InternalClusterAction.InitJoinAck"/> replies are received within the 
+            <see cref="P:Akka.Cluster.ClusterSettings.SeedNodeTimeout"/>. When at least one reply has been received it stops itself after
+            an idle <see cref="P:Akka.Cluster.ClusterSettings.SeedNodeTimeout"/>.
+            
+            The seed nodes can be started in any order, but they will not be "active" until they have been
+            able to join another seed node (seed1.)
+            
+            They will retry the join procedure.
+            
+            Possible scenarios:
+             1. seed2 started, but doesn't get any ack from seed1 or seed3
+             2. seed3 started, doesn't get any ack from seed1 or seed3 (seed2 doesn't reply)
+             3. seed1 is started and joins itself
+             4. seed2 retries the join procedure and gets an ack from seed1, and then joins to seed1
+             5. seed3 retries the join procedure and gets acks from seed2 first, and then joins to seed2
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.FirstSeedNodeProcess">
+            <summary>
+            INTERNAL API
+            
+            Used only for the first seed node.
+            Sends <see cref="T:Akka.Cluster.InternalClusterAction.InitJoin"/> to all seed nodes except itself.
+            If other seed nodes are not part of the cluster yet they will reply with 
+            <see cref="T:Akka.Cluster.InternalClusterAction.InitJoinNack"/> or not respond at all and then the
+            first seed node will join itself to initialize the new cluster. When the first seed 
+            node is restarted, and some other seed node is part of the cluster it will reply with
+            <see cref="T:Akka.Cluster.InternalClusterAction.InitJoinAck"/> and then the first seed node will
+            join that other seed node to join the existing cluster.
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.GossipStats">
+            <summary>
+            INTERNAL API
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.OnMemberStatusChangedListener">
+            <summary>
+            INTERNAL API
+            
+            The supplied callback will be run once when the current cluster member has the same status.
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.ClusterEvent">
+            <summary>
+            Domain events published to the event bus.
+            Subscribe with:
+            {{{
+            Cluster(system).Subscribe(actorRef, typeof(IClusterDomainEvent))
+            }}}
+            </summary>
+        </member>
+        <member name="F:Akka.Cluster.ClusterEvent.SubscriptionInitialStateMode.InitialStateAsSnapshot">
+            <summary>
+            When using this subscription mode a snapshot of
+            <see cref="T:Akka.Cluster.ClusterEvent.CurrentClusterState"/> will be sent to the
+            subscriber as the first message.
+            </summary>
+        </member>
+        <member name="F:Akka.Cluster.ClusterEvent.SubscriptionInitialStateMode.InitialStateAsEvents">
+            <summary>
+            When using this subscription mode the events corresponding
+            to the current state will be sent to the subscriber to mimic what you would
+            have seen if you were listening to the events when they occurred in the past.
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.ClusterEvent.IClusterDomainEvent">
+            <summary>
+            Marker interface for cluster domain events
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.ClusterEvent.CurrentClusterState.Members">
+            <summary>
+            Get current member list
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.ClusterEvent.CurrentClusterState.Unreachable">
+            <summary>
+            Get current unreachable set
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.ClusterEvent.CurrentClusterState.SeenBy">
+            <summary>
+            Get current "seen-by" set
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.ClusterEvent.CurrentClusterState.Leader">
+            <summary>
+            Get address of current leader, or null if noe
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.ClusterEvent.CurrentClusterState.AllRoles">
+            <summary>
+            All node roles in the cluster
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.ClusterEvent.CurrentClusterState.RoleLeaderMap">
+            <summary>
+            Needed internally inside the <see cref="T:Akka.Cluster.ClusterReadView"/>
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.ClusterEvent.CurrentClusterState.RoleLeader(System.String)">
+            <summary>
+            Get address of current leader, if any, within the role set
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.ClusterEvent.CurrentClusterState.Copy(System.Collections.Immutable.ImmutableSortedSet{Akka.Cluster.Member},System.Collections.Immutable.ImmutableHashSet{Akka.Cluster.Member},System.Collections.Immutable.ImmutableHashSet{Akka.Actor.Address},Akka.Actor.Address,System.Collections.Immutable.ImmutableDictionary{System.String,Akka.Actor.Address})">
+            <summary>
+            Creates a deep copy of the <see cref="T:Akka.Cluster.ClusterEvent.CurrentClusterState"/> and optionally allows you
+            to specify different values for the outgoing objects
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.ClusterEvent.IMemberEvent">
+            <summary>
+            Marker interface for membership events.
+            Published when the state change is first seen on a node.
+            The state change was performed by the leader when there was
+            convergence on the leader node, i.e. all members had seen previous
+            state.
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.ClusterEvent.MemberJoined">
+            <summary>
+            Member status changed to Joining.
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.ClusterEvent.MemberUp">
+            <summary>
+            Member status changed to Up.
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.ClusterEvent.MemberLeft">
+            <summary>
+             Member status changed to Leaving.
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.ClusterEvent.MemberExited">
+            <summary>
+            Member status changed to <see cref="F:Akka.Cluster.MemberStatus.Exiting"/> and will be removed
+            when all members have seen the `Exiting` status.
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.ClusterEvent.MemberRemoved">
+            <summary>
+            Member completely removed from the cluster.
+            When `previousStatus` is `MemberStatus.Down` the node was removed
+            after being detected as unreachable and downed.
+            When `previousStatus` is `MemberStatus.Exiting` the node was removed
+            after graceful leaving and exiting.
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.ClusterEvent.LeaderChanged">
+            <summary>
+            Leader of the cluster members changed. Published when the state change
+            is first seen on a node.
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.ClusterEvent.LeaderChanged.Leader">
+            <summary>
+            Address of current leader, or null if none
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.ClusterEvent.RoleLeaderChanged">
+            <summary>
+            First member (leader) of the members within a role set changed.
+            Published when the state change is first seen on a node.
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.ClusterEvent.RoleLeaderChanged.Leader">
+            <summary>
+            Address of current leader, or null if none
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.ClusterEvent.IReachabilityEvent">
+            <summary>
+            A marker interface to facilitate the subscription of
+            both <see cref="T:Akka.Cluster.ClusterEvent.UnreachableMember"/> and <see cref="T:Akka.Cluster.ClusterEvent.ReachableMember"/>.
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.ClusterEvent.UnreachableMember">
+            <summary>
+            A member is considered as unreachable by the failure detector.
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.ClusterEvent.ReachableMember">
+            <summary>
+            A member is considered as reachable by the failure detector
+            after having been unreachable.
+            <see cref="T:Akka.Cluster.ClusterEvent.UnreachableMember"/>
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.ClusterEvent.SeenChanged">
+            <summary>
+            The nodes that have seen current version of the Gossip.
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.ClusterDomainEventPublisher.SendCurrentClusterState(Akka.Actor.IActorRef)">
+            <summary>
+            The current snapshot state corresponding to latest gossip 
+            to mimic what you would have seen if you were listening to the events.
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.ClusterHeartbeatReceiver">
+            <summary>
+            INTERNAL API
+            
+            Receives <see cref="T:Akka.Cluster.ClusterHeartbeatSender.Heartbeat"/> messages and replies.
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.ClusterHeartbeatSender">
+            <summary>
+            INTERNAL API
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.ClusterHeartbeatSender.HeartbeatReceiver(Akka.Actor.Address)">
+            <summary>
+            Looks up and returns the remote cluster heartbeat connection for the specific address.
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.ClusterHeartbeatSender.Heartbeat">
+            <summary>
+            Sent at regular intervals for failure detection
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.ClusterHeartbeatSender.HeartbeatRsp">
+            <summary>
+            Sends replies to <see cref="T:Akka.Cluster.ClusterHeartbeatSender.Heartbeat"/> messages
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.ClusterHeartbeatSender.HeartbeatTick">
+            <summary>
+            Sent to self only
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.ClusterHeartbeatSenderState">
+            <summary>
+            INTERNAL API
+            State of <see cref="T:Akka.Cluster.ClusterHeartbeatSender"/>. Encapsulated to facilitate unit testing.
+            It is immutable, but it updates the failure detector.
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.HeartbeatNodeRing">
+            <summary>
+            INTERNAL API
+            
+            Data structure for picking heartbeat receivers. The node ring is shuffled
+            by deterministic hashing to avoid picking physically co-located neighbors.
+            
+            It is immutable, i.e. the methods all return new instances.
+            </summary>
+        </member>
+        <member name="F:Akka.Cluster.HeartbeatNodeRing.MyReceivers">
+            <summary>
+            Receivers for <see cref="P:Akka.Cluster.HeartbeatNodeRing.SelfAddress"/>. Cached for subsequent access.
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.ClusterReadView">
+            <summary>
+            INTERNAL API
+            
+            Read view of the cluster's state, updated via subscription of
+            cluster events published on the <see cref="T:Akka.Event.EventBus`3"/>.
+            </summary>
+        </member>
+        <member name="F:Akka.Cluster.ClusterReadView._state">
+            <summary>
+            Current state
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.ClusterReadView.LatestStats">
+            <summary>
+            INTERNAL API
+            </summary>
+        </member>
+        <member name="F:Akka.Cluster.ClusterReadView._latestStats">
+            <summary>
+            Current internal cluster stats, updated periodically via event bus.
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.ClusterReadView.EventBusListener">
+            <summary>
+            actor that subscribers to cluster eventBus to update current read view state
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.ClusterReadView.IsTerminated">
+            <summary>
+            Returns true if this cluster instance has been shutdown.
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.ClusterReadView.Members">
+            <summary>
+            Current cluster members, sorted by address
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.ClusterReadView.UnreachableMembers">
+            <summary>
+            Members that have been detected as unreachable
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.ClusterReadView.Status">
+            <summary>
+            <see cref="T:Akka.Cluster.MemberStatus"/> for this node.
+            
+            NOTE: If the node has been removed from the cluster (and shut down) then it's status is set to the 'REMOVED' tombstone state
+            and is no longer present in the node ring or any other part of the gossiping state. However in order to maintain the
+            model and the semantics the user would expect, this method will in this situation return <see cref="F:Akka.Cluster.MemberStatus.Removed"/>.
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.ClusterReadView.Leader">
+            <summary>
+            Get the address of the current leader.
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.ClusterReadView.IsLeader">
+            <summary>
+            Is this node the leader?
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.ClusterReadView.IsSingletonCluster">
+            <summary>
+            Does the cluster consist of only one member?
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.ClusterReadView.IsAvailable">
+            <summary>
+            Returns true if the node is no reachable and not <see cref="F:Akka.Cluster.MemberStatus.Down"/>
+            and not <see cref="F:Akka.Cluster.MemberStatus.Removed"/>
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.ClusterReadView.RefreshCurrentState">
+            <summary>
+            INTERNAL API
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.ClusterReadView.SeenBy">
+            <summary>
+            INTERNAL API
+            The nodes that have seen current version of the <see cref="T:Akka.Cluster.Gossip"/>
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.ClusterRemoteWatcher">
+            <summary>
+            Specialization of <see cref="T:Akka.Remote.RemoteWatcher"/> that keeps
+            track of cluster member nodes and is responsible for watchees on cluster nodes.
+            <see cref="T:Akka.Actor.AddressTerminated"/> is published when a node is removed from cluster
+            
+            `RemoteWatcher` handles non-cluster nodes. `ClusterRemoteWatcher` will take
+            over responsibility from `RemoteWatcher` if a watch is added before a node is member
+            of the cluster and then later becomes cluster member.
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.ClusterRemoteWatcher.Props(Akka.Remote.IFailureDetectorRegistry{Akka.Actor.Address},System.TimeSpan,System.TimeSpan,System.TimeSpan)">
+            <summary>
+            Factory method for <see cref="T:Akka.Remote.RemoteWatcher"/>
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.ClusterRemoteWatcher.TakeOverResponsibility(Akka.Actor.Address)">
+            <summary>
+            When a cluster node is added this class takes over the
+            responsibility for watchees on that node already handled
+            by base RemoteWatcher.
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Configuration.ClusterConfigFactory">
+             <summary>
+             This class contains methods used to retrieve cluster configuration options from this assembly's resources.
+            
+             <remarks>Note! Part of internal API. Breaking changes may occur without notice. Use at own risk.</remarks>
+             </summary>
+        </member>
+        <member name="M:Akka.Cluster.Configuration.ClusterConfigFactory.Default">
+            <summary>
+            Retrieves the default cluster options that Akka.NET uses when no configuration has been defined.
+            </summary>
+            <returns>The configuration that contains default values for all cluster options.</returns>
+        </member>
+        <member name="M:Akka.Cluster.Configuration.ClusterConfigFactory.FromResource(System.String)">
+            <summary>
+            Retrieves a configuration defined in a resource of the current executing assembly.
+            </summary>
+            <param name="resourceName">The name of the resource that contains the configuration.</param>
+            <returns>The configuration defined in the current executing assembly.</returns>
+        </member>
+        <member name="T:Akka.Cluster.Gossip">
+             <summary>
+             Represents the state of the cluster; cluster ring membership, ring convergence -
+             all versioned by a vector clock.
+            
+             When a node is joining the `Member`, with status `Joining`, is added to `members`.
+             If the joining node was downed it is moved from `overview.unreachable` (status `Down`)
+             to `members` (status `Joining`). It cannot rejoin if not first downed.
+            
+             When convergence is reached the leader change status of `members` from `Joining`
+             to `Up`.
+            
+             When failure detector consider a node as unavailable it will be moved from
+             `members` to `overview.unreachable`.
+            
+             When a node is downed, either manually or automatically, its status is changed to `Down`.
+             It is also removed from `overview.seen` table. The node will reside as `Down` in the
+             `overview.unreachable` set until joining again and it will then go through the normal
+             joining procedure.
+            
+             When a `Gossip` is received the version (vector clock) is used to determine if the
+             received `Gossip` is newer or older than the current local `Gossip`. The received `Gossip`
+             and local `Gossip` is merged in case of conflicting version, i.e. vector clocks without
+             same history.
+            
+             When a node is told by the user to leave the cluster the leader will move it to `Leaving`
+             and then rebalance and repartition the cluster and start hand-off by migrating the actors
+             from the leaving node to the new partitions. Once this process is complete the leader will
+             move the node to the `Exiting` state and once a convergence is complete move the node to
+             `Removed` by removing it from the `members` set and sending a `Removed` command to the
+             removed node telling it to shut itself down.
+             </summary>
+        </member>
+        <member name="M:Akka.Cluster.Gossip.Increment(Akka.Cluster.VectorClock.Node)">
+            <summary>
+            Increments the version for this 'Node'.
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Gossip.AddMember(Akka.Cluster.Member)">
+            <summary>
+            Adds a member to the member node ring.
+            </summary>
+            <param name="member"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Akka.Cluster.Gossip.Seen(Akka.Cluster.UniqueAddress)">
+            <summary>
+            Marks the gossip as seen by this node (address) by updating the address entry in the 'gossip.overview.seen'
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Gossip.OnlySeen(Akka.Cluster.UniqueAddress)">
+            <summary>
+            Marks the gossip as seen by only this node (address) by replacing the 'gossip.overview.seen'
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Gossip.SeenBy">
+            <summary>
+            The nodes that have seen the current version of the Gossip.
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Gossip.SeenByNode(Akka.Cluster.UniqueAddress)">
+            <summary>
+            Has this Gossip been seen by this node.
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.GossipOverview">
+            <summary>
+            Represents the overview of the cluster, holds the cluster convergence table and set with unreachable nodes.
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.GossipEnvelope">
+            <summary>
+            Envelope adding a sender and receiver address to the gossip.
+            The reason for including the receiver address is to be able to
+            ignore messages that were intended for a previous incarnation of
+            the node with same host:port. The `uid` in the `UniqueAddress` is
+            different in that case.
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.GossipStatus">
+            <summary>
+            When there are no known changes to the node ring a `GossipStatus`
+            initiates a gossip chat between two members. If the receiver has a newer
+            version it replies with a `GossipEnvelope`. If receiver has older version
+            it replies with its `GossipStatus`. Same versions ends the chat immediately.
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Member">
+            <summary>
+            Represents the address, current status, and roles of a cluster member node.
+            
+            Note: `hashCode` and `equals` are solely based on the underlying `Address`, not its `MemberStatus`
+            and roles.
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Member.IsOlderThan(Akka.Cluster.Member)">
+            <summary>
+            Is this member older, has been part of cluster longer, than another
+            member. It is only correct when comparing two existing members in a
+            cluster. A member that joined after removal of another member may be
+            considered older than the removed member.
+            </summary>
+        </member>
+        <member name="F:Akka.Cluster.Member.AddressOrdering">
+            <summary>
+             `Address` ordering type class, sorts addresses by host and port.
+            </summary>
+        </member>
+        <member name="F:Akka.Cluster.Member.LeaderStatusOrdering">
+            <summary>
+            Orders the members by their address except that members with status
+            Joining, Exiting and Down are ordered last (in that order).
+            </summary>
+        </member>
+        <member name="F:Akka.Cluster.Member.Ordering">
+            <summary>
+            `Member` ordering type class, sorts members by host and port.
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Member.HighestPriorityOf(Akka.Cluster.Member,Akka.Cluster.Member)">
+            <summary>
+            Picks the Member with the highest "priority" MemberStatus.
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.MemberStatus">
+            <summary>
+            Defines the current status of a cluster member node
+            
+            Can be one of: Joining, Up, Leaving, Exiting and Down.
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.UniqueAddress">
+            <summary>
+            Member identifier consisting of address and random `uid`.
+            The `uid` is needed to be able to distinguish different
+            incarnations of a member with same hostname and port.
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Proto.ClusterMessageSerializer">
+            <summary>
+            Protobuff serializer for cluster messages
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Proto.ClusterMessageSerializer.Compress(Google.ProtocolBuffers.IMessageLite)">
+            <summary>
+            Compresses the protobuf message using GZIP compression
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Proto.ClusterMessageSerializer.Decompress(System.Byte[])">
+            <summary>
+            Decompresses the protobuf message using GZIP compression
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Reachability">
+             <summary>
+             Immutable data structure that holds the reachability status of subject nodes as seen
+             from observer nodes. Failure detector for the subject nodes exist on the
+             observer nodes. Changes (reachable, unreachable, terminated) are only performed
+             by observer nodes to its own records. Each change bumps the version number of the
+             record, and thereby it is always possible to determine which record is newest 
+             merging two instances.
+            
+             Aggregated status of a subject node is defined as (in this order):
+             - Terminated if any observer node considers it as Terminated
+             - Unreachable if any observer node considers it as Unreachable
+             - Reachable otherwise, i.e. no observer node considers it as Unreachable
+             </summary>
+        </member>
+        <member name="P:Akka.Cluster.Reachability.AllUnreachable">
+            <summary>
+            Doesn't include terminated
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Routing.ClusterRouterGroupSettings">
+            <summary>
+            <see cref="P:Akka.Cluster.Routing.ClusterRouterSettingsBase.TotalInstances"/> of cluster router must be > 0
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Routing.ClusterRouterPoolSettings">
+            <summary>
+            <see cref="P:Akka.Cluster.Routing.ClusterRouterSettingsBase.TotalInstances"/> of cluster router must be > 0
+            <see cref="P:Akka.Cluster.Routing.ClusterRouterPoolSettings.MaxInstancesPerNode"/> of cluster router must be > 0
+            <see cref="P:Akka.Cluster.Routing.ClusterRouterPoolSettings.MaxInstancesPerNode"/> of cluster router must be 1 when routeesPath is defined
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Routing.ClusterRouterSettingsBase">
+            <summary>
+            Base class for defining <see cref="T:Akka.Cluster.Routing.ClusterRouterGroupSettings"/> and <see cref="T:Akka.Cluster.Routing.ClusterRouterPoolSettings"/>
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Routing.ClusterRouterPool">
+            <summary>
+            <see cref="T:Akka.Routing.RouterConfig"/> implementation for deployment on cluster nodes.
+            Delegates other duties to the local <see cref="T:Akka.Routing.RouterConfig"/>, which makes it
+            possible to mix this with built-in routers such as <see cref="T:Akka.Routing.RoundRobinGroup"/> or
+            custom routers.
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Routing.ClusterRouterPool.GetNrOfInstances(Akka.Actor.ActorSystem)">
+            <summary>
+            Returns the initial number of routees
+            </summary>
+            <param name="system">The actor system to which this router belongs.</param>
+            <returns>The initial number of routees</returns>
+        </member>
+        <member name="T:Akka.Cluster.Routing.ClusterRouterGroup">
+            <summary>
+            <see cref="T:Akka.Routing.RouterConfig"/> implementation for deployment on cluster nodes.
+            Delegates other duties to the local <see cref="T:Akka.Routing.RouterConfig"/>, which makes it
+            possible to mix this with built-in routers such as <see cref="T:Akka.Routing.RoundRobinGroup"/> or
+            custom routers.
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Routing.ClusterRouterActor">
+            <summary>
+            INTERNAL API
+            The router actor, subscribes to cluster events and
+            adjusts the routees.
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Routing.ClusterRouterActor.FullAddress(Akka.Routing.Routee)">
+            <summary>
+            Fills in self address for local <see cref="T:Akka.Actor.IActorRef"/>
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Routing.ClusterRouterActor.AddRoutees">
+            <summary>
+            Adds routees based on settings
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Routing.ClusterRouterGroupActor">
+            <summary>
+            INTERNAL API
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Routing.ClusterRouterGroupActor.AddRoutees">
+            <summary>
+            Adds routees based on totalInstances and maxInstancesPerNode settings
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Routing.ClusterRouterPoolActor">
+            <summary>
+            INTERNAL API
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.VectorClock">
+            <summary>
+            Representation of a Vector-based clock (counting clock), inspired by Lamport logical clocks.
+            
+            {{{
+            Reference:
+                1) Leslie Lamport (1978). "Time, clocks, and the ordering of events in a distributed system". Communications of the ACM 21 (7): 558-565.
+               2) Friedemann Mattern (1988). "Virtual Time and Global States of Distributed Systems". Workshop on Parallel and Distributed Algorithms: pp. 215-226
+            }}}
+            
+            Based on code from the 'vlock' VectorClock library by Coda Hale.
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.VectorClock.Node">
+            Hash representation of a versioned node name.
+        </member>
+        <member name="M:Akka.Cluster.VectorClock.Increment(Akka.Cluster.VectorClock.Node)">
+            <summary>
+            Increment the version for the node passed as argument. Returns a new VectorClock.
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.VectorClock.IsConcurrentWith(Akka.Cluster.VectorClock)">
+            <summary>
+            Returns true if <code>this</code> and <code>that</code> are concurrent else false.
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.VectorClock.IsBefore(Akka.Cluster.VectorClock)">
+            <summary>
+            Returns true if <code>this</code> is before <code>that</code> else false.
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.VectorClock.IsAfter(Akka.Cluster.VectorClock)">
+            <summary>
+            Returns true if <code>this</code> is after <code>that</code> else false.
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.VectorClock.IsSameAs(Akka.Cluster.VectorClock)">
+            <summary>
+            Returns true if this VectorClock has the same history as the 'that' VectorClock else false.
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.VectorClock.CompareOnlyTo(Akka.Cluster.VectorClock,Akka.Cluster.VectorClock.Ordering)">
+             Vector clock comparison according to the semantics described by compareTo, with the ability to bail
+             out early if the we can't reach the Ordering that we are looking for.
+            
+             The ordering always starts with Same and can then go to Same, Before or After
+             If we're on After we can only go to After or Concurrent
+             If we're on Before we can only go to Before or Concurrent
+             If we go to Concurrent we exit the loop immediately
+            
+             If you send in the ordering FullOrder, you will get a full comparison.
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Akka.Cluster.VectorClock.CompareTo(Akka.Cluster.VectorClock)" -->
+        <member name="M:Akka.Cluster.VectorClock.Merge(Akka.Cluster.VectorClock)">
+            <summary>
+            Merges this VectorClock with another VectorClock. E.g. merges its versioned history.
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.VectorClock.Prune(Akka.Cluster.VectorClock.Node)">
+            <summary>
+            Prunes the specified removed node.
+            </summary>
+            <param name="removedNode">The removed node.</param>
+        </member>
+    </members>
+</doc>
