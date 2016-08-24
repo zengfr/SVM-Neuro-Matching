@@ -35,18 +35,49 @@ namespace ConsoleApplication1
             problem.Add(xx, Lables[lable]);
         }
 
-       public SVMNode[] CreateNodes(IEnumerable<KeyValuePair<string, double>> xValues)
+        public SVMNode[] CreateNodes(IEnumerable<KeyValuePair<string, double>> xValues)
         {
-            var node = new List<SVMNode>();
+            var nodes = new List<SVMNode>();
             foreach (var xValue in xValues)
             {
-                if (!Features.ContainsKey(xValue.Key))
-                {
-                    Features.Add(xValue.Key, Features.Count+1);
-                }
-                node.Add(new SVMNode { Index = Features[xValue.Key], Value = xValue.Value });
+                var node =CreateNode(xValue);
+                nodes.Add(node);
+                
+                AddSPNode(nodes,xValue.Key,"大", xValue.Key.Where(t => t == '大').Count());
+                AddSPNode(nodes,xValue.Key,"双", xValue.Key.Where(t => t == '双').Count());
+                AddSPNode(nodes,xValue.Key,"套", xValue.Key.Where(t => t == '套').Count());
+                
             }
-            return node.ToArray();
+            return nodes.ToArray();
+        }
+        protected void AddSPNode(IList<SVMNode> nodes, string xValue, string key, double value)
+        {
+            var node = CreateNode(new KeyValuePair<string, double>(key, value));
+            if (xValue.IndexOf(key)!= -1)
+            {
+                nodes.Add(node);
+            }
+        }
+        protected SVMNode CreateNode(KeyValuePair<string, double> xValue)
+        {
+            if (!Features.ContainsKey(xValue.Key))
+            {
+                Features.Add(xValue.Key, Features.Count+1);
+            }
+            var node=new SVMNode(Features[xValue.Key],xValue.Value);
+            return node;
+        }
+        public virtual IEnumerable<int> CreateWeightFeatures(params string[] features)
+        {
+            var ls = new List<int>();
+            foreach (var feature in features)
+            {
+                if(Features.ContainsKey(feature))
+                {
+                  ls.Add(Features[feature]);
+                }
+            }
+            return ls;
         }
     }
 }

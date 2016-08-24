@@ -37,6 +37,10 @@
       <HintPath>..\..\..\..\..\..\nuget\packages\Accord.3.2.0\lib\net45\Accord.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Accord.Extensions.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\nuget\packages\Accord.Extensions.Core.3.0.1\lib\net45\Accord.Extensions.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Accord.MachineLearning.GPL, Version=3.0.2.0, Culture=neutral, PublicKeyToken=fa1a88e29555ccf7, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\..\..\nuget\packages\Accord.MachineLearning.GPL.3.0.2\lib\net45\Accord.MachineLearning.GPL.dll</HintPath>
       <Private>True</Private>
@@ -218,6 +222,13 @@
   <ItemGroup>
     <Compile Include="A.cs" />
     <Compile Include="Class1.cs" />
+    <Compile Include="HMM\Backward.cs" />
+    <Compile Include="HMM\BaumWelch.cs" />
+    <Compile Include="HMM\Forward.cs" />
+    <Compile Include="HMM\HMM.cs" />
+    <Compile Include="HMM\HMMtest2.cs" />
+    <Compile Include="HMM\HMMtest3.cs" />
+    <Compile Include="HMM\Viterbi.cs" />
     <Compile Include="PanGuSegment.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -245,6 +256,8 @@
     <Content Include="dict\dict.txt" />
     <Content Include="dll\libsvm.dll" />
     <Content Include="room.txt" />
+    <Content Include="room12.txt" />
+    <Content Include="room11.txt" />
     <Content Include="room3.txt" />
     <Content Include="room5.txt" />
     <Content Include="room7.txt" />
@@ -253,6 +266,8 @@
     <Content Include="room4.txt" />
     <Content Include="room2.txt" />
     <Content Include="room1.txt" />
+    <Content Include="room10.txt" />
+    <Content Include="room9.txt" />
     <Content Include="SimilarityMeasure\libs\Centivus.EnglishStemmer.dll" />
     <Content Include="SimilarityMeasure\libs\HtmlAgilityPack.dll" />
     <Content Include="SimilarityMeasure\libs\MathNet.Numerics.dll" />

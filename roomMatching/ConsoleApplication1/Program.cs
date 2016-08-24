@@ -32,13 +32,14 @@ namespace ConsoleApplication1
         //}
         static void Main(string[] args)
         {
+            //HMM.HMMtest3.run();
             wordsSvm();
-            //Console.ReadLine();
+            Console.ReadLine();
 
             Console.WindowWidth = 188;
             Console.WindowHeight = 33;
-            var rooms11 = File.ReadAllText("../../room7.txt");
-            var rooms22 = File.ReadAllText("../../room8.txt");
+            var rooms11 = File.ReadAllText("../../room5.txt");
+            var rooms22 = File.ReadAllText("../../room6.txt");
 
             var termFreqWeight = new  PanGuTermFreqWeight();
 
@@ -73,16 +74,15 @@ namespace ConsoleApplication1
         static void wordsSvm()
         {//http://www.svm-tutorial.com/2014/10/svm-tutorial-classify-text-csharp/
 
-            
-            var rooms11 = File.ReadAllText("../../room7.txt");
-            var rooms22 = File.ReadAllText("../../room8.txt");
+            var index = 9;
+            var rooms11 = File.ReadAllText(string.Format("../../room{0}.txt", index));
+            var rooms22 = File.ReadAllText(string.Format("../../room{0}.txt",++index));
 
             var rooms1 = rooms11.Split(';');
             var rooms2 = rooms22.Split(';');
 
             var termFreqWeight = new PanGuTermFreqWeight();
             termFreqWeight.computerFW(rooms1, rooms2);
-            //var maxFraq = termFreqWeight.TermFWByGlobal.Values.Max(t=>t.Freq);
            
             var problem = new SVMProblem();
 
@@ -99,10 +99,18 @@ namespace ConsoleApplication1
             parameter.Type=SVMType.C_SVC;
             parameter.Kernel=SVMKernelType.LINEAR;
             parameter.C=1;
+            parameter.Probability = true;
+            //parameter.
+            parameter.WeightLabels = lableFeaturesBuilder.CreateWeightFeatures("大", "双", "套", "大床","双床").ToArray();
+            parameter.Weights = new double[] { 1.90,1.90, 1.90,1.0,1.0 };
 
             problem = problem.Normalize(SVMNormType.L1);
-            var model= SVM.Train(problem, parameter);
-           
+            problem.CheckParameter(parameter);
+            
+            var model2=SVM.Train(problem,parameter);
+             model2.SaveModel("roomMatching.model");
+
+             var model = SVM.LoadModel("roomMatching.model");// model.Parameter = parameter.Clone();
             foreach (var room in rooms1)
             {
                 var words = termFreqWeight.TermsByDoc[0,room];
@@ -110,15 +118,17 @@ namespace ConsoleApplication1
 
                 var nodes = lableFeaturesBuilder.CreateNodes(words.Select(t => new KeyValuePair<string, double>(t, termFreqWeight.TermFWByDoc[0,room,t].Freq)));
                 nodes = nodes.Normalize(SVMNormType.L1);
-                var predictedY = nodes.Predict(model);
 
-                double[] values = null;
-                var v = nodes.PredictValues(model, out values);
+                double predictedY = 0;
+                predictedY = SVM.Predict(model,nodes);
+
+                double[] values = null; double probabilityValue = 0;
+                probabilityValue = SVM.PredictValues(model,nodes, out values);
 
                 double[] est = null; double probability = 0;
-                probability = nodes.PredictProbability(model, out est);
+                probability = SVM.PredictProbability(model, nodes, out est);
 
-                Console.WriteLine("{0,22}\t{1},{2},{3}", room, "" + lableFeaturesBuilder.GetLable(predictedY), v, probability);
+                Console.WriteLine("{0,22}\t{1},{2},{3},{4}", room, lableFeaturesBuilder.GetLable(predictedY), predictedY,probabilityValue, probability);
             }
 
             Console.WriteLine(new string('=', 50));
