@@ -142,7 +142,6 @@ D:\github\SVM-Neuro-Matching\roomMatching\ConsoleApplication1\bin\Debug\ILNumeri
 D:\github\SVM-Neuro-Matching\roomMatching\ConsoleApplication1\bin\Debug\LibSVMsharp.pdb
 D:\github\SVM-Neuro-Matching\roomMatching\ConsoleApplication1\bin\Debug\Lucene.Net.pdb
 D:\github\SVM-Neuro-Matching\roomMatching\ConsoleApplication1\bin\Debug\Lucene.Net.xml
-D:\github\SVM-Neuro-Matching\roomMatching\ConsoleApplication1\bin\Debug\MathNet.Numerics.xml
 D:\github\SVM-Neuro-Matching\roomMatching\ConsoleApplication1\bin\Debug\Newtonsoft.Json.xml
 D:\github\SVM-Neuro-Matching\roomMatching\ConsoleApplication1\bin\Debug\Ploeh.AutoFixture.xml
 D:\github\SVM-Neuro-Matching\roomMatching\ConsoleApplication1\bin\Debug\Reactor.Core.xml

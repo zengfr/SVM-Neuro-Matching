@@ -33,6 +33,8 @@ namespace ConsoleApplication1
         static void Main(string[] args)
         {
             //HMM.HMMtest3.run();
+            //HMM.HMMtest22.Viterbi();
+           // HMM.HMMtest22.BaumWelchLearning();
             wordsSvm();
             Console.ReadLine();
 
@@ -91,7 +93,7 @@ namespace ConsoleApplication1
             foreach (var room in rooms2)
             {
                 var words = termFreqWeight.TermsByDoc[1, room];
-                words = words.Where(t => t.Length > 1 && termFreqWeight.TermFWByGlobal.ContainsKey(t) && termFreqWeight.TermFWByType.ContainsKey(0, t)).ToArray();
+                words = words.Where(t => t.Length >0 && termFreqWeight.TermFWByGlobal.ContainsKey(t) && termFreqWeight.TermFWByType.ContainsKey(0, t)).ToArray();
                 lableFeaturesBuilder.AddToProblem(problem, room, words.Select(t => new KeyValuePair<string, double>(t, termFreqWeight.TermFWByDoc[1, room, t].Freq)));
             }
 
@@ -101,8 +103,11 @@ namespace ConsoleApplication1
             parameter.C=1;
             parameter.Probability = true;
             //parameter.
-            parameter.WeightLabels = lableFeaturesBuilder.CreateWeightFeatures("大", "双", "套", "大床","双床").ToArray();
-            parameter.Weights = new double[] { 1.90,1.90, 1.90,1.0,1.0 };
+            //parameter.WeightLabels = lableFeaturesBuilder.CreateWeightFeatures("大", "双", "套", "大床", "双床").ToArray();
+            //parameter.Weights = new double[] { 1.90, 1.90, 1.90, 1.99, 1.99 };
+
+            //parameter.WeightLabels = lableFeaturesBuilder.CreateWeightLables<int>("行政湖景双床房").ToArray();
+            //parameter.Weights = new double[] { 1.90, 1.90, 1.90, 1.99, 1.99 };
 
             problem = problem.Normalize(SVMNormType.L1);
             problem.CheckParameter(parameter);
@@ -110,25 +115,28 @@ namespace ConsoleApplication1
             var model2=SVM.Train(problem,parameter);
              model2.SaveModel("roomMatching.model");
 
-             var model = SVM.LoadModel("roomMatching.model");// model.Parameter = parameter.Clone();
+            var model = SVM.LoadModel("roomMatching.model");
             foreach (var room in rooms1)
             {
                 var words = termFreqWeight.TermsByDoc[0,room];
-                words = words.Where(t => t.Length > 1 && termFreqWeight.TermFWByGlobal.ContainsKey(t) && termFreqWeight.TermFWByType.ContainsKey(1, t)).ToArray();
+                words = words.Where(t => t.Length > 0 && termFreqWeight.TermFWByGlobal.ContainsKey(t) && termFreqWeight.TermFWByType.ContainsKey(1, t)).ToArray();
 
                 var nodes = lableFeaturesBuilder.CreateNodes(words.Select(t => new KeyValuePair<string, double>(t, termFreqWeight.TermFWByDoc[0,room,t].Freq)));
-                nodes = nodes.Normalize(SVMNormType.L1);
+                if (nodes.Length > 0)
+                {
+                    nodes = nodes.Normalize(SVMNormType.L1);
 
-                double predictedY = 0;
-                predictedY = SVM.Predict(model,nodes);
+                    double predictedY = 0;
+                    predictedY = SVM.Predict(model, nodes);
 
-                double[] values = null; double probabilityValue = 0;
-                probabilityValue = SVM.PredictValues(model,nodes, out values);
+                    double[] values = null; double probabilityValue = 0;
+                    probabilityValue = SVM.PredictValues(model, nodes, out values);
 
-                double[] est = null; double probability = 0;
-                probability = SVM.PredictProbability(model, nodes, out est);
+                    double[] est = null; double probability = 0;
+                    probability = SVM.PredictProbability(model, nodes, out est);
 
-                Console.WriteLine("{0,22}\t{1},{2},{3},{4}", room, lableFeaturesBuilder.GetLable(predictedY), predictedY,probabilityValue, probability);
+                    Console.WriteLine("{0,22}\t{1},{2},{3},{4}", room, lableFeaturesBuilder.GetLable(predictedY), predictedY, probabilityValue, probability);
+                }
             }
 
             Console.WriteLine(new string('=', 50));

@@ -14,11 +14,11 @@ namespace ConsoleApplication1.HMM
 
         ////隐马尔科夫模型的研究建模
         ////http://www.zhihu.com/question/20962240
-        //var pS = new double[] { 1.0 / 3, 1.0 / 3, 1.0 / 3 };
-        //var p4N = new double[] { 1.0 / 4, 1.0 / 4, 1.0 / 4, 1.0 / 4 };
-        //var p6N = new double[] { 1.0 / 6, 1.0 / 6, 1.0 / 6, 1.0 / 6, 1.0 / 6, 1.0 / 6 };
-        //var p8N = new double[] { 1.0 / 8, 1.0 / 8, 1.0 / 8, 1.0 / 8, 1.0 / 8, 1.0 / 8, 1.0 / 8, 1.0 / 8 };
-        //var pN = new double[][] { p4N, p6N, p8N };
+          var pS = new double[] { 1.0 / 3, 1.0 / 3, 1.0 / 3 };
+          var p4N = new double[] { 1.0 / 4, 1.0 / 4, 1.0 / 4, 1.0 / 4 };
+          var p6N = new double[] { 1.0 / 6, 1.0 / 6, 1.0 / 6, 1.0 / 6, 1.0 / 6, 1.0 / 6 };
+          var p8N = new double[] { 1.0 / 8, 1.0 / 8, 1.0 / 8, 1.0 / 8, 1.0 / 8, 1.0 / 8, 1.0 / 8, 1.0 / 8 };
+          var pN = new double[][] { p4N, p6N, p8N };
 
         ////问题0
         ////状态链
@@ -44,8 +44,8 @@ namespace ConsoleApplication1.HMM
         //}
 
         ////解法2：Viterbi algorithm (最大概率累加 1 2 3 .... n)
-        //var sn2 = new int[] { 1, 6, 3 };
-        //var pI2 = ViterbiAlgorithm(pS, pN, sn2);
+          var sn2 = new int[] { 1, 6, 3 };
+          var pI2 = ViterbiAlgorithm(pS, pN, sn2);
 
         ////问题2：谁动了我的骰子？(取3个序列,计算出显式链序列的出现概率)
         ////解法1：穷举所有可能的骰子序列（上面就有了，所以不写了）
@@ -59,8 +59,8 @@ namespace ConsoleApplication1.HMM
         Double LogProbInit = 0.0;
         Double LogProbFinal = 0.0;
         var sn4 = new int[] { 1, 6, 3 };
-        var hmm = new Splash.HMM(3, 8);
-       var round = hmm.BaumWelch(sn4, out LogProbInit, out LogProbFinal);
+       // var hmm = new Splash.HMM(3, 8);
+       //var round = hmm.BaumWelch(sn4, out LogProbInit, out LogProbFinal);
 
 //        Result = round.ToString() + ":" + LogProbInit + ":" + LogProbFinal;
 //        Result = pI3.ToString();
