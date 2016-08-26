@@ -53,10 +53,15 @@ namespace ConsoleApplication1
             var nodesDict = new Dictionary<string,SVMNode>();
             foreach (var xValue in xValues)
             {
+                AddSpecialNode(nodesDict, xValue.Key, "单", xValue.Key.Where(t => t == '单').Count());
                 AddSpecialNode(nodesDict, xValue.Key, "大", xValue.Key.Where(t => t == '大').Count());
                 AddSpecialNode(nodesDict, xValue.Key, "双", xValue.Key.Where(t => t == '双').Count());
+                //AddSpecialNode(nodesDict, xValue.Key, "二", xValue.Key.Where(t => t == '二').Count());
+                //AddSpecialNode(nodesDict, xValue.Key, "两", xValue.Key.Where(t => t == '两').Count());
+                AddSpecialNode(nodesDict, xValue.Key, "三", xValue.Key.Where(t => t == '三').Count());
                 AddSpecialNode(nodesDict, xValue.Key, "套", xValue.Key.Where(t => t == '套').Count());
             }
+            //AddSpecialNode(nodesDict, "Count", "Count", xValues.Count());
             //Parallel.ForEach(nodesDict, (kv) =>
             //{
             //    if (kv.Value.Value <= 0) kv.Value.Value = 0;//-1
@@ -66,7 +71,7 @@ namespace ConsoleApplication1
         }
         protected void AddSpecialNode(IDictionary<string,SVMNode> nodesDict, string xValue, string key, double value)
         {
-            if (xValue != key && !key.Equals(xValue))
+            //if (xValue != key && !key.Equals(xValue))
             {
                 if (!nodesDict.ContainsKey(key))
                 {

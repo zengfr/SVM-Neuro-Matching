@@ -41,8 +41,8 @@
       <HintPath>..\..\..\..\nuget\packages\Accord.Extensions.Core.3.0.1\lib\net45\Accord.Extensions.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Accord.MachineLearning.GPL, Version=3.2.0.0, Culture=neutral, PublicKeyToken=fa1a88e29555ccf7, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\nuget\packages\Accord.MachineLearning.GPL.3.2.0\lib\net45\Accord.MachineLearning.GPL.dll</HintPath>
+    <Reference Include="Accord.MachineLearning, Version=3.2.0.0, Culture=neutral, PublicKeyToken=fa1a88e29555ccf7, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\nuget\packages\Accord.MachineLearning.3.2.0\lib\net45\Accord.MachineLearning.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Accord.Math, Version=3.2.0.0, Culture=neutral, PublicKeyToken=fa1a88e29555ccf7, processorArchitecture=MSIL">
@@ -241,6 +241,25 @@
     <Compile Include="SimilarityMeasure\TFIDFModel.cs" />
     <Compile Include="SimilarityMeasure\Tokenizer.cs" />
     <Compile Include="LableFeaturesBuilder.cs" />
+    <Compile Include="SVM\SVM\Cache.cs" />
+    <Compile Include="SVM\SVM\GaussianTransform.cs" />
+    <Compile Include="SVM\SVM\IRangeTransform.cs" />
+    <Compile Include="SVM\SVM\Kernel.cs" />
+    <Compile Include="SVM\SVM\Model.cs" />
+    <Compile Include="SVM\SVM\Node.cs" />
+    <Compile Include="SVM\SVM\Parameter.cs" />
+    <Compile Include="SVM\SVM\ParameterSelection.cs" />
+    <Compile Include="SVM\SVM\PerformanceEvaluator.cs" />
+    <Compile Include="SVM\SVM\PrecomputedKernel.cs" />
+    <Compile Include="SVM\SVM\Prediction.cs" />
+    <Compile Include="SVM\SVM\Problem.cs" />
+    <Compile Include="SVM\SVM\RangeTransform.cs" />
+    <Compile Include="SVM\SVM\Scaling.cs" />
+    <Compile Include="SVM\SVM\Solver.cs" />
+    <Compile Include="SVM\SVM\SVMExtensions.cs" />
+    <Compile Include="SVM\SVM\SVMUtilities.cs" />
+    <Compile Include="SVM\SVM\TemporaryCulture.cs" />
+    <Compile Include="SVM\SVM\Training.cs" />
     <Compile Include="TermFreqWeight.cs" />
     <Compile Include="TF_IDFWeighting\Class1.cs" />
     <Compile Include="TF_IDFWeighting\PorterStemmer.cs" />
@@ -249,6 +268,9 @@
     <Compile Include="TF_IDFWeighting\TFIDF.cs" />
     <Compile Include="TF_IDFWeighting\TFIDFMeasure.cs" />
     <Compile Include="TF_IDFWeighting\Tokeniser.cs" />
+    <Compile Include="VectorSpaceModel\src\Corpus.cs" />
+    <Compile Include="VectorSpaceModel\src\Document.cs" />
+    <Compile Include="VectorSpaceModel\src\VectorSpaceModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -273,8 +295,10 @@
     <Content Include="SimilarityMeasure\libs\Centivus.EnglishStemmer.dll" />
     <Content Include="SimilarityMeasure\libs\HtmlAgilityPack.dll" />
     <Content Include="SimilarityMeasure\libs\MathNet.Numerics.dll" />
+    <Content Include="SVM\SVM.sln" />
+    <Content Include="SVM\SVM\SVM.csproj" />
+    <Content Include="VectorSpaceModel\VectorSpaceModel.csproj" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\..\..\..\..\nuget\packages\Accord.3.2.0\build\Accord.targets" Condition="Exists('..\..\..\..\..\..\nuget\packages\Accord.3.2.0\build\Accord.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

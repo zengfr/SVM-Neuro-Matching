@@ -74,7 +74,6 @@ D:\github\SVM-Neuro-Matching\roomMatching\ConsoleApplication1\bin\Debug\Accord.d
 D:\github\SVM-Neuro-Matching\roomMatching\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe
 D:\github\SVM-Neuro-Matching\roomMatching\ConsoleApplication1\bin\Debug\ConsoleApplication1.pdb
 D:\github\SVM-Neuro-Matching\roomMatching\ConsoleApplication1\bin\Debug\Accord.dll
-D:\github\SVM-Neuro-Matching\roomMatching\ConsoleApplication1\bin\Debug\Accord.MachineLearning.GPL.dll
 D:\github\SVM-Neuro-Matching\roomMatching\ConsoleApplication1\bin\Debug\Accord.Math.Core.dll
 D:\github\SVM-Neuro-Matching\roomMatching\ConsoleApplication1\bin\Debug\Accord.Math.dll
 D:\github\SVM-Neuro-Matching\roomMatching\ConsoleApplication1\bin\Debug\Accord.Neuro.dll
@@ -117,7 +116,6 @@ D:\github\SVM-Neuro-Matching\roomMatching\ConsoleApplication1\bin\Debug\Reactor.
 D:\github\SVM-Neuro-Matching\roomMatching\ConsoleApplication1\bin\Debug\System.Collections.Immutable.dll
 D:\github\SVM-Neuro-Matching\roomMatching\ConsoleApplication1\bin\Debug\UnitTestGenerator.dll
 D:\github\SVM-Neuro-Matching\roomMatching\ConsoleApplication1\bin\Debug\Accord.xml
-D:\github\SVM-Neuro-Matching\roomMatching\ConsoleApplication1\bin\Debug\Accord.MachineLearning.GPL.xml
 D:\github\SVM-Neuro-Matching\roomMatching\ConsoleApplication1\bin\Debug\Accord.Math.xml
 D:\github\SVM-Neuro-Matching\roomMatching\ConsoleApplication1\bin\Debug\Accord.Math.Core.xml
 D:\github\SVM-Neuro-Matching\roomMatching\ConsoleApplication1\bin\Debug\Accord.Neuro.xml
@@ -149,3 +147,5 @@ D:\github\SVM-Neuro-Matching\roomMatching\ConsoleApplication1\bin\Debug\System.C
 D:\github\SVM-Neuro-Matching\roomMatching\ConsoleApplication1\obj\Debug\ConsoleApplication1.csprojResolveAssemblyReference.cache
 D:\github\SVM-Neuro-Matching\roomMatching\ConsoleApplication1\bin\Debug\Accord.Extensions.Core.dll
 D:\github\SVM-Neuro-Matching\roomMatching\ConsoleApplication1\bin\Debug\Accord.Extensions.Core.xml
+D:\github\SVM-Neuro-Matching\roomMatching\ConsoleApplication1\bin\Debug\Accord.MachineLearning.dll
+D:\github\SVM-Neuro-Matching\roomMatching\ConsoleApplication1\bin\Debug\Accord.MachineLearning.xml
