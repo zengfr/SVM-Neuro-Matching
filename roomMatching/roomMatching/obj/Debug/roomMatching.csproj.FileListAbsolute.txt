@@ -1,0 +1,3 @@
+D:\github\SVM-Neuro-Matching\roomMatching\roomMatching\bin\Debug\ConsoleApplication1.exe.config
+D:\github\SVM-Neuro-Matching\roomMatching\roomMatching\obj\Debug\ConsoleApplication1.exe
+D:\github\SVM-Neuro-Matching\roomMatching\roomMatching\obj\Debug\ConsoleApplication1.pdb
